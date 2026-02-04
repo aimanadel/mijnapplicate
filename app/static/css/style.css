@@ -1,0 +1,104 @@
+h1 {
+  text-align: center;
+  color: whitesmoke;
+  font-size: 60px;
+}
+
+li {
+  display: inline;
+}
+
+.main {
+  padding-left: 100px;
+  padding-right: 100px;
+  text-align: left;
+  height: 100%;
+}
+
+nav {
+  width: 100%;
+  float: left;
+  margin: 0 0 1em 0;
+  padding: 0;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  font-size: 46px;
+  color: darkblue;
+}
+
+input {
+  width: 60%;
+}
+
+button {
+  background-color: grey;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+td.fitwidth {
+  width: 1px;
+  white-space: nowrap;
+}
+
+
+html {
+  height: 100%;
+  background-color: darkmagenta;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+a,
+a:link,
+a:visited {
+  color: whitesmoke;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: none;
+  color: whitesmoke;
+  text-align: center;
+}
+
+tr.clicked {
+  background-color: #abc;
+}
+
+td {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  min-width: 20px;
+}
+
+th {
+  background-color: grey;
+  color: white;
+  font-size: 20px;
+}
+
+#clicked {
+  background-color: aqua;
+}
+
+.container {
+  height: 60%;
+  overflow-y: scroll;
+}
