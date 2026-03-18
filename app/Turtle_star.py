@@ -10,8 +10,4 @@ def star(t, size):
         return
     for i in range(5):
         t.forward(size)
-        star(t, size/2)
-        t.left(216)
-
-star(aiman, 100)
-turtle.done()
+        
