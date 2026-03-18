@@ -1,5 +1,4 @@
 import turtle
-
 class LogoANSW:
     def __init__(self):
         self.t = turtle.Turtle()
