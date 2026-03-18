@@ -1,29 +1,26 @@
+
 import turtle
 
-t = turtle.Turtle()
-t.left(75)
-t.forward(100)
+class Logo:
+    def __init__(self):
+        self.t = turtle.Turtle()
+        self.t.pensize(3)
 
-t.right(150)
-t.forward(100)
+    def teken_w(self):
+        self.t.penup()
+        self.t.goto(250, 0)
+        self.t.pendown()
 
-t.backward(50)
-t.right(105)
-t.forward(25)
-t.penup()
-t.goto(50, 0)
-t.pendown()
+        self.t.right(75)
+        self.t.forward(100)
+        self.t.left(150)
+        self.t.forward(100)
+        self.t.right(150)
+        self.t.forward(100)
+        self.t.left(150)
+        self.t.forward(100)
 
-t.left(90)
-t.forward(100)
-t.right(150)
-t.forward(115)
-t.left(150)
-t.forward(100)
-t.penup()
-t.goto(150, 0)
-t.pendown()
+logo = Logo()
+logo.teken_w()
 
-t.circle(30, 180)
-t.circle(-30, 180)
 turtle.done()
