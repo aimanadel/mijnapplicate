@@ -55,7 +55,7 @@ td.fitwidth {
 
 html {
   height: 100%;
-  background-color: darkmagenta;
+  background-color: #e6f2ff;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
@@ -101,4 +101,60 @@ th {
 .container {
   height: 60%;
   overflow-y: scroll;
+}
+
+/* Pagina (body) */
+.main-body {
+  margin: 0;
+  font-family: Arial;
+  background: #f5f6fa;
+}
+
+/* Header bovenaan */
+.header {
+ background: #fff;
+  padding: 20px;
+}
+
+/* Container in header */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Titel */
+.title {
+  margin: 0;
+  font-size: 28px;
+  color: #000;
+}
+
+/* Subtekst */
+.subtitle {
+  margin: 5px 0;
+  color: rgb(93, 89, 89);
+}
+
+/* Gebruiker box */
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Cirkel met initialen */
+.user-circle {
+  background: #2ecc71;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+/* Naam van gebruiker */
+.user-name {
+  font-size: 14px;
+}
+.body-content {
+  background-color: #2d6f9a;
 }

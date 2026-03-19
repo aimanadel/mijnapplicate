@@ -11,3 +11,7 @@ def index():
 @bp.route("/over-mij")
 def about_me():
     return render_template("zelfportret.html")
+
+@bp.route("/home")
+def home():
+    return render_template("home.html")
