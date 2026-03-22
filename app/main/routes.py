@@ -15,3 +15,6 @@ def about_me():
 @bp.route("/home")
 def home():
     return render_template("home.html")
+@bp.route ("/leerling")
+def leerling():
+    return render_template("leerling.html")
