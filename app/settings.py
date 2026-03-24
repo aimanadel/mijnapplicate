@@ -1,5 +1,5 @@
 from os import environ
 
-API_KEY = environ.get("API_KEY")
-API_URL = environ.get("API_URL")
-DATABASE = environ.get("DATABASE")
+API_KEY = "s2bima2526_teebaakeepoo79.IxpC5NUTWzwIdjNQ"
+API_URL = "https://api.hbo-ict.cloud"
+DATABASE = "s2bima2526_teebaakeepoo79_live"
