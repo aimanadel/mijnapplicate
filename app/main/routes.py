@@ -1,4 +1,5 @@
-from flask import render_template
+from flask import render_template 
+from app.db import execute_query
 
 from app.main import bp
 
@@ -18,3 +19,12 @@ def home():
 @bp.route ("/leerling")
 def leerling():
     return render_template("leerling.html")
+
+@bp.route("/foutenanalyse")
+def foutenanalyse():
+    leerling_id = 1  # test (later dynamisch maken)
+
+    query = "SELECT type, aantal FROM fout WHERE leerling_id = %s"
+    fouten = execute_query(query, (leerling_id,))
+
+    return render_template("foutenanalyse.html", fouten=fouten)

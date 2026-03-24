@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Foutenanalyse{% endblock %}
+
+{% block header %}
+<h1>Foutenanalyse</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Meest gemaakte fouten</h2>
+
+{% if fouten %}
+  {% for fout in fouten %}
+    <div class="fout-card">
+      <p><strong>{{ fout.type }}</strong></p>
+      <p>Aantal: {{ fout.aantal }}</p>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>Geen fouten gevonden.</p>
+{% endif %}
+
+{% endblock %}

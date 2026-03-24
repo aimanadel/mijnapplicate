@@ -90,7 +90,7 @@ td {
 
 th {
   background-color: grey;
-  color: white;
+  color: black;
   font-size: 20px;
 }
 
@@ -157,4 +157,29 @@ th {
 }
 .body-content {
   background-color: #2d6f9a;
+}
+/* Foutenanalyse cards */
+.fout-card {
+  background: #ffffff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel van fout */
+.fout-card strong {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Aantal tekst */
+.fout-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Pagina titel beter maken */
+h1 {
+  color: #2c3e50;
 }
