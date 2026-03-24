@@ -1,7 +1,7 @@
 """Database functionalty"""
 
 import requests
-from flask import current_app
+from flask import current_app 
 
 
 def execute_query(query, values=None):
@@ -18,3 +18,5 @@ def execute_query(query, values=None):
         timeout=10,
     )
     return x.json()
+
+ 
