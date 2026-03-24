@@ -1,52 +1,27 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}ANSW project{% endblock %}</title>
+{% extends "base.html" %}
 
-  <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+{% block title %}Dashboard{% endblock %}
 
-<body class="main-body dashboard-page">
-
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <ul>
-      <li><a href="{{ url_for('main.home') }}">Dashboard</a></li>
-      <li><a href="{{ url_for('main.index') }}">Home</a></li>
-      <li><a href="{{ url_for('events.index') }}">Events</a></li>
-     <li><a href="{{ url_for('main.leerling') }}">leerling </a></li>
-    </ul>
-  </nav>
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-container">
-      
-      <div class="header-text">
-        <h1 class="title">{% block page_title %}Dashboard{% endblock %}</h1>
-        <p class="subtitle">
-          {% block subtitle %}
-          Welkom terug. Hier is je voortgang.
-          {% endblock %}
-        </p>
-      </div>
-
-      <div class="user-box">
-        <span class="user-circle">{% block user_initials %}JN{% endblock %}</span>
-        <span class="user-name">
-          Leerling: {% block user_name %}Jouw Naam{% endblock %}
-        </span>
-      </div>
-
+{% block header %}
+<div class="header">
+  <div class="header-container">
+    
+    <div class="header-text">
+      <h1 class="title">Dashboard</h1>
+      <p class="subtitle">Welkom terug. Hier is je voortgang.</p>
     </div>
-  </div>
 
-  <!-- CONTENT -->
-  <div class="body-content">
-    {% block content %}{% endblock %}
-  </div>
+    <div class="user-box">
+      <span class="user-circle">JN</span>
+      <span class="user-name">Leerling: Jouw Naam</span>
+    </div>
 
-</body>
-</html>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="body-content">
+  <h2>Dashboard inhoud</h2>
+</div>
+{% endblock %}

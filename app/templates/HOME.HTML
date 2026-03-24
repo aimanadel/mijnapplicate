@@ -1,38 +1,30 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
+{% extends "base.html" %}
 
-  <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='css/style.css')}}"
-    />
-</head>
+{% block title %}Dashboard{% endblock %}
 
-<body class="main-body dashboard-page">
-   
-
-  <div class="header">
-    <div class="header-conts je voortgang.</p>
-      </div>
-
-      <div class="user-box">
-        <span class="user-circle">JN</span>
-        <span class="user-name">Leerling: Jouw Naam</span>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="body-content">
+{% block header %}
+<div class="header">
+  <div class="header-container">
     
-  </div>
+    <div class="header-text">
+      <h1 class="title">Dashboard</h1>
+      <p class="subtitle">Welkom terug. Hier zie je voortgang.</p>
+    </div>
 
-</body>
-</html>ainer">
-      
-      <div class="header-text">
-        <h1 class="title">Dashboard</h1>
-        <p class="subtitle">Welkom terug. Hier i
+    <div class="user-box">
+      <span class="user-circle">JN</span>
+      <span class="user-name">Leerling: Jouw Naam</span>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="body-content">
+  <h2>Overzicht</h2>
+  <p>Hier komt jouw dashboard data...</p>
+</div>
+
+{% endblock %}
