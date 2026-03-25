@@ -13,12 +13,22 @@
 {% if fouten %}
   {% for fout in fouten %}
     <div class="fout-card">
-      <p><strong>{{ fout.type }}</strong></p>
-      <p>Aantal: {{ fout.aantal }}</p>
+      <p><strong>{{ fout.categorie }}</strong></p>
+      <p>Percentage: {{ fout.percentage }}%</p>
+
+      {% if fout.details %}
+        <ul>
+          {% for detail in fout.details %}
+            <li>{{ detail.naam }} - {{ detail.aantal }} keer</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </div>
   {% endfor %}
 {% else %}
   <p>Geen fouten gevonden.</p>
 {% endif %}
+
+<p><strong>Aanbeveling:</strong> {{ aanbeveling }}</p>
 
 {% endblock %}

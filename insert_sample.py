@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Insert sample data into the fout table."""
+
+from app.db import execute_query
+
+def insert_sample_data():
+    """Insert some sample fout data for leerling_id=1."""
+    inserts = [
+        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Rekenen', 'Optellen', 5);",
+        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Rekenen', 'Aftrekken', 3);",
+        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Taal', 'Spelling', 7);",
+        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Taal', 'Zinsbouw', 2);",
+        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Wetenschap', 'Biologie', 4);",
+    ]
+
+    for insert in inserts:
+        print(f"Executing: {insert}")
+        result = execute_query(insert)
+        print(f"Result: {result}")
+
+if __name__ == "__main__":
+    from app import create_app
+    app = create_app()
+    with app.app_context():
+        insert_sample_data()
