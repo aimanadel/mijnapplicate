@@ -40,4 +40,17 @@
     const feedback = document.getElementById("feedback"); 
     const scoreElem = document.getElementById("score");   
     const totalElem = document.getElementById("total");   
+        // Functie om de volgende vraag te tonen
+    function showQuestion() {
+        if(index < questions.length){
+            qElem.textContent = questions[index].text; 
+            aElem.value = "";                           
+            feedback.textContent = "";                  
+        } else {
+            qElem.textContent = "Alle vragen zijn voltooid!"; 
+            aElem.style.display = "none";                      
+            document.getElementById("submit").style.display = "none"; 
+        }
+    }
+
 
