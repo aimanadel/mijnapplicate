@@ -15,21 +15,153 @@ li {
   height: 100%;
 }
 
-nav {
-  width: 100%;
-  float: left;
-  margin: 0 0 1em 0;
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1f3b6c, #2a4f8a);
+  color: #fff;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  z-index: 100;
+}
+
+.sidebar .brand {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffdd59;
+  letter-spacing: 0.4px;
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
   padding: 0;
-  background-color: transparent;
-  border-bottom: 1px solid #b34949;
-  text-align: center;
-  font-size: 46px;
-  color: rgb(40, 40, 156);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-list li {
+  display: block;
+}
+
+.sidebar-list a {
+  display: block;
+  color: #e8ecf3;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-list a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.main {
+  margin-left: 250px;
+  padding: 28px;
+  min-height: calc(100vh - 40px);
 }
 
 input {
   width: 60%;
 }
+
+.search-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  border: 1px solid #88b4d8;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: #f3f8ff;
+}
+
+.search-input, .filter-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#searchInput, #klasFilter {
+  padding: 10px 12px;
+  border: 1px solid #93b8dc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 250px;
+}
+
+.leerlingen-lijst {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.leerling-item {
+  background: #ffffff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.09);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.leerling-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+}
+
+.leerling-link {
+  color: #2b4374;
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.leerling-klas {
+  color: #5d6d84;
+  font-size: 16px;
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+
+.detail-table th,
+.detail-table td {
+  border: 1px solid #d7dbe1;
+  padding: 9px 12px;
+  text-align: left;
+}
+
+.detail-table th {
+  background: #e9f0fb;
+  color: #2f3f60;
+}
+
+.score-badge {
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.score-laag { background: #dc3545; }
+.score-gemiddeld { background: #ffc107; color: #232323; }
+.score-goed { background: #28a745; }
 
 button {
   background-color: grey;
@@ -182,4 +314,48 @@ th {
 /* Pagina titel beter maken */
 h1 {
   color: #2c3e50;
+}
+
+.login-card {
+  max-width: 420px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.login-form {
+  display: grid;
+  gap: 12px;
+}
+
+.login-form input,
+.login-form select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.login-form button {
+  background-color: #2d6f9a;
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: none;
+}
+
+.flash-messages {
+  margin-bottom: 12px;
+}
+
+.flash-item {
+  background-color: #f8e1dd;
+  color: #991f1d;
+  border: 1px solid #d28f8f;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 14px;
 }

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <div class="login-card">
+    <h1>Inloggen</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <div class="flash-item">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" class="login-form">
+      <label for="username">Username:</label>
+      <input id="username" name="username" type="text" placeholder="Jouw username" required />
+
+      <label for="password">Wachtwoord:</label>
+      <input id="password" name="password" type="password" placeholder="Jouw wachtwoord" required />
+
+      <button type="submit">Inloggen</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 16px;">
+      Nog geen account? <a href="{{ url_for('main.register') }}">Registreer hier</a>
+    </p>
+  </div>
+{% endblock %}

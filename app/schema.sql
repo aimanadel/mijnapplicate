@@ -1,3 +1,12 @@
+CREATE TABLE `docent`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(100) NOT NULL UNIQUE,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `password_hash` VARCHAR(255) NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(`id`)
+);
+
 CREATE TABLE `Event`(
 	`eventId` INT NOT NULL AUTO_INCREMENT,
     `description` VARCHAR(100) NOT NULL,

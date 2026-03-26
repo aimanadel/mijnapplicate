@@ -10,20 +10,25 @@
 
   <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <ul>
+    <!-- SIDEBAR NAVIGATIE -->
+    <aside class="sidebar">
+      <div class="brand">Teebaak Epoo</div>
+      <ul class="sidebar-list">
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
-        <li><a href="{{ url_for('main.home') }}">Dashboard</a></li>
         <li><a href="{{ url_for('events.index') }}">Events</a></li>
         <li><a href="{{ url_for('main.foutenanalyse') }}">Foutenanalyse</a></li>
         <li><a href="{{ url_for('main.oefenen_opgaven') }}">Oefenen opgaven</a></li>
-        <li><a href="{{ url_for('main.leerling') }}">Leerlingen</a></li>
+        <li><a href="{{ url_for('main.leerlingen') }}">Leerlingen</a></li>
+        {% if session.get('role') %}
+          <li><a href="{{ url_for('main.logout') }}">Uitloggen ({{ session.get('role') }})</a></li>
+        {% else %}
+          <li><a href="{{ url_for('main.login') }}">Inloggen</a></li>
+        {% endif %}
       </ul>
-    </nav>
+    </aside>
 
     <!-- MAIN CONTENT -->
-    <div class="main">
+    <main class="main">
       <header>
         {% block header %}{% endblock %}
       </header>

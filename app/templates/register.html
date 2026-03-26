@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Registreren{% endblock %}
+
+{% block content %}
+  <div class="login-card">
+    <h1>Account aanmaken</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <div class="flash-item">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" class="login-form">
+      <label for="username">Username:</label>
+      <input id="username" name="username" type="text" placeholder="Kies een username" required />
+
+      <label for="email">Email:</label>
+      <input id="email" name="email" type="email" placeholder="Jouw email" required />
+
+      <label for="password">Wachtwoord:</label>
+      <input id="password" name="password" type="password" placeholder="Minimaal 6 karakters" required />
+
+      <label for="password_confirm">Bevestig wachtwoord:</label>
+      <input id="password_confirm" name="password_confirm" type="password" placeholder="Herhaal wachtwoord" required />
+
+      <button type="submit">Account aanmaken</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 16px;">
+      Al een account? <a href="{{ url_for('main.login') }}">Log hier in</a>
+    </p>
+  </div>
+{% endblock %}
