@@ -77,3 +77,7 @@ def foutenanalyse():
         labels=labels,
         waarden=waarden
     )
+
+@bp.route("/oefenen-opgaven")
+def oefenen_opgaven():
+    return render_template("oefenen_opgaven.html")
