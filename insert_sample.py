@@ -4,8 +4,13 @@
 from app.db import execute_query
 
 def insert_sample_data():
-    """Insert some sample fout data for leerling_id=1."""
+    """Insert some sample data."""
     inserts = [
+        "INSERT INTO leerling (naam, klas) VALUES ('Jan Jansen', 'Klas 3A');",
+        "INSERT INTO leerling (naam, klas) VALUES ('Piet Peters', 'Klas 3B');",
+        "INSERT INTO resultaat (leerling_id, onderwerp, score) VALUES (1, 'Rekenen', 75);",
+        "INSERT INTO resultaat (leerling_id, onderwerp, score) VALUES (1, 'Taal', 82);",
+        "INSERT INTO resultaat (leerling_id, onderwerp, score) VALUES (1, 'Wetenschap', 68);",
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Rekenen', 'Optellen', 5);",
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Rekenen', 'Aftrekken', 3);",
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Taal', 'Spelling', 7);",

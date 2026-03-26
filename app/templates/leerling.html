@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Leerlingen{% endblock %}
+
+{% block content %}
+
+<h1>Leerlingen</h1>
+
+<p>Kies een leerling om de details te bekijken:</p>
+
+<ul>
+  <li><a href="{{ url_for('main.leerling_detail', leerling_id=1) }}">Jan Jansen (Klas 3A)</a></li>
+  <li><a href="{{ url_for('main.leerling_detail', leerling_id=2) }}">Piet Peters (Klas 3B)</a></li>
+</ul>
+
+{% endblock %}

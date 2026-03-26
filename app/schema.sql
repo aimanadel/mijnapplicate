@@ -14,3 +14,19 @@ CREATE TABLE `fout`(
     `aantal` INT NOT NULL,
     PRIMARY KEY(`id`)
 );
+
+CREATE TABLE `leerling`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `naam` VARCHAR(100) NOT NULL,
+    `klas` VARCHAR(50) NOT NULL,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `resultaat`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `leerling_id` INT NOT NULL,
+    `onderwerp` VARCHAR(100) NOT NULL,
+    `score` INT NOT NULL,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
+);

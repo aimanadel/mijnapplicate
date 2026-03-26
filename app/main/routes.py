@@ -81,3 +81,43 @@ def foutenanalyse():
 @bp.route("/oefenen-opgaven")
 def oefenen_opgaven():
     return render_template("oefenen_opgaven.html")
+@bp.route("/leerling/<int:leerling_id>")
+def leerling_detail(leerling_id):
+
+    # leerling ophalen
+    leerling = execute_query(
+        "SELECT * FROM leerling WHERE id = ?",
+        (leerling_id,)
+    )[0]
+
+    # resultaten ophalen
+    resultaten = execute_query(
+        "SELECT onderwerp, score FROM resultaat WHERE leerling_id = ?",
+        (leerling_id,)
+    )
+
+    # zwakste onderwerp bepalen
+    laagste_score = 100
+    zwak_onderwerp = ""
+
+    for r in resultaten:
+        if r["score"] < laagste_score:
+            laagste_score = r["score"]
+            zwak_onderwerp = r["onderwerp"]
+
+    # simpele analyse
+    if laagste_score < 50:
+        uitleg = f"De leerling scoort laag op {zwak_onderwerp}"
+        advies = f"Oefen extra op {zwak_onderwerp}"
+    else:
+        uitleg = "De leerling presteert goed"
+        advies = "Ga door met oefenen"
+
+    return render_template(
+        "leerlingdetail.html",
+        leerling=leerling,
+        resultaten=resultaten,
+        zwak_onderwerp=zwak_onderwerp,
+        uitleg=uitleg,
+        advies=advies
+    )

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Leerling detail{% endblock %}
+
+{% block content %}
+
+<h1>{{ leerling.naam }}</h1>
+<p>Klas: {{ leerling.klas }}</p>
+
+<h2>Resultaten</h2>
+<ul>
+  {% for r in resultaten %}
+    <li>{{ r.onderwerp }}: {{ r.score }}%</li>
+  {% endfor %}
+</ul>
+
+<h2>Belangrijkste aandachtspunt</h2>
+<p>{{ zwak_onderwerp }}</p>
+
+<h2>Waarom gaat het mis?</h2>
+<p>{{ uitleg }}</p>
+
+<h2>Advies</h2>
+<p>{{ advies }}</p>
+
+{% endblock %}
