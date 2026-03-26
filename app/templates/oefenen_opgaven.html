@@ -53,4 +53,27 @@
         }
     }
 
+    // Functie om het antwoord te controleren bij klikken
+    document.getElementById("submit").onclick = function(){
+        const ans = aElem.value.trim(); 
+        total++;                        
+        totalElem.textContent = total;  
+
+        if(ans.toLowerCase() === questions[index].answer.toLowerCase()){
+            score++;                    
+            scoreElem.textContent = score; 
+            feedback.textContent = "✅ Correct!"; 
+        } else {
+            feedback.textContent = "❌ Fout, het juiste antwoord is: " + questions[index].answer; 
+        }
+
+        index++;                       
+        setTimeout(showQuestion, 1000); 
+    }
+
+    // Start eerste vraag
+    showQuestion();
+</script>
+
+
 
