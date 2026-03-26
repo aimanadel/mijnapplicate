@@ -1,23 +1,70 @@
+<!--
+  Template: leerlingen.html
+  Purpose: Overview of all students with search/filter capabilities (docent-only)
+  
+  Description:
+    Shows list of all students. Teacher can filter by name and class.
+    Click on student to view detail page (/leerling/<id>).
+    Filter functionality via JavaScript (client-side, real-time).
+  
+  Extends: base.html
+  
+  Template variables (from routes.py):
+    - leerlingen (list[dict]): All students with id, naam, klas
+    - klassen (list[str]): Unique, sorted class list
+  
+  HTML Elements:
+    - #searchInput: Search bar (text input)
+    - #klasFilter: Class dropdown select
+    - #leerlingenLijst: Unordered list of students
+    - .leerling-item: List item with data-attributes
+    - .leerling-link: Link to detail page
+  
+  JavaScript Function: filterLeerlingen()
+    - Read values: searchInput + klasFilter
+    - Algorithm: Show item if (naam/klas contains search) AND (klas == filter)
+    - Performance: O(n) per keystroke, acceptable for < 500 students
+  
+  CSS Classes:
+    - .search-panel: Container for search/filter controls
+    - .search-input: Search bar section
+    - .filter-input: Dropdown filter section
+    - .leerlingen-lijst: UL list styling
+    - .leerling-item: LI item styling
+    - .leerling-klas: Class badge styling
+    - .leerling-link: Link styling
+-->
 {% extends "base.html" %}
 
 {% block title %}Leerlingen{% endblock %}
 
 {% block content %}
 
+<!-- ===== PAGINA HEADER ===== -->
 <h1>Leerlingen</h1>
-
 <p>Kies een leerling om de details te bekijken:</p>
 
+<!-- ===== ZOEK/FILTER PANEL ===== -->
 <div class="search-panel">
+  <!-- ZOEKBALK: Zoek op naam en klas -->
   <div class="search-input">
     <label for="searchInput">Zoek op naam:</label>
-    <input id="searchInput" type="text" placeholder="Type naam of klas..." oninput="filterLeerlingen()" />
+    <input 
+      id="searchInput" 
+      type="text" 
+      placeholder="Type naam of klas..." 
+      oninput="filterLeerlingen()" 
+    />
   </div>
 
+  <!-- FILTER DROPDOWN: Filter op specifieke klas -->
   <div class="filter-input">
     <label for="klasFilter">Filter op klas:</label>
     <select id="klasFilter" onchange="filterLeerlingen()">
+      <!-- Default: alle klassen zichtbaar -->
       <option value="">Alle klassen</option>
+      
+      <!-- Dynamisch gegenereerde klas options -->
       {% for klas in klassen %}
         <option value="{{ klas }}">{{ klas }}</option>
       {% endfor %}
@@ -25,31 +72,72 @@
   </div>
 </div>
 
+<!-- ===== LEERLINGEN LIJST ===== -->
+<!-- UL list met alle leerlingen (filterbaar) -->
 <ul id="leerlingenLijst" class="leerlingen-lijst">
   {% for leerling in leerlingen %}
-    <li data-klas="{{ leerling.klas }}" data-naam="{{ leerling.naam }}" class="leerling-item">
-      <a class="leerling-link" href="{{ url_for('main.leerling_detail', leerling_id=leerling.id) }}">
+    <!-- 
+      LI item met data-attributes voor filtering
+      - data-klas: Klasnaam (voor class filter matching)
+      - data-naam: Leerlingnaam (voor search matching)
+    -->
+    <li 
+      data-klas="{{ leerling.klas }}" 
+      data-naam="{{ leerling.naam }}" 
+      class="leerling-item"
+    >
+      <!-- Link naar detail pagina -->
+      <a 
+        class="leerling-link" 
+        href="{{ url_for('main.leerling_detail', leerling_id=leerling.id) }}"
+      >
+        <!-- Naam en klas in badge -->
         {{ leerling.naam }} <span class="leerling-klas">({{ leerling.klas }})</span>
       </a>
     </li>
   {% endfor %}
 </ul>
 
+<!-- ===== FILTER JAVASCRIPT ===== -->
 <script>
+/*
+  Function: filterLeerlingen()
+  Doel: Real-time client-side filtering van leerlingen op naam en klas
+  
+  Flow:
+    1. Lees zoektekst van #searchInput
+    2. Lees geselecteerde klas van #klasFilter
+    3. Itereer door alle #leerlingenLijst items
+    4. Voor elk item:
+       a. Extraheer data-klas en data-naam attributes
+       b. Controleer of zoektekst in naam/klas voorkomt
+       c. Controleer of klas filter matcht (of filter is leeg)
+       d. Zet display:none als filter niet matcht, anders show
+  
+  Complexiteit: O(n) waar n = aantal leerlingen
+  Performance: ~1-5ms voor 500 leerlingen
+*/
 function filterLeerlingen() {
+  // === STAP 1: Lees filter waarden ===
   const zoektekst = document.getElementById('searchInput').value.toLowerCase().trim();
   const klasFilter = document.getElementById('klasFilter').value;
   const lijst = document.getElementById('leerlingenLijst');
   const items = lijst.getElementsByTagName('li');
 
+  // === STAP 2: Itereer door items en filter ===
   for (let i = 0; i < items.length; i++) {
+    // Extraheer data-attributes en convert naar lowercase voor compare
     const klas = items[i].getAttribute('data-klas').toLowerCase();
     const naam = items[i].getAttribute('data-naam').toLowerCase();
     const tekst = `${naam} ${klas}`;
 
+    // Controleer search text match (leeg = match alles)
     const matchText = zoektekst === '' || tekst.includes(zoektekst);
+    
+    // Controleer klas filter match (leeg = match alles)
     const matchKlas = klasFilter === '' || klas === klasFilter.toLowerCase();
 
+    // Wij item als beide filters matchen, anders verbergen
     items[i].style.display = (matchText && matchKlas) ? '' : 'none';
   }
 }

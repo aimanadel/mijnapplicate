@@ -1,7 +1,49 @@
+<!--
+  Template: base.html
+  Purpose: Master/base template for all pages
+  
+  Description:
+    This is base template that uses Jinja2 inheritance.
+    All other templates extend this template with {% extends "base.html" %}.
+    Contains:
+    - Fixed left sidebar navigation
+    - Header/content/footer layout
+    - CSS/JS asset linkage
+    - Session-aware menu items (Login vs Logout)
+  
+  Jinja2 Blocks:
+    - {% block title %}: Page title (overwrites default "ANSW project")
+    - {% block header %}: Page header (optional)
+    - {% block content %}: Page content (required)
+  
+  Template variables:
+    - session: Flask session dict (contains docent_id, user, role)
+  
+  Routes:
+    - Home: main.index
+    - Events: events.index
+    - Error analysis: main.foutenanalyse
+    - Practice exercises: main.oefenen_opgaven
+    - Students: main.leerlingen
+    - Login: main.login
+    - Logout: main.logout
+  
+  CSS Classes:
+    - .sidebar: Fixed left navigation panel
+    - .sidebar-list: Navigation menu items
+    - .main: Main content area with sidebar spacer
+-->
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Meta charset and viewport for responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title (can be overwritten per template) -->
     <title>{% block title %}ANSW project{% endblock %}</title>
+    
+    <!-- Link to global stylesheet -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
@@ -10,34 +52,54 @@
 
   <body>
 
-    <!-- SIDEBAR NAVIGATIE -->
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <!-- Fixed left sidebar with branding and navigation menu -->
     <aside class="sidebar">
+      <!-- Application branding/name -->
       <div class="brand">Teebaak Epoo</div>
+      
+      <!-- Navigation menu list -->
       <ul class="sidebar-list">
+        <!-- Home link (always visible) -->
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
+        
+        <!-- Events link -->
         <li><a href="{{ url_for('events.index') }}">Events</a></li>
-        <li><a href="{{ url_for('main.foutenanalyse') }}">Foutenanalyse</a></li>
-        <li><a href="{{ url_for('main.oefenen_opgaven') }}">Oefenen opgaven</a></li>
-        <li><a href="{{ url_for('main.leerlingen') }}">Leerlingen</a></li>
+        
+        <!-- Error analysis -->
+        <li><a href="{{ url_for('main.foutenanalyse') }}">Error Analysis</a></li>
+        
+        <!-- Practice exercises -->
+        <li><a href="{{ url_for('main.oefenen_opgaven') }}">Practice Exercises</a></li>
+        
+        <!-- Student list (docent only in template, protected by route decorator) -->
+        <li><a href="{{ url_for('main.leerlingen') }}">Students</a></li>
+        
+        <!-- Login/Logout conditional display -->
+        <!-- Show "Logout" if docent is logged in, otherwise "Login" -->
         {% if session.get('role') %}
-          <li><a href="{{ url_for('main.logout') }}">Uitloggen ({{ session.get('role') }})</a></li>
+          <li><a href="{{ url_for('main.logout') }}">Logout ({{ session.get('role') }})</a></li>
         {% else %}
-          <li><a href="{{ url_for('main.login') }}">Inloggen</a></li>
+          <li><a href="{{ url_for('main.login') }}">Login</a></li>
         {% endif %}
       </ul>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- ===== MAIN CONTENT AREA ===== -->
+    <!-- Content area with margin-left spacer for sidebar -->
     <main class="main">
+      <!-- Page header (optional per template) -->
       <header>
         {% block header %}{% endblock %}
       </header>
 
+      <!-- Page content (required per template) -->
       <div>
         {% block content %}{% endblock %}
       </div>
-    </div>
 
+    <!-- Footer -->
+    </div>
     <footer>Developed with ♥️ in Python and Flask</footer>
 
   </body>

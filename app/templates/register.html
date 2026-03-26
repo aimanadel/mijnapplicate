@@ -1,11 +1,47 @@
+<!--
+  Template: register.html
+  Purpose: Teacher account registration form
+  
+  Description:
+    Registration page for new teachers. Accepts username, email,
+    and password (with confirmation). Form post to /register route which
+    validates input and password hashing.
+  
+  Extends: base.html
+  
+  Form action: POST /register
+  Form inputs:
+    - username (text): Unique teacher username
+    - email (email): Email address
+    - password (password): Password (min 6 chars)
+    - password_confirm (password): Password confirmation
+  
+  Validation (server-side):
+    - All fields required
+    - Passwords must match
+    - Password min 6 characters
+    - Username/email must be unique
+  
+  Flash messages:
+    - "Fill in all fields"
+    - "Passwords do not match"
+    - "Password must be at least 6 characters long"
+    - "Username or email already exists"
+    - "Account created! You can now log in."
+  
+  Routes:
+    - Login link: /login (for existing teachers)
+-->
 {% extends "base.html" %}
 
 {% block title %}Registreren{% endblock %}
 
 {% block content %}
+  <!-- Registration form in centered card -->
   <div class="login-card">
-    <h1>Account aanmaken</h1>
+    <h1>Create Account</h1>
 
+    <!-- Show flash messages (errors/success) if present -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <div class="flash-messages">
@@ -16,24 +52,55 @@
       {% endif %}
     {% endwith %}
 
+    <!-- Registration form: POST to /register route -->
     <form method="post" class="login-form">
+      <!-- Username input -->
       <label for="username">Username:</label>
-      <input id="username" name="username" type="text" placeholder="Kies een username" required />
+      <input 
+        id="username" 
+        name="username" 
+        type="text" 
+        placeholder="Choose a username" 
+        required 
+      />
 
+      <!-- Email input -->
       <label for="email">Email:</label>
-      <input id="email" name="email" type="email" placeholder="Jouw email" required />
+      <input 
+        id="email" 
+        name="email" 
+        type="email" 
+        placeholder="Your email" 
+        required 
+      />
 
-      <label for="password">Wachtwoord:</label>
-      <input id="password" name="password" type="password" placeholder="Minimaal 6 karakters" required />
+      <!-- Password input -->
+      <label for="password">Password:</label>
+      <input 
+        id="password" 
+        name="password" 
+        type="password" 
+        placeholder="At least 6 characters" 
+        required 
+      />
 
-      <label for="password_confirm">Bevestig wachtwoord:</label>
-      <input id="password_confirm" name="password_confirm" type="password" placeholder="Herhaal wachtwoord" required />
+      <!-- Password confirmation input (must match password) -->
+      <label for="password_confirm">Confirm Password:</label>
+      <input 
+        id="password_confirm" 
+        name="password_confirm" 
+        type="password" 
+        placeholder="Repeat password" 
+        required 
+      />
 
-      <button type="submit">Account aanmaken</button>
+      <!-- Submit button -->
+      <button type="submit">Create Account</button>
     </form>
 
+    <!-- Link to login for existing teachers -->
     <p style="text-align: center; margin-top: 16px;">
-      Al een account? <a href="{{ url_for('main.login') }}">Log hier in</a>
+      Already have an account? <a href="{{ url_for('main.login') }}">Log in here</a>
     </p>
   </div>
 {% endblock %}

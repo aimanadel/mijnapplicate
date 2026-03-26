@@ -1,3 +1,40 @@
+/*
+  File: style.css
+  Purpose: Global styling for ANSW student-analytics application
+  
+  Description:
+    Master stylesheet with styling for:
+    - Sidebar navigation (fixed left panel)
+    - Login/register forms
+    - Student list with cards
+    - Detail table with score badges
+    - Responsive grid/flexbox layouts
+    - Color coding (green/yellow/red for scores)
+  
+  Color palette:
+    - Sidebar: #1f3b6c, #2a4f8a (blue gradient)
+    - Brand: #ffdd59 (yellow)
+    - Backgrounds: #e6f2ff, #f3f8ff (light blue)
+    - Scores: #28a745 (green), #ffc107 (yellow), #dc3545 (red)
+    - Text: #2f3f60 (dark blue), #5d6d84 (gray)
+  
+  Breakpoints:
+    - Currently: Fixed sidebar (not responsive)
+    - Future: Media queries for tablets/mobile
+  
+  Layout:
+    - .sidebar: position:fixed, 230px width
+    - .main: margin-left:250px for content offset
+    - .search-panel: flex row for search/filter controls
+    - .leerlingen-lijst: CSS grid for responsive cards
+    - .detail-table: Standard HTML table with alternating rows
+  
+  Interactions:
+    - .sidebar-list a:hover: Background highlight + color change
+    - .leerling-item:hover: Slight lifting effect + shadow increase
+    - form inputs: Rounded borders, 250px width
+*/
+
 h1 {
   text-align: center;
   color: whitesmoke;
@@ -15,6 +52,8 @@ li {
   height: 100%;
 }
 
+/* ===== SIDEBAR NAVIGATION ===== */
+/* Fixed left sidebar with brand and navigation menu */
 .sidebar {
   position: fixed;
   top: 0;
@@ -29,6 +68,7 @@ li {
   z-index: 100;
 }
 
+/* Application branding in sidebar */
 .sidebar .brand {
   font-size: 24px;
   font-weight: 700;
@@ -37,6 +77,7 @@ li {
   letter-spacing: 0.4px;
 }
 
+/* Sidebar navigation list */
 .sidebar-list {
   list-style: none;
   margin: 0;
@@ -50,6 +91,7 @@ li {
   display: block;
 }
 
+/* Sidebar navigation links */
 .sidebar-list a {
   display: block;
   color: #e8ecf3;
@@ -60,11 +102,14 @@ li {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
+/* Sidebar link hover state */
 .sidebar-list a:hover {
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
 }
 
+/* ===== MAIN CONTENT AREA ===== */
+/* Main content container with spacer for sidebar */
 .main {
   margin-left: 250px;
   padding: 28px;
@@ -75,6 +120,8 @@ input {
   width: 60%;
 }
 
+/* ===== SEARCH/FILTER PANEL ===== */
+/* Panel for search bar and filter dropdown */
 .search-panel {
   display: flex;
   flex-wrap: wrap;
@@ -87,12 +134,14 @@ input {
   background-color: #f3f8ff;
 }
 
+/* Search input section */
 .search-input, .filter-input {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
+/* Search and filter input styling */
 #searchInput, #klasFilter {
   padding: 10px 12px;
   border: 1px solid #93b8dc;
@@ -101,6 +150,8 @@ input {
   width: 250px;
 }
 
+/* ===== STUDENTS LIST ===== */
+/* List of student cards */
 .leerlingen-lijst {
   list-style: none;
   padding: 0;
@@ -109,6 +160,7 @@ input {
   gap: 10px;
 }
 
+/* Individual student card */
 .leerling-item {
   background: #ffffff;
   padding: 12px 14px;
@@ -117,11 +169,13 @@ input {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+/* Student item hover state (lift effect) */
 .leerling-item:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
 }
 
+/* Student item link styling */
 .leerling-link {
   color: #2b4374;
   text-decoration: none;
@@ -129,11 +183,14 @@ input {
   font-weight: 600;
 }
 
+/* Class badge in student item */
 .leerling-klas {
   color: #5d6d84;
   font-size: 16px;
 }
 
+/* ===== DETAIL TABLE STYLING ===== */
+/* Table for test results */
 .detail-table {
   width: 100%;
   border-collapse: collapse;
@@ -152,6 +209,8 @@ input {
   color: #2f3f60;
 }
 
+/* ===== SCORE BADGES ===== */
+/* Badge styling for score percentage */
 .score-badge {
   border-radius: 999px;
   padding: 4px 10px;
@@ -159,13 +218,25 @@ input {
   font-weight: 700;
 }
 
-.score-laag { background: #dc3545; }
-.score-gemiddeld { background: #ffc107; color: #232323; }
-.score-goed { background: #28a745; }
+/* Score low (< 50%): Red badge */
+.score-laag { 
+  background: #dc3545; 
+}
 
+/* Score medium (50-75%): Yellow badge */
+.score-gemiddeld { 
+  background: #ffc107; 
+  color: #232323; 
+}
+
+/* Score good (>= 75%): Green badge */
+.score-goed { 
+  background: #28a745; 
+}
+
+/* ===== BUTTONS ===== */
 button {
   background-color: grey;
-  /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -185,6 +256,8 @@ td.fitwidth {
 }
 
 
+/* ===== PAGE BACKGROUND & TYPOGRAPHY ===== */
+/* Global HTML styling */
 html {
   height: 100%;
   background-color: #e6f2ff;
@@ -192,12 +265,14 @@ html {
   color: rgb(155, 70, 70);
 }
 
+/* Link styling */
 a,
 a:link,
 a:visited {
   color: rgb(56, 7, 7);
 }
 
+/* ===== FOOTER ===== */
 footer {
   position: fixed;
   bottom: 0;
@@ -208,10 +283,13 @@ footer {
   text-align: center;
 }
 
+/* ===== TABLE STYLING (LEGACY) ===== */
+/* Clicked row highlight */
 tr.clicked {
   background-color: #abc;
 }
 
+/* Table cell styling (legacy) */
 td {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
@@ -220,62 +298,68 @@ td {
   min-width: 20px;
 }
 
+/* Table header styling (legacy) */
 th {
   background-color: grey;
   color: black;
   font-size: 20px;
 }
 
+/* Clicked element ID styling */
 #clicked {
   background-color: aqua;
 }
 
+/* ===== CONTAINER SCROLLING ===== */
 .container {
   height: 60%;
   overflow-y: scroll;
 }
 
-/* Pagina (body) */
+/* ===== PAGE BODY (LEGACY) ===== */
+/* Main body class (potentially unused) */
 .main-body {
   margin: 0;
   font-family: Arial;
   background: #f5f6fa;
 }
 
-/* Header bovenaan */
+/* ===== HEADER (LEGACY) ===== */
+/* Header styling */
 .header {
  background: #fff;
   padding: 20px;
 }
 
-/* Container in header */
+/* Header container */
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Titel */
+/* Header title */
 .title {
   margin: 0;
   font-size: 28px;
   color: #000;
 }
 
-/* Subtekst */
+/* Subtitle text */
 .subtitle {
   margin: 5px 0;
   color: rgb(93, 89, 89);
 }
 
-/* Gebruiker box */
+/* ===== USER BOX (LEGACY) ===== */
+/* User information box */
 .user-box {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Cirkel met initialen */
+/* User avatar circle */
 .user-circle {
   background: #2ecc71;
   color: #fff;
@@ -283,14 +367,18 @@ th {
   border-radius: 50%;
 }
 
-/* Naam van gebruiker */
+/* User name in box */
 .user-name {
   font-size: 14px;
 }
+
+/* Body content background */
 .body-content {
   background-color: #2d6f9a;
 }
-/* Foutenanalyse cards */
+
+/* ===== FOUTENANALYSE CARDS ===== */
+/* Error analysis card styling */
 .fout-card {
   background: #ffffff;
   padding: 20px;
@@ -299,23 +387,23 @@ th {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Titel van fout */
 .fout-card strong {
   font-size: 20px;
   color: #333;
 }
 
-/* Aantal tekst */
 .fout-card p {
   margin: 5px 0;
   color: #555;
 }
 
-/* Pagina titel beter maken */
+/* ===== PAGE TITLE STYLING ===== */
 h1 {
   color: #2c3e50;
 }
 
+/* ===== LOGIN/REGISTER CARD ===== */
+/* Login form card container */
 .login-card {
   max-width: 420px;
   margin: 20px auto;
@@ -325,11 +413,13 @@ h1 {
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
+/* Login form grid layout */
 .login-form {
   display: grid;
   gap: 12px;
 }
 
+/* Form input styling */
 .login-form input,
 .login-form select {
   padding: 10px 12px;
@@ -338,6 +428,7 @@ h1 {
   font-size: 16px;
 }
 
+/* Login form button styling */
 .login-form button {
   background-color: #2d6f9a;
   color: white;
@@ -347,10 +438,13 @@ h1 {
   border: none;
 }
 
+/* ===== FLASH MESSAGES ===== */
+/* Flash message container */
 .flash-messages {
   margin-bottom: 12px;
 }
 
+/* Individual flash message item */
 .flash-item {
   background-color: #f8e1dd;
   color: #991f1d;
