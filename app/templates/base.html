@@ -20,21 +20,21 @@
     <!-- ===== SIDEBAR NAVIGATION ===== -->
     <aside class="sidebar">
       <!-- Application branding/name -->
-      <div class="brand">Brain Boost</div>
+      <div class="brand">Teebaak Epoo</div>
       
       <!-- Navigation menu list -->
       <ul class="sidebar-list">
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
         <li><a href="{{ url_for('events.index') }}">Events</a></li>
-        <li><a href="{{ url_for('main.foutenanalyse') }}">fout Analyseren</a></li>
-        <li><a href="{{ url_for('main.oefenen_opgaven') }}">Oefenen  opgaven</a></li>
-        <li><a href="{{ url_for('main.leerlingen') }}">leerling</a></li>
+        <li><a href="{{ url_for('main.foutenanalyse') }}">Error Analysis</a></li>
+        <li><a href="{{ url_for('main.oefenen_opgaven') }}">Practice Exercises</a></li>
+        <li><a href="{{ url_for('main.leerlingen') }}">Students</a></li>
         
         <!-- Login/Logout conditional display -->
         {% if session.get('role') %}
-          <li><a href="{{ url_for('main.logout') }}">Logout ({{ session.get('role') }})</a></li>
+          <li><a href="{{ url_for('main.logout') }}">Uitloggen ({{ session.get('role') }})</a></li>
         {% else %}
-          <li><a href="{{ url_for('main.login') }}">Login</a></li>
+          <li><a href="{{ url_for('main.login') }}">Inloggen</a></li>
         {% endif %}
       </ul>
     </aside>
@@ -52,7 +52,7 @@
       </div>
 
       <!-- Footer -->
-      <footer>Developed with ♥️ in Python and Flask</footer>
+      <footer>Ontwikkeld met ♥️ in Python en Flask</footer>
     </main>
 
   </body>
