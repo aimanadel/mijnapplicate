@@ -4,7 +4,6 @@
 
 {% block content %}
 <h1>Welkom bij Oefenen Opgaven</h1>
-{% endblock %}
 <!-- Score sectie -->
 <p>Score: <span id="score">0</span> / <span id="total">0</span></p>
 <!-- Vraag sectie -->
@@ -28,3 +27,52 @@
         {text: "Wat is de grootste planeet in ons zonnestelsel?", answer: "Jupiter"},
         {text: "Welke taal spreken ze in Frankrijk?", answer: "Frans"}
     ];
+
+    // Variabelen voor score en voortgang
+    let score = 0;           // Aantal juiste antwoorden
+    let total = 0;           // Totaal aantal gegeven antwoorden
+    let index = 0;           // Huidige vraag index
+
+
+    // DOM elementen ophalen
+    const qElem = document.getElementById("question"); 
+    const aElem = document.getElementById("answer");   
+    const feedback = document.getElementById("feedback"); 
+    const scoreElem = document.getElementById("score");   
+    const totalElem = document.getElementById("total");   
+        // Functie om de volgende vraag te tonen
+    function showQuestion() {
+        if(index < questions.length){
+            qElem.textContent = questions[index].text; 
+            aElem.value = "";                           
+            feedback.textContent = "";                  
+        } else {
+            qElem.textContent = "Alle vragen zijn voltooid!"; 
+            aElem.style.display = "none";                      
+            document.getElementById("submit").style.display = "none"; 
+        }
+    }
+
+    // Functie om het antwoord te controleren bij klikken
+    document.getElementById("submit").onclick = function(){
+        const ans = aElem.value.trim(); 
+        total++;                        
+        totalElem.textContent = total;  
+
+        if(ans.toLowerCase() === questions[index].answer.toLowerCase()){
+            score++;                    
+            scoreElem.textContent = score; 
+            feedback.textContent = "✅ Correct!"; 
+        } else {
+            feedback.textContent = "❌ Fout, het juiste antwoord is: " + questions[index].answer; 
+        }
+
+        index++;                       
+        setTimeout(showQuestion, 1000); 
+    }
+
+    // Start eerste vraag
+    showQuestion();
+</script>
+
+{% endblock %}
