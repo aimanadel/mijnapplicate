@@ -31,6 +31,20 @@ def index():
     return render_template("index.html")
 
 
+@bp.route("/foutenanalyse")
+def foutenanalyse():
+    return render_template(
+        "foutenanalyse.html",
+        fouten=[],
+        aanbeveling="Geen analyse beschikbaar."
+    )
+
+
+@bp.route("/oefenen-opgaven")
+def oefenen_opgaven():
+    return render_template("oefenen_opgaven.html")
+
+
 # =========================
 # Registratie
 # =========================

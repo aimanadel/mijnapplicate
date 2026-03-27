@@ -20,15 +20,15 @@
     <!-- ===== SIDEBAR NAVIGATION ===== -->
     <aside class="sidebar">
       <!-- Application branding/name -->
-      <div class="brand">Teebaak Epoo</div>
+      <div class="brand">Brain Boost</div>
       
       <!-- Navigation menu list -->
       <ul class="sidebar-list">
         <li><a href="{{ url_for('main.index') }}">Home</a></li>
         <li><a href="{{ url_for('events.index') }}">Events</a></li>
-        <li><a href="{{ url_for('main.foutenanalyse') }}">Error Analysis</a></li>
-        <li><a href="{{ url_for('main.oefenen_opgaven') }}">Practice Exercises</a></li>
-        <li><a href="{{ url_for('main.leerlingen') }}">Students</a></li>
+        <li><a href="{{ url_for('main.foutenanalyse') }}">fout Analyseren</a></li>
+        <li><a href="{{ url_for('main.oefenen_opgaven') }}">Oefenen  opgaven</a></li>
+        <li><a href="{{ url_for('main.leerlingen') }}">leerling</a></li>
         
         <!-- Login/Logout conditional display -->
         {% if session.get('role') %}
