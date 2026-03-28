@@ -46,47 +46,69 @@
 
 
     // DOM elementen ophalen
-    const qElem = document.getElementById("question"); 
-    const aElem = document.getElementById("answer");   
-    const feedback = document.getElementById("feedback"); 
-    const scoreElem = document.getElementById("score");   
-    const totalElem = document.getElementById("total");  
-    
+    const qElem = document.getElementById("question");
+    const aElem = document.getElementById("answer");
+    const feedback = document.getElementById("feedback");
+    const scoreElem = document.getElementById("score");
+    const totalElem = document.getElementById("total");
+    const submitButton = document.getElementById("submit");
+
     // Hier slaan we foute antwoorden op
     const incorrectAnswers = [];
-        // Functie om de volgende vraag te tonen
+
     function showQuestion() {
-        if(index < questions.length){
-            qElem.textContent = questions[index].text; 
-            aElem.value = "";                           
-            feedback.textContent = "";                  
+        if (index < questions.length) {
+            qElem.textContent = questions[index].text;
+            aElem.value = "";
+            feedback.textContent = "";
         } else {
-            qElem.textContent = "Alle vragen zijn voltooid!"; 
-            aElem.style.display = "none";                      
-            document.getElementById("submit").style.display = "none"; 
+            qElem.textContent = "Alle vragen zijn voltooid!";
+            aElem.style.display = "none";
+            submitButton.style.display = "none";
+            feedback.textContent = "Je hebt de quiz afgerond. Resultaten worden opgeslagen...";
+            saveQuizResult();
         }
+    }
+
+    function saveQuizResult() {
+        fetch("{{ url_for('main.oefenen_opgaven_resultaat') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                score: score,
+                total_answered: total,
+                incorrect_answers: incorrectAnswers
+            })
+        })
+        .catch(error => console.error("Fout bij opslaan resultaten:", error));
     }
 
     // Functie om het antwoord te controleren bij klikken
-    document.getElementById("submit").onclick = function(){
-        const ans = aElem.value.trim(); 
-        total++;                        
-        totalElem.textContent = total;  
+    submitButton.onclick = function () {
+        const ans = aElem.value.trim();
+        total++;
+        totalElem.textContent = total;
 
-        if(ans.toLowerCase() === questions[index].answer.toLowerCase()){
-            score++;                    
-            scoreElem.textContent = score; 
-            feedback.textContent = "✅ Correct!"; 
+        if (ans.toLowerCase() === questions[index].answer.toLowerCase()) {
+            score++;
+            scoreElem.textContent = score;
+            feedback.textContent = "✅ Correct!";
         } else {
-            feedback.textContent = "❌ Fout, het juiste antwoord is: " + questions[index].answer; 
+            incorrectAnswers.push({
+                question: questions[index].text,
+                expected: questions[index].answer,
+                given: ans
+            });
+            feedback.textContent = "❌ Fout, het juiste antwoord is: " + questions[index].answer;
         }
 
-        index++;                       
-        setTimeout(showQuestion, 1000); 
-    }
+        index++;
+        setTimeout(showQuestion, 1000);
+    };
 
-
-    // Start eerste vraag v
+    // Start eerste vraag
     showQuestion();
 
      // Deze functie stuurt de resultaten naar de server

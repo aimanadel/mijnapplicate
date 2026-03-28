@@ -21,7 +21,7 @@ from flask import render_template, session, redirect, url_for, request, flash
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import execute_query
-
+import json
 from app.main import bp
 
 
@@ -248,12 +248,15 @@ def foutenanalyse():
     )
 
 
+
+# Pagina route
+
 @bp.route("/oefenen-opgaven")
 def oefenen_opgaven():
-    """
-    Oefenpagina (placeholder).
-    """
+    
     return render_template("oefenen_opgaven.html")
+
+
 
 
 @bp.route("/leerling/<int:leerling_id>")
