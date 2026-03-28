@@ -258,6 +258,25 @@ def oefenen_opgaven():
 
 
 
+# Database
+
+def ensure_oefenopgaven_table():
+    """
+    Maakt de tabel aan als deze nog niet bestaat.
+    """
+    execute_query("""
+        CREATE TABLE IF NOT EXISTS oefenopgaven_result (
+            id INT NOT NULL AUTO_INCREMENT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            score INT NOT NULL,
+            total_answered INT NOT NULL,
+            incorrect_answers TEXT NOT NULL,
+            PRIMARY KEY(id)
+        )
+    """)
+
+
+
 
 @bp.route("/leerling/<int:leerling_id>")
 @docent_required
