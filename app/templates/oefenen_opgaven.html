@@ -3,17 +3,28 @@
 {% block title %}Oefenen Opgaven{% endblock %}
 
 {% block content %}
-<h1>Welkom bij Oefenen Opgaven</h1>
-<!-- Score sectie -->
-<p>Score: <span id="score">0</span> / <span id="total">0</span></p>
-<!-- Vraag sectie -->
-<p id="question"></p>
+<!-- Hoofdcontainer van de oefenpagina -->
+<div class="oefenen-opgaven">
 
-<!-- Antwoord sectie -->
-<input type="text" id="answer" placeholder="Typ hier je antwoord">
-<button id="submit">Verzend antwoord</button>
-<!-- Feedback sectie -->
-<p id="feedback"></p>
+    <!-- Titel van de pagina -->
+    <h1>Welkom bij Oefenen Opgaven</h1>
+
+    <!-- Hier wordt de score getoond (juiste antwoorden / totaal) -->
+    <p>Score: <span id="score">0</span> / <span id="total">0</span></p>
+
+    <!-- Hier wordt de vraag getoond -->
+    <p id="question"></p>
+
+    <!-- Input veld waar de gebruiker zijn antwoord invult -->
+    <input type="text" id="answer" placeholder="Typ hier je antwoord">
+
+    <!-- Knop om het antwoord te controleren -->
+    <button id="submit">Verzend antwoord</button>
+
+    <!-- Hier komt feedback (goed of fout) -->
+    <p id="feedback"></p>
+
+</div>
 
 
 <!-- JavaScript sectie -->
