@@ -453,3 +453,44 @@ h1 {
   border-radius: 8px;
   font-size: 14px;
 }
+
+/* CSS speciaal voor de pagina Oefenen Opgaven */
+/* Algemene pagina stijl (stijl van de hele pagina) */
+.oefenen-opgaven {
+    font-family: Arial, sans-serif; /* Lettertype */
+    background: #f9f9f9;           /* Achtergrondkleur */
+    color: #333;                   /* Tekstkleur */
+    padding: 20px;                 /* Ruimte binnen de container */
+    display: flex;                 /* Flexbox gebruiken */
+    flex-direction: column;        /* Onder elkaar plaatsen */
+    align-items: center;           /* Inhoud centreren */
+}
+
+/* Titel van de pagina */
+.oefenen-opgaven h1 {
+    margin-bottom: 20px;           /* Ruimte onder de titel */
+    color: #2c3e50;               /* Kleur van de titel */
+}
+
+/* Stijl voor vraag en invoerveld */
+.oefenen-opgaven #question,
+.oefenen-opgaven #answer {
+    width: 100%;                   /* Volledige breedte */
+    max-width: 500px;              /* Maximale breedte */
+    padding: 12px;                 /* Binnenruimte */
+    border: 2px solid #00bcd4;     /* Randkleur */
+    border-radius: 6px;            /* Ronde hoeken */
+    text-align: center;            /* Tekst centreren */
+    margin-bottom: 10px;           /* Ruimte onder */
+}
+/* Knop */
+.oefenen-opgaven #submit {
+    padding: 10px 20px;            /* Ruimte binnen de knop */
+    background-color: #00bcd4;     /* Achtergrondkleur */
+    color: #fff;                   /* Tekstkleur */
+    border: none;                  /* Geen rand */
+    border-radius: 5px;            /* Ronde hoeken */
+    cursor: pointer;               /* Muis pointer */
+}
+
+  
