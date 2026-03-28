@@ -50,7 +50,10 @@
     const aElem = document.getElementById("answer");   
     const feedback = document.getElementById("feedback"); 
     const scoreElem = document.getElementById("score");   
-    const totalElem = document.getElementById("total");   
+    const totalElem = document.getElementById("total");  
+    
+    // Hier slaan we foute antwoorden op
+    const incorrectAnswers = [];
         // Functie om de volgende vraag te tonen
     function showQuestion() {
         if(index < questions.length){
