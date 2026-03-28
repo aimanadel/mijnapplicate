@@ -462,3 +462,7 @@ h1 {
     align-items: center;
     padding: 20px;
 }
+ /* Titel van de pagina */
+.oefenen-opgaven h1 {
+    margin-bottom: 20px;
+}
