@@ -276,6 +276,22 @@ def ensure_oefenopgaven_table():
     """)
 
 
+def save_oefenopgaven(score, total_answered, incorrect_answers):
+    """
+    Slaat de resultaten op in de database.
+    """
+    ensure_oefenopgaven_table()
+
+    execute_query(
+        """
+        INSERT INTO oefenopgaven_result (score, total_answered, incorrect_answers)
+        VALUES (?, ?, ?)
+        """,
+        (score, total_answered, json.dumps(incorrect_answers, ensure_ascii=False))
+    )
+
+
+
 
 
 @bp.route("/leerling/<int:leerling_id>")
