@@ -457,6 +457,7 @@ h1 {
 /* CSS speciaal voor de pagina Oefenen Opgaven */
 <<<<<<< HEAD
 /* Algemene pagina stijl (stijl van de hele pagina) */
+/* Algemene pagina stijl (stijl van de hele pagina) */
 .oefenen-opgaven {
     font-family: Arial, sans-serif; /* Lettertype */
     background: #f9f9f9;           /* Achtergrondkleur */
@@ -484,18 +485,30 @@ h1 {
     text-align: center;            /* Tekst centreren */
     margin-bottom: 10px;           /* Ruimte onder */
 }
+
+/* Extra stijl voor de vraag */
+.oefenen-opgaven #question {
+    background: #e0f7fa;           /* Achtergrondkleur */
+    font-size: 1.2em;              /* Grotere tekst */
+}
+
 /* Knop */
 .oefenen-opgaven #submit {
     padding: 10px 20px;            /* Ruimte binnen de knop */
-    background-color: #00bcd4;     /* Achtergrondkleur */
+    background: #00bcd4;           /* Achtergrondkleur */
     color: #fff;                   /* Tekstkleur */
     border: none;                  /* Geen rand */
     border-radius: 5px;            /* Ronde hoeken */
     cursor: pointer;               /* Muis pointer */
 }
+
 /* Hover effect voor knop */
 .oefenen-opgaven #submit:hover {
     background: #0097a7;           /* Donkere kleur bij hover */
 }
 
-
+/* Feedback en score tekst */
+.oefenen-opgaven #feedback,
+.oefenen-opgaven p span {
+    font-weight: bold;             /* Vetgedrukte tekst */
+}
