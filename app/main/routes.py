@@ -292,6 +292,22 @@ def save_oefenopgaven(score, total_answered, incorrect_answers):
 
 
 
+# Resultaten ontvangen
+
+@bp.route("/oefenen-opgaven/resultaat", methods=["POST"])
+def oefenen_opgaven_resultaat():
+    """
+    Ontvangt resultaten en slaat deze op.
+    """
+    data = request.get_json() or {}
+
+    score = int(data.get("score", 0))
+    total_answered = int(data.get("total_answered", 0))
+    incorrect_answers = data.get("incorrect_answers", [])
+
+    save_oefenopgaven(score, total_answered, incorrect_answers)
+
+    return jsonify({"ok": True})
 
 
 @bp.route("/leerling/<int:leerling_id>")
