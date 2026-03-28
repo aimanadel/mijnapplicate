@@ -486,4 +486,11 @@ h1 {
 /* Knop */
 .oefenen-opgaven #submit {
     padding: 10px 20px;            /* Ruimte binnen de knop */
+    background-color: #00bcd4;     /* Achtergrondkleur */
+    color: #fff;                   /* Tekstkleur */
+    border: none;                  /* Geen rand */
+    border-radius: 5px;            /* Ronde hoeken */
+    cursor: pointer;               /* Muis pointer */
+}
+
   
