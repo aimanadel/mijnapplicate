@@ -510,5 +510,5 @@ h1 {
 /* Feedback en score tekst */
 .oefenen-opgaven #feedback,
 .oefenen-opgaven p span {
-    font-weight: bold;             /* Vetgedrukte tekst */
+    font-weight: bold;             /*Vetgedrukte tekst */
 }
