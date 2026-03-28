@@ -88,6 +88,21 @@
 
     // Start eerste vraag v
     showQuestion();
+
+     // Deze functie stuurt de resultaten naar de server
+    function saveQuizResult() {
+        fetch("{{ url_for('main.oefenen_opgaven_resultaat') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            score: score,
+            total_answered: total,
+            incorrect_answers: incorrectAnswers
+           })
+        });
+     }
 </script>
 
 {% endblock %}
