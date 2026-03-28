@@ -469,7 +469,7 @@ h1 {
 /* Titel van de pagina */
 .oefenen-opgaven h1 {
     margin-bottom: 20px;           /* Ruimte onder de titel */
-    color: #2c3e50;               /* Kleur van de titel */
+    color: #2c3e50;                /* Kleur van de titel */
 }
 
 /* Stijl voor vraag en invoerveld */
@@ -483,6 +483,7 @@ h1 {
     text-align: center;            /* Tekst centreren */
     margin-bottom: 10px;           /* Ruimte onder */
 }
+
 /* Knop */
 .oefenen-opgaven #submit {
     padding: 10px 20px;            /* Ruimte binnen de knop */
@@ -493,4 +494,3 @@ h1 {
     cursor: pointer;               /* Muis pointer */
 }
 
-  
