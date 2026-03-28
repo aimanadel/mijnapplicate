@@ -17,7 +17,7 @@ Afhankelijkheden:
 - app.db (database queries)
 """
 
-from flask import render_template, session, redirect, url_for, request, flash
+from flask import render_template, session, redirect, url_for, request, flash, jsonify
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import execute_query
