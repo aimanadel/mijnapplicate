@@ -29,7 +29,137 @@
 
 <!-- JavaScript sectie -->
 <script>
-    // Lijst van vragen en antwoorden
+    class Question {
+        constructor(text, answer) {
+            this.text = text;
+            this.answer = answer;
+        }
+
+        isCorrect(response) {
+            return response.trim().toLowerCase() === this.answer.toLowerCase();
+        }
+
+        getFeedback(response) {
+            if (this.isCorrect(response)) {
+                return {
+                    message: "✅ Correct!",
+                    correct: true
+                };
+            }
+
+            return {
+                message: `❌ Fout, het juiste antwoord is: ${this.answer}`,
+                correct: false
+            };
+        }
+    }
+
+    class Exercise {
+        constructor(questionList) {
+            this.questions = questionList.map(item => new Question(item.text, item.answer));
+            this.score = 0;
+            this.total = 0;
+            this.index = 0;
+            this.incorrectAnswers = [];
+        }
+
+        get currentQuestion() {
+            return this.questions[this.index];
+        }
+
+        get finished() {
+            return this.index >= this.questions.length;
+        }
+
+        submitAnswer(answer) {
+            if (this.finished) {
+                return null;
+            }
+
+            const result = this.currentQuestion.getFeedback(answer);
+            this.total += 1;
+
+            if (result.correct) {
+                this.score += 1;
+            } else {
+                this.incorrectAnswers.push({
+                    question: this.currentQuestion.text,
+                    expected: this.currentQuestion.answer,
+                    given: answer.trim()
+                });
+            }
+
+            this.index += 1;
+            return result;
+        }
+
+        getResultPayload() {
+            return {
+                score: this.score,
+                total_answered: this.total,
+                incorrect_answers: this.incorrectAnswers
+            };
+        }
+    }
+
+    class ExercisePage {
+        constructor(exercise, elements, saveUrl) {
+            this.exercise = exercise;
+            this.elements = elements;
+            this.saveUrl = saveUrl;
+            this.elements.submitButton.addEventListener("click", () => this.handleSubmit());
+        }
+
+        init() {
+            this.showQuestion();
+        }
+
+        showQuestion() {
+            if (this.exercise.finished) {
+                this.finishQuiz();
+                return;
+            }
+
+            this.elements.question.textContent = this.exercise.currentQuestion.text;
+            this.elements.answer.value = "";
+            this.elements.feedback.textContent = "";
+        }
+
+        updateStats() {
+            this.elements.score.textContent = this.exercise.score;
+            this.elements.total.textContent = this.exercise.total;
+        }
+
+        handleSubmit() {
+            if (this.exercise.finished) {
+                return;
+            }
+
+            const answer = this.elements.answer.value;
+            const feedback = this.exercise.submitAnswer(answer);
+            this.elements.feedback.textContent = feedback.message;
+            this.updateStats();
+
+            setTimeout(() => this.showQuestion(), 1000);
+        }
+
+        finishQuiz() {
+            this.elements.question.textContent = "Alle vragen zijn voltooid!";
+            this.elements.answer.style.display = "none";
+            this.elements.submitButton.style.display = "none";
+            this.elements.feedback.textContent = "Je hebt de quiz afgerond. Resultaten worden opgeslagen...";
+            this.saveResults();
+        }
+
+        saveResults() {
+            fetch(this.saveUrl, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(this.exercise.getResultPayload())
+            }).catch(error => console.error("Fout bij opslaan resultaten:", error));
+        }
+    }
+
     const questions = [
         {text: "Wat is de hoofdstad van Nederland?", answer: "Amsterdam"},
         {text: "Hoeveel dagen heeft een week?", answer: "7"},
@@ -39,80 +169,18 @@
         {text: "Welke taal spreken ze in Frankrijk?", answer: "Frans"}
     ];
 
-    // Variabelen voor score en voortgang
-    let score = 0;           // Aantal juiste antwoorden
-    let total = 0;           // Totaal aantal gegeven antwoorden
-    let index = 0;           // Huidige vraag index
-
-
-    // DOM elementen ophalen
-    const qElem = document.getElementById("question");
-    const aElem = document.getElementById("answer");
-    const feedback = document.getElementById("feedback");
-    const scoreElem = document.getElementById("score");
-    const totalElem = document.getElementById("total");
-    const submitButton = document.getElementById("submit");
-
- 
-
-    // Hier slaan we foute antwoorden op
-    const incorrectAnswers = [];
-
-    function showQuestion() {
-        if (index < questions.length) {
-            qElem.textContent = questions[index].text;
-            aElem.value = "";
-            feedback.textContent = "";
-        } else {
-            qElem.textContent = "Alle vragen zijn voltooid!";
-            aElem.style.display = "none";
-            submitButton.style.display = "none";
-            feedback.textContent = "Je hebt de quiz afgerond. Resultaten worden opgeslagen...";
-            saveQuizResult();
-        }
-    }
-
-    function saveQuizResult() {
-        fetch("{{ url_for('main.oefenen_opgaven_resultaat') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                score: score,
-                total_answered: total,
-                incorrect_answers: incorrectAnswers
-            })
-        })
-        .catch(error => console.error("Fout bij opslaan resultaten:", error));
-    }
-
-    // Functie om het antwoord te controleren bij klikken
-    submitButton.onclick = function () {
-        const ans = aElem.value.trim();
-        total++;
-        totalElem.textContent = total;
-
-        if (ans.toLowerCase() === questions[index].answer.toLowerCase()) {
-            score++;
-            scoreElem.textContent = score;
-            feedback.textContent = "✅ Correct!";
-        } else {
-            incorrectAnswers.push({
-                question: questions[index].text,
-                expected: questions[index].answer,
-                given: ans
-            });
-            feedback.textContent = "❌ Fout, het juiste antwoord is: " + questions[index].answer;
-        }
-
-        index++;
-        setTimeout(showQuestion, 1000);
+    const elements = {
+        question: document.getElementById("question"),
+        answer: document.getElementById("answer"),
+        feedback: document.getElementById("feedback"),
+        score: document.getElementById("score"),
+        total: document.getElementById("total"),
+        submitButton: document.getElementById("submit")
     };
 
-
-    // Start eerste vraag
-    showQuestion();
+    const exercise = new Exercise(questions);
+    const page = new ExercisePage(exercise, elements, "{{ url_for('main.oefenen_opgaven_resultaat') }}");
+    page.init();
 </script>
 
 {% endblock %}
