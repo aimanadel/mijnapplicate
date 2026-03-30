@@ -15,6 +15,7 @@ CREATE TABLE `Event`(
     PRIMARY KEY(`eventId`)
 );
 
+<<<<<<< HEAD
 CREATE TABLE `fout`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `leerling_id` INT NOT NULL,
@@ -39,3 +40,17 @@ CREATE TABLE `resultaat`(
     PRIMARY KEY(`id`),
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 );
+=======
+
+CREATE TABLE exercises (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    title TEXT NOT NULL,
+    description TEXT,
+    duration INTEGER,
+    question_count INTEGER,
+    color_code TEXT,
+    status TEXT DEFAULT 'recommended',
+);
+
+
+>>>>>>> Tabel voor oefeningen sql gemaakt
