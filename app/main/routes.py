@@ -56,7 +56,7 @@ def index():
 @bp.route("/register", methods=["GET", "POST"])
 def register():
     """
-    Registratie van een nieuwe docent.
+    Registration from new teacher 
     """
     if request.method == "POST":
         username = request.form.get("username", "").strip()
@@ -97,7 +97,7 @@ def register():
 @bp.route("/login", methods=["GET", "POST"])
 def login():
     """
-    Login voor docenten.
+    Login for teachers.
     """
     if request.method == "POST":
         username = request.form.get("username", "").strip()
@@ -150,7 +150,7 @@ def about_me():
 @bp.route("/home")
 def home():
     """
-    Home pagina.
+    Home page.
     """
     return render_template("home.html")
 
