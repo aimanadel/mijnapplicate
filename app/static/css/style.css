@@ -512,7 +512,52 @@ h1 {
     font-weight: bold;             /*Vetgedrukte tekst */
 }
 
+/* Aanbevelingen page container layout */
+.aanbevelingen-container {                 /* wrapper for recommendation page sections */
+  display: grid;                           /* use grid layout */
+  grid-template-columns: 2fr 1fr;          /* left/right ratio */
+  gap: 18px;                               /* space between grid children */
+  margin-top: 22px;                        /* top margin */
+}
 
+/* Cards container */
+.cards {                                   /* group of cards */
+  display: grid;                           /* grid layout for cards */
+  gap: 14px;                               /* gap between card blocks */
+}
 
+/* Individual card style */
+.card {                                    /* single card box */
+  background: #ffffff;                     /* white background */
+  border-radius: 12px;                     /* rounding corners */
+  padding: 14px;                           /* inner spacing */
+  box-shadow: 0 6px 16px rgba(16,42,89,0.08); /* subtle shadow */
+}
 
+.card.red { border-left: 4px solid #e04949; }      /* red card indicator */
+.card.purple { border-left: 4px solid #815cd5; }   /* purple card indicator */
+.card.blue { border-left: 4px solid #2f80ed; }     /* blue card indicator */
+.card.primary { border-left: 4px solid #1976d2; }  /* primary card indicator */
 
+.card h3 { margin: 0 0 6px; font-size: 20px; color: #1f3257; }  /* card title */
+.card p { color: #596e88; margin: 8px 0 10px; }                 /* card text */
+.card .meta { color: #6a7d98; font-size: 14px; display: flex; gap: 12px; } /* meta row*/
+
+.card .button {                                    /* card action link */
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 14px;
+  background: #1f81ff;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* Right panel stats column */
+.stats { display: flex; flex-direction: column; gap: 14px; }
+.panel { background: #fff; border: 1px solid #d8e5f5; border-radius: 12px; padding: 10px; }
+.panel h4 { margin: 0 0 8px; color: #2e4b72; }
+.panel-item { margin-bottom: 8px; font-size: 15px; }
+
+.panel.cta { background: linear-gradient(90deg, #1987f0, #0c6dd9); color: #fff; border: 0; }
+.panel.cta .button { background: rgba(255,255,255,0.95); color: #1c3f7a; }
