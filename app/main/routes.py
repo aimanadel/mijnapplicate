@@ -255,24 +255,23 @@ def oefenen_opgaven():
     
     return render_template("oefenen_opgaven.html")
 
+# Aanbevelingen pagina route
 
 @bp.route("/aanbevelingen")
 def aanbevelingen():
-    """Render the aanbevolen page with student recommendations."""
-    # Render sidebar navigation state
+    """Render the recommendations page for students with tips and oefenopgaven."""
+
     menu_items = [
         {"name": "Dashboard", "url": url_for('main.index'), "active": False},
         {"name": "Aanbevelingen", "url": url_for('main.aanbevelingen'), "active": True},
         {"name": "Oefenen", "url": url_for('main.oefenen_opgaven'), "active": False},
     ]
 
-    # User session context
     user = {
         "name": session.get("user", "Gast"),
         "role": session.get("role", "leerling")
     }
 
-    # Query exercises from database, fallback to empty list on error
     try:
         exercises = execute_query("SELECT id, title, description, duration FROM exercises")
     except Exception:
@@ -282,6 +281,7 @@ def aanbevelingen():
     for e in exercises:
         if not isinstance(e, dict):
             continue
+
         cards.append({
             "title": e.get("title", "Onbekend"),
             "description": e.get("description", "Geen beschrijving"),
