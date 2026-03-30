@@ -29,16 +29,32 @@
 
 <!-- JavaScript sectie -->
 <script>
+
+    /*
+    Documentatie:
+    Deze class representeert één vraag.
+    Elke vraag heeft een tekst en een juist antwoord.
+    */
     class Question {
         constructor(text, answer) {
             this.text = text;
             this.answer = answer;
         }
 
+        /*
+        Documentatie:
+        Controleert of het gegeven antwoord correct is.
+        */
         isCorrect(response) {
             return response.trim().toLowerCase() === this.answer.toLowerCase();
         }
 
+        /*
+        Documentatie:
+        Geeft feedback terug:
+        - Correct antwoord → positief bericht
+        - Fout antwoord → toont juiste antwoord
+        */
         getFeedback(response) {
             if (this.isCorrect(response)) {
                 return {
@@ -48,12 +64,17 @@
             }
 
             return {
-                message: `❌ Fout, het juiste antwoord is: ${this.answer}`,
+                message: ❌ Fout, het juiste antwoord is: ${this.answer},
                 correct: false
             };
         }
     }
 
+    /*
+    Documentatie:
+    Deze class beheert de logica van de quiz.
+    Houdt score, totaal en verkeerde antwoorden bij.
+    */
     class Exercise {
         constructor(questionList) {
             this.questions = questionList.map(item => new Question(item.text, item.answer));
@@ -63,14 +84,20 @@
             this.incorrectAnswers = [];
         }
 
+        // Geeft de huidige vraag terug
         get currentQuestion() {
             return this.questions[this.index];
         }
 
+        // Controleert of de quiz klaar is
         get finished() {
             return this.index >= this.questions.length;
         }
 
+        /*
+        Documentatie:
+        Verwerkt het antwoord van de gebruiker.
+        */
         submitAnswer(answer) {
             if (this.finished) {
                 return null;
@@ -93,6 +120,10 @@
             return result;
         }
 
+        /*
+        Documentatie:
+        Geeft alle resultaten terug voor opslag in de database.
+        */
         getResultPayload() {
             return {
                 score: this.score,
@@ -102,6 +133,11 @@
         }
     }
 
+    /*
+    Documentatie:
+    Deze class regelt de gebruikersinterface (UI).
+    Zorgt voor tonen van vragen en feedback.
+    */
     class ExercisePage {
         constructor(exercise, elements, saveUrl) {
             this.exercise = exercise;
@@ -110,10 +146,15 @@
             this.elements.submitButton.addEventListener("click", () => this.handleSubmit());
         }
 
+        // Start de quiz
         init() {
             this.showQuestion();
         }
 
+        /*
+        Documentatie:
+        Toont de huidige vraag op het scherm.
+        */
         showQuestion() {
             if (this.exercise.finished) {
                 this.finishQuiz();
@@ -125,11 +166,16 @@
             this.elements.feedback.textContent = "";
         }
 
+        // Update score en totaal
         updateStats() {
             this.elements.score.textContent = this.exercise.score;
             this.elements.total.textContent = this.exercise.total;
         }
 
+        /*
+        Documentatie:
+        Wordt uitgevoerd wanneer gebruiker op submit klikt.
+        */
         handleSubmit() {
             if (this.exercise.finished) {
                 return;
@@ -143,6 +189,10 @@
             setTimeout(() => this.showQuestion(), 1000);
         }
 
+        /*
+        Documentatie:
+        Eindigt de quiz en verstuurt resultaten naar backend.
+        */
         finishQuiz() {
             this.elements.question.textContent = "Alle vragen zijn voltooid!";
             this.elements.answer.style.display = "none";
@@ -151,6 +201,10 @@
             this.saveResults();
         }
 
+        /*
+        Documentatie:
+        Stuurt de resultaten naar de server met fetch (POST).
+        */
         saveResults() {
             fetch(this.saveUrl, {
                 method: "POST",
@@ -160,6 +214,10 @@
         }
     }
 
+    /*
+    Documentatie:
+    Lijst met quiz vragen en antwoorden.
+    */
     const questions = [
         {text: "Wat is de hoofdstad van Nederland?", answer: "Amsterdam"},
         {text: "Hoeveel dagen heeft een week?", answer: "7"},
@@ -169,6 +227,10 @@
         {text: "Welke taal spreken ze in Frankrijk?", answer: "Frans"}
     ];
 
+    /*
+    Documentatie:
+    Koppeling tussen HTML elementen en JavaScript.
+    */
     const elements = {
         question: document.getElementById("question"),
         answer: document.getElementById("answer"),
@@ -178,10 +240,14 @@
         submitButton: document.getElementById("submit")
     };
 
+    /*
+    Documentatie:
+    Start de applicatie.
+    */
     const exercise = new Exercise(questions);
     const page = new ExercisePage(exercise, elements, "{{ url_for('main.oefenen_opgaven_resultaat') }}");
     page.init();
-</script>
 
+</script>
 
 {% endblock %}
