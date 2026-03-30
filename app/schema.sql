@@ -53,4 +53,14 @@ CREATE TABLE exercises (
 );
 
 
+<<<<<<< HEAD
 >>>>>>> Tabel voor oefeningen sql gemaakt
+=======
+CREATE TABLE result ( 
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    exercise_id INTEGER,
+    score REAL,
+    completion_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (exercise_id) REFERENCES exercises(id),
+);
+>>>>>>> tabel voor resultaten toegevoegd in sql
