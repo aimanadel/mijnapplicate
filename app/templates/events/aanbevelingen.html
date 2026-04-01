@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Aanbevelingen{% endblock %}
+
+{% block header %}
+  <h1>Aanbevelingen</h1>
+  <p>Persoonlijke oefeningen en aanbevelingen om te verbeteren.</p>
+{% endblock %}
+
+{% block content %}
+  <div class="aanbevelingen-container">
+    <section class="cards">
+      <h2>Aanbevolen Oefeningen</h2>
+      {% for card in cards %}
+      <article class="card {{ card.color }}">
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+        <div class="meta">
+          <span>⏱ {{ card.time }} min</span>
+          <span>📘 {{ card.exercises }} oefeningen</span>
+        </div>
+        <a class="button" href="#">Start Oefenen →</a>
+      </article>
+      {% endfor %}
+    </section>
+
+    <aside class="stats">
+      <div class="panel">
+        <h4>Afgerond</h4>
+        {% for item in completed %}
+        <div class="panel-item">
+          <p>{{ item.title }}</p>
+          <small>Score: {{ item.score }}/10</small>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="panel">
+        <h4>Binnenkort</h4>
+        {% for item in upcoming %}
+        <div class="panel-item">{{ item.title }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="panel cta">
+        <h4>Start Oefenen</h4>
+        <p>{{ cta_text }}</p>
+        <a class="button" href="#">Start Nu →</a>
+      </div>
+    </aside>
+  </div>
+{% endblock %}
