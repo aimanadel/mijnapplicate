@@ -82,16 +82,3 @@ CREATE TABLE `vaardigheid` (
 
 
 
-
--- 7. INZICHT
-CREATE TABLE `inzicht` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `leerling_id` INT NOT NULL,
-    `titel` VARCHAR(100),
-    `beschrijving` TEXT,
-    `categorie` VARCHAR(100),
-    `positief` BOOLEAN,
-    `datum` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
-) ENGINE=InnoDB;
