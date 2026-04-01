@@ -369,3 +369,7 @@ def leerling_detail(leerling_id):
         uitleg=uitleg,
         advies=advies
     )
+
+
+     
+
