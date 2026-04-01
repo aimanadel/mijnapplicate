@@ -40,6 +40,11 @@ CREATE TABLE `resultaat`(
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 );
 
+CREATE TABLE `vak`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `naam` VARCHAR(100) NOT NULL,
+    PRIMARY KEY(`id`)
+);
 
 --  SCORE---
 CREATE TABLE `score` (
@@ -53,3 +58,17 @@ CREATE TABLE `score` (
     PRIMARY KEY (`id`),
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 );
+
+
+
+--  VAARDIGHEID
+CREATE TABLE `vaardigheid` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `leerling_id` INT NOT NULL,
+    `naam` VARCHAR(100),
+    `sterren` INT,
+    `trend` VARCHAR(50),
+    `bijgewerkt_op` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
+) ENGINE=InnoDB;
