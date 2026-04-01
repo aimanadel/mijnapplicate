@@ -39,3 +39,17 @@ CREATE TABLE `resultaat`(
     PRIMARY KEY(`id`),
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 );
+
+
+--  SCORE---
+CREATE TABLE `score` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `leerling_id` INT NOT NULL,
+    `vak_id` INT,
+    `gemiddelde_score` DECIMAL(5,2),
+    `vorige_score` DECIMAL(5,2),
+    `trend` VARCHAR(50),
+    `periode` DATE,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
+);
