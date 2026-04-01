@@ -80,18 +80,5 @@ CREATE TABLE `vaardigheid` (
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE result (
-    -- Unique ID number for each saved result.
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    -- The ID of the exercise that this result is for, linking to the exercises table.
-    exercise_id INTEGER,
-    -- The grade achieved in the exercise, stored as a real number.
-    score REAL,
-    -- The date and time when the exercise was completed, defaulting to the current timestamp.
-    completion_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    /** Establishing a foreign key relationship to ensure that each result is associated with a valid exercise.
-     * You can't save a result for a lesson that doesn't exist in the exercises table.
-     */
-    FOREIGN KEY (exercise_id) REFERENCES exercises(id)
-);
+
 
