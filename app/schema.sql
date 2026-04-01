@@ -34,9 +34,11 @@ CREATE TABLE exercises (
 CREATE TABLE `leerling`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `naam` VARCHAR(100) NOT NULL,
-    `klas` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `wachtwoord_hash` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`id`)
 );
+
 
 CREATE TABLE `resultaat`(
     `id` INT NOT NULL AUTO_INCREMENT,
