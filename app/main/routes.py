@@ -56,7 +56,7 @@ def index():
 @bp.route("/register", methods=["GET", "POST"])
 def register():
     """
-    Registratie van een nieuwe docent.
+    Registration from new teacher 
     """
     if request.method == "POST":
         username = request.form.get("username", "").strip()
@@ -97,7 +97,7 @@ def register():
 @bp.route("/login", methods=["GET", "POST"])
 def login():
     """
-    Login voor docenten.
+    Login for teachers.
     """
     if request.method == "POST":
         username = request.form.get("username", "").strip()
@@ -150,7 +150,7 @@ def about_me():
 @bp.route("/home")
 def home():
     """
-    Home pagina.
+    Home page.
     """
     return render_template("home.html")
 
@@ -246,6 +246,72 @@ def foutenanalyse():
         labels=labels,
         waarden=waarden
     )
+
+
+# Aanbevelingen pagina route
+
+@bp.route("/aanbevelingen")
+def aanbevelingen():
+    """Render the recommendations page for students with tips and oefenopgaven."""
+
+    menu_items = [
+        {"name": "Dashboard", "url": url_for('main.index'), "active": False},
+        {"name": "Aanbevelingen", "url": url_for('main.aanbevelingen'), "active": True},
+        {"name": "Oefenen", "url": url_for('main.oefenen_opgaven'), "active": False},
+    ]
+
+    user = {
+        "name": session.get("user", "Gast"),
+        "role": session.get("role", "leerling")
+    }
+
+    try:
+        exercises = execute_query("SELECT id, title, description, duration FROM exercises")
+    except Exception:
+        exercises = []
+
+    cards = []
+    for e in exercises:
+        if not isinstance(e, dict):
+            continue
+
+        cards.append({
+            "title": e.get("title", "Onbekend"),
+            "description": e.get("description", "Geen beschrijving"),
+            "time": e.get("duration", 10),
+            "exercises": 10,
+            "color": "primary"
+        })
+
+    if not cards:
+        cards = [
+            {"title": "Vermijd Haastige Conclusies", "description": "Lees alle antwoordopties goed voordat je kiest.", "time": 15, "exercises": 12, "color": "red"},
+            {"title": "Sleutelwoorden Herkennen", "description": "Oefen met markeren van belangrijke woorden.", "time": 10, "exercises": 8, "color": "purple"},
+            {"title": "Tijdsplanning Verbeteren", "description": "Leer beter je tijd in delen zodat je op tijd klaar bent.", "time": 20, "exercises": 15, "color": "blue"},
+        ]
+
+    completed = [
+        {"title": "Concentratie Oefeningen", "score": 8.5},
+        {"title": "Tijdsbeheer Basis", "score": 7.8},
+    ]
+
+    upcoming = [
+        {"title": "Nieuwe Oefeningen: Nauwkeurigheid"},
+        {"title": "Nieuwe Oefeningen: Spelling"},
+    ]
+
+    return render_template(
+        "events/aanbevelingen.html",
+        menu_items=menu_items,
+        subtitle="Persoonlijke oefeningen en aanbevelingen om te verbeteren",
+        user=user,
+        cards=cards,
+        completed=completed,
+        upcoming=upcoming,
+        cta_text="Start nu met oefenen"
+    )
+
+
 @bp.route("/leerling/<int:leerling_id>")
 @docent_required
 def leerling_detail(leerling_id):
@@ -303,3 +369,7 @@ def leerling_detail(leerling_id):
         uitleg=uitleg,
         advies=advies
     )
+
+
+     
+
