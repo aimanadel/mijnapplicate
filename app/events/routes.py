@@ -30,7 +30,8 @@ def create():
         if not event_id:
             return render_template("events/create.html", error="Event kon niet worden aangemaakt, zorg dat de datum in de toekomst ligt.")
         return redirect(url_for("events.view", event_id=event_id))
-
+   
+   
     return render_template("events/create.html")
 
 
