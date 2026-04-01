@@ -312,8 +312,6 @@ def aanbevelingen():
     )
 
 
-
-
 @bp.route("/leerling/<int:leerling_id>")
 @docent_required
 def leerling_detail(leerling_id):
