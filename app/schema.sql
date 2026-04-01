@@ -24,7 +24,7 @@ CREATE TABLE `fout`(
     PRIMARY KEY(`id`)
 );
 
-CREATE TABLE `leerlingen `(
+CREATE TABLE `leerling`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `naam` VARCHAR(100) NOT NULL,
     `email` VARCHAR(100) NOT NULL UNIQUE,
