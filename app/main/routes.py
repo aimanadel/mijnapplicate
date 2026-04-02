@@ -128,13 +128,12 @@ def home():
 
 
 @bp.route("/leerlingen")
-@docent_required
 def leerlingen():
     """
-    Overzicht van alle leerlingen (beveiligd).
+    Overzicht van alle leerlingen.
     """
     leerlingen = execute_query("SELECT id, naam, klas FROM leerling")
-    klassen = sorted(list(set([l["klas"] for l in leerlingen])))
+    klassen = sorted({l.get("klas") for l in leerlingen if l.get("klas") is not None})
     
     return render_template(
         "leerlingen.html",
@@ -285,7 +284,6 @@ def aanbevelingen():
 
 
 @bp.route("/leerling/<int:leerling_id>")
-@docent_required
 def leerling_detail(leerling_id):
     """
     Detailpagina van één leerling.
@@ -340,4 +338,4 @@ def leerling_detail(leerling_id):
         zwak_onderwerp=zwak_onderwerp,
         uitleg=uitleg,
         advies=advies
-    ) 
+    )
