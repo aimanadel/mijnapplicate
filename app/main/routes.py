@@ -1,22 +1,3 @@
-"""
-Module: routes.py
-
-Bevat alle Flask routes voor de ANSW student-analytics applicatie.
-
-Functionaliteit:
-- Authenticatie (login, register, logout)
-- Overzicht van leerlingen
-- Detailpagina per leerling
-- Foutenanalyse
-- Oefenpagina’s
-- Beveiliging via @docent_required decorator
-
-Afhankelijkheden:
-- Flask
-- werkzeug (password hashing)
-- app.db (database queries)
-"""
-
 from flask import render_template, session, redirect, url_for, request, flash, jsonify
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -24,16 +5,8 @@ from app.db import execute_query
 import json
 from app.main import bp
 
-
 def docent_required(f):
-    """
-    Decorator: alleen toegankelijk voor ingelogde docenten.
-
-    Werking:
-    - Controleert session op docent_id en role
-    - Redirect naar login indien niet ingelogd
-    - Voert functie uit indien toegestaan
-    """
+   
     @wraps(f)
     def wrapper(*args, **kwargs):
         if session.get("role") != "docent" or not session.get("docent_id"):
@@ -51,7 +24,6 @@ def index():
     Homepage (geen login vereist).
     """
     return render_template("index.html")
-
 
 @bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -368,4 +340,4 @@ def leerling_detail(leerling_id):
         zwak_onderwerp=zwak_onderwerp,
         uitleg=uitleg,
         advies=advies
-    )
+    ) 
