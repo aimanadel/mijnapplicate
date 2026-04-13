@@ -31,11 +31,9 @@
         <li><a href="{{ url_for('main.aanbevelingen') }}">Aanbevelingen</a></li>
         <li><a href="{{ url_for('main.leerlingen') }}">leerling </a></li>
         
-        <!-- Login/Logout conditional display -->
+        <!-- Logout link (only if logged in) -->
         {% if session.get('role') %}
           <li><a href="{{ url_for('main.logout') }}">Uitloggen ({{ session.get('role') }})</a></li>
-        {% else %}
-          <li><a href="{{ url_for('main.login') }}">Inloggen</a></li>
         {% endif %}
       </ul>
     </aside>

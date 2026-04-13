@@ -12,7 +12,7 @@ def docent_required(f):
     def wrapper(*args, **kwargs):
         if session.get("role") != "docent" or not session.get("docent_id"):
             flash("U moet ingelogd zijn als docent om deze pagina te bekijken.")
-            return redirect(url_for("main.login"))
+            return redirect(url_for("main.index"))
         
         return f(*args, **kwargs)
     
@@ -58,7 +58,7 @@ def register():
             )
 
             flash("Account aangemaakt! U kunt nu inloggen.")
-            return redirect(url_for("main.login"))
+            return redirect(url_for("main.index"))
         
         except Exception:
             flash("Fout: gebruikersnaam of e-mail bestaat al.")
@@ -67,39 +67,7 @@ def register():
     return render_template("register.html")
 
 
-@bp.route("/login", methods=["GET", "POST"])
-def login():
-    """
-    Login for teachers.
-    """
-    if request.method == "POST":
-        username = request.form.get("username", "").strip()
-        password = request.form.get("password", "")
 
-        if not username or not password:
-            flash("Voer gebruikersnaam en wachtwoord in.")
-            return redirect(url_for("main.login"))
-
-        try:
-            docent = execute_query(
-                "SELECT id, username, password_hash FROM docent WHERE username = ?",
-                (username,)
-            )
-
-            if docent and check_password_hash(docent[0]["password_hash"], password):
-                session["docent_id"] = docent[0]["id"]
-                session["user"] = docent[0]["username"]
-                session["role"] = "docent"
-                
-                flash(f"Welkom, {username}!")
-                return redirect(url_for("main.leerlingen"))
-            else:
-                flash("Ongeldige gebruikersnaam of wachtwoord.")
-        
-        except Exception as e:
-            flash(f"Fout: {str(e)}")
-
-    return render_template("login.html")
 
 
 @bp.route("/logout")
