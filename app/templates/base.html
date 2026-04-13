@@ -30,6 +30,8 @@
         <li><a href="{{ url_for('main.oefenen_opgaven') }}">Oefenen opgaven</a></li>
         <li><a href="{{ url_for('main.aanbevelingen') }}">Aanbevelingen</a></li>
         <li><a href="{{ url_for('main.leerlingen') }}">leerling </a></li>
+         <li><a href="{{ url_for('main.score') }}">Score</a></li>
+       
         
         <!-- Logout link (only if logged in) -->
         {% if session.get('role') %}
