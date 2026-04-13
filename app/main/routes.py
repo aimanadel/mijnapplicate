@@ -6,17 +6,7 @@ import json
 from app.main import bp
 
 
-def docent_required(f):
-   
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        if session.get("role") != "docent" or not session.get("docent_id"):
-            flash("U moet ingelogd zijn als docent om deze pagina te bekijken.")
-            return redirect(url_for("main.index"))
-        
-        return f(*args, **kwargs)
-    
-    return wrapper
+
 
 
 @bp.route("/")
@@ -26,58 +16,7 @@ def index():
     """
     return render_template("index.html")
 
-@bp.route("/register", methods=["GET", "POST"])
-def register():
-    """
-    Registration from new teacher 
-    """
-    if request.method == "POST":
-        username = request.form.get("username", "").strip()
-        email = request.form.get("email", "").strip()
-        password = request.form.get("password", "")
-        password_confirm = request.form.get("password_confirm", "")
 
-        if not username or not email or not password:
-            flash("Vul alle velden in.")
-            return redirect(url_for("main.register"))
-
-        if password != password_confirm:
-            flash("Wachtwoorden komen niet overeen.")
-            return redirect(url_for("main.register"))
-
-        if len(password) < 6:
-            flash("Wachtwoord moet minimaal 6 tekens bevatten.")
-            return redirect(url_for("main.register"))
-
-        try:
-            password_hash = generate_password_hash(password)
-
-            execute_query(
-                "INSERT INTO docent (username, email, password_hash) VALUES (?, ?, ?)",
-                (username, email, password_hash)
-            )
-
-            flash("Account aangemaakt! U kunt nu inloggen.")
-            return redirect(url_for("main.index"))
-        
-        except Exception:
-            flash("Fout: gebruikersnaam of e-mail bestaat al.")
-            return redirect(url_for("main.register"))
-
-    return render_template("register.html")
-
-
-
-
-
-@bp.route("/logout")
-def logout():
-    """
-    Logout en sessie reset.
-    """
-    session.clear()
-    flash("U bent uitgelogd.")
-    return redirect(url_for("main.index"))
 
 
 @bp.route("/over-mij")
