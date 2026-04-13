@@ -82,5 +82,16 @@ CREATE TABLE `vaardigheid` (
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 ) ENGINE=InnoDB;
 
+-- FOUT
+CREATE TABLE `fout` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `leerling_id` INT NOT NULL,
+    `categorie` VARCHAR(100) NOT NULL,
+    `subcategorie` VARCHAR(100) NOT NULL,
+    `aantal` INT NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
+);
+
 
 
