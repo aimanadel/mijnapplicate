@@ -561,3 +561,47 @@ h1 {
 
 .panel.cta { background: linear-gradient(90deg, #1987f0, #0c6dd9); color: #fff; border: 0; }
 .panel.cta .button { background: rgba(255,255,255,0.95); color: #1c3f7a; }
+
+.subtext {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.fout-item {
+    margin-bottom: 20px;
+}
+
+.fout-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    background: #e5e7eb;
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: #4db6ac;
+}
+
+.details {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.aanbeveling {
+    background: #f9fafb;
+}

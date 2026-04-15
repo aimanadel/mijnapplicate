@@ -34,9 +34,11 @@ CREATE TABLE exercises (
 CREATE TABLE `leerling`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `naam` VARCHAR(100) NOT NULL,
-    `klas` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `wachtwoord_hash` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`id`)
 );
+
 
 CREATE TABLE `resultaat`(
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -79,6 +81,17 @@ CREATE TABLE `vaardigheid` (
     PRIMARY KEY (`id`),
     FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
 ) ENGINE=InnoDB;
+
+-- FOUT
+CREATE TABLE `fout` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `leerling_id` INT NOT NULL,
+    `categorie` VARCHAR(100) NOT NULL,
+    `subcategorie` VARCHAR(100) NOT NULL,
+    `aantal` INT NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`)
+);
 
 
 

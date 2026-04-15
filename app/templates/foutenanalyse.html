@@ -4,31 +4,96 @@
 
 {% block header %}
 <h1>Foutenanalyse</h1>
+<p class="subtext">Inzicht in je meest gemaakte fouten en verbeterpunten</p>
 {% endblock %}
 
 {% block content %}
 
-<h2>Meest gemaakte fouten</h2>
+<div class="card">
+    <h2>Foutendistributie</h2>
+    <canvas id="foutenChart"></canvas>
+</div>
 
-{% if fouten %}
-  {% for fout in fouten %}
-    <div class="fout-card">
-      <p><strong>{{ fout.categorie }}</strong></p>
-      <p>Percentage: {{ fout.percentage }}%</p>
+<div class="card">
+    <h2>Meest gemaakte fouten</h2>
 
-      {% if fout.details %}
-        <ul>
-          {% for detail in fout.details %}
-            <li>{{ detail.naam }} - {{ detail.aantal }} keer</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </div>
-  {% endfor %}
-{% else %}
-  <p>Geen fouten gevonden.</p>
-{% endif %}
+    {% if fouten %}
+        {% for fout in fouten %}
+            <div class="fout-item">
+                <div class="fout-header">
+                    <strong>{{ fout.categorie }}</strong>
+                    <span>{{ fout.percentage }}%</span>
+                </div>
 
-<p><strong>Aanbeveling:</strong> {{ aanbeveling }}</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ fout.percentage }}%;"></div>
+                </div>
+
+                {% if fout.details %}
+                    <ul class="details">
+                        {% for detail in fout.details %}
+                            <li>{{ detail.naam }} - {{ detail.aantal }} keer</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Geen fouten gevonden.</p>
+    {% endif %}
+</div>
+
+<div class="card aanbeveling">
+    <h2>Aanbeveling</h2>
+    <p>{{ aanbeveling }}</p>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const labels = [
+        {% for fout in fouten %}
+            "{{ fout.categorie }}",
+        {% endfor %}
+    ];
+
+    const dataValues = [
+        {% for fout in fouten %}
+            {{ fout.percentage }},
+        {% endfor %}
+    ];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            data: dataValues,
+            backgroundColor: [
+                '#e57373',
+                '#9575cd',
+                '#64b5f6',
+                '#81c784',
+                '#4db6ac'
+            ],
+            borderRadius: 10
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { beginAtZero: true }
+            }
+        }
+    };
+
+    new Chart(document.getElementById('foutenChart'), config);
+</script>
 
 {% endblock %}
