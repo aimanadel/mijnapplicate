@@ -61,6 +61,33 @@
         </div>
 
     </div>
+   <!--
+    SECTIE TITEL:
+    Begin van vakken overzicht.
+    -->
+    <h2 class="score-page-section-title">Score per Vak</h2>
+
+    <!--
+    BOTTOM GRID:
+    Toont alle vakken in kaarten.
+    -->
+    <div class="score-page-bottom-grid">
+  <!--
+        LOOP DOOR VAKKEN:
+        Elke vak krijgt een eigen kaart.
+        -->
+        {% for s in data.subjects %}
+
+        <!-- VAK KAART -->
+        <div class="score-page-card">
+
+            <!-- Naam van vak -->
+            <h3>{{ s.name }}</h3>
+
+            <!-- Score van vak -->
+            <div class="score-page-value">
+                {{ s.score }} /10
+            </div>
         
         
 
