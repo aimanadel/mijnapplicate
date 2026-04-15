@@ -29,6 +29,29 @@
         <div class="score-page-card">
 
             <h2>Gemiddelde Score</h2>
+                <!--
+            CIRKEL SCORE:
+            Visuele weergave van de gemiddelde score.
+            -->
+            <div class="score-page-circle-wrapper">
+
+                <div class="score-page-circle">
+                    {{ data.average_score }}
+                </div>
+
+                <div class="score-page-circle-subtext">/10</div>
+
+                <!--
+                BADGE:
+                Toont procentuele verandering deze maand.
+                -->
+                <div class="score-page-badge-up">
+                    ⬆ +{{ data.monthly_change }}% deze maand
+                </div>
+
+            </div>
+        </div>
+
 
 
 
