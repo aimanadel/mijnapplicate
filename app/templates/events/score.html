@@ -88,6 +88,27 @@
             <div class="score-page-value">
                 {{ s.score }} /10
             </div>
+    
+    
+ 
+            <!--
+            SCORE VERANDERING:
+            Controleert of score is gestegen of gedaald.
+            -->
+            {% if s.change >= 0 %}
+                <div class="score-page-up">⬆ +{{ s.change }}</div>
+            {% else %}
+                <div class="score-page-down">⬇ {{ s.change }}</div>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+           
         
         
 
