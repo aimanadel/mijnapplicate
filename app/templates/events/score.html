@@ -108,6 +108,46 @@
     </div>
 
 </div>
+
+
+<!--
+CHART.JS LIBRARY:
+Wordt gebruikt om grafieken te maken.
+-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+<!--
+TREND GRAFIEK:
+Maakt een line chart met score data.
+-->
+const ctx = document.getElementById('trendChart');
+
+new Chart(ctx, {
+    type: 'line',
+
+    data: {
+        labels: ['W1','W2','W3','W4','W5','W6'],
+
+        datasets: [{
+            data: {{ data.trend | tojson }},
+            borderColor: '#1e88e5',
+            backgroundColor: 'rgba(30,136,229,0.15)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+
+    options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { min: 0, max: 10 } }
+    }
+});
+
+</script>
+
+
            
         
         
