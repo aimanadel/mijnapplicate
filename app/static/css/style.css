@@ -645,4 +645,24 @@ De styling zorgt voor een modern dashboard met kaarten, grid layout en duidelijk
     grid-template-columns: 1fr 2fr;
     gap: 20px;
 }
+/*
+    Standaard kaartstijl voor alle onderdelen.
+    Witte achtergrond met schaduw en afgeronde hoeken.
+    */
+score-page-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
 
+/*
+    Centreert de cirkel en inhoud verticaal en horizontaal.
+    */
+.score-page-circle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+}
