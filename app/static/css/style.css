@@ -605,3 +605,22 @@ h1 {
 .aanbeveling {
     background: #f9fafb;
 }
+
+/*
+Deze CSS is speciaal voor de Score Dashboard pagina.
+Alle classes beginnen met "score-page-" om conflicten met andere pagina's te voorkomen.
+De styling zorgt voor een modern dashboard met kaarten, grid layout en duidelijke visuele structuur.
+*/
+
+
+
+ /*
+    Dit is de hoofdcontainer van de pagina.
+    Het centreert de inhoud en geeft een lichte achtergrond.
+    */
+.score-page-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: #f5f7fb;
+}
