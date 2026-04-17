@@ -60,3 +60,25 @@ class ScoreService:
             .filter(Score.user_id == user_id)
             .scalar()
         )
+
+
+        # Trend: laatste 6 scores
+        trend = [s.score for s in scores[-6:]]
+
+        # Subjects omzetten naar frontend structuur
+        subjects = []
+        for s in scores:
+            subjects.append({
+                "name": s.subject,
+                "score": s.score,
+                "change": 0.5  # placeholder voor toekomstige logica
+            })
+
+        return {
+            "average_score": round(avg, 1) if avg else 0,
+            "monthly_change": 5,
+            "trend": trend,
+            "subjects": subjects
+        }
+
+
