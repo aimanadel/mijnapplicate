@@ -630,9 +630,19 @@ De styling zorgt voor een modern dashboard met kaarten, grid layout en duidelijk
     Maakt de titel groot en duidelijk zichtbaar.
     */
 .score-page-title {
-
-   
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+
+    /*
+    Maakt een grid layout met 2 kolommen:
+    links gemiddelde score en rechts trend grafiek.
+    */
+.score-page-top-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
