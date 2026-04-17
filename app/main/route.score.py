@@ -86,3 +86,22 @@ class ScoreService:
 score_service = ScoreService()
 
 
+# ==============================
+# FLASK ROUTE (CONTROLLER)
+# ==============================
+
+@bp.route("/score/<int:user_id>")
+def score(user_id):
+    """
+    Controller laag:
+    Verbindt backend data met frontend template.
+
+    Stappen:
+    - Data ophalen via service
+    - Data doorsturen naar HTML (Jinja)
+    """
+
+    data = score_service.get_dashboard_data(user_id)
+
+    return render_template("events/score.html", data=data)
+
