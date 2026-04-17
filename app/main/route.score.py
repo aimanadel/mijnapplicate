@@ -82,3 +82,7 @@ class ScoreService:
         }
 
 
+# Service instantie (wordt gebruikt in route)
+score_service = ScoreService()
+
+
