@@ -666,3 +666,20 @@ score-page-card {
     justify-content: center;
     height: 220px;
 }
+
+ /*
+    Ronde visuele score indicator.
+    De score staat groot in het midden.
+    */
+
+.score-page-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 10px solid #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: bold;
+}
