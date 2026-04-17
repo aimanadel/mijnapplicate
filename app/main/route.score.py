@@ -1,9 +1,35 @@
+/*
+BrainBoost - Score Module (Single File Version)
+
+Deze module bevat alles voor het scoresysteem:
+- Database model (Score)
+- Service layer (business logic)
+- Flask route (controller)
+
+Het is opgebouwd volgens OOP principes (scheiding van verantwoordelijkheden).
+*/
+
 from flask import render_template
-
 from app.main import bp
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
+# ==============================
+# DATABASE SETUP (MODEL)
+# ==============================
 
-@bp.route("/score")
-def score():
-    """Render de score pagina."""
-    return render_template("events/score.html")
+db = SQLAlchemy()
+
+class Score(db.Model):
+    """
+    Model: Score
+    Slaat scores op per gebruiker en per vak.
+    """
+
+    _tablename_ = "scores"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    subject = db.Column(db.String(100), nullable=False)
+    score = db.Column(db.Float, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
