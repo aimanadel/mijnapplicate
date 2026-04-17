@@ -33,3 +33,21 @@ class Score(db.Model):
     subject = db.Column(db.String(100), nullable=False)
     score = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+
+
+# ==============================
+# SERVICE LAYER (OOP BUSINESS LOGIC)
+# ==============================
+
+class ScoreService:
+    """
+    Service Layer:
+    Bevat alle logica voor het ophalen en berekenen van scores.
+    """
+
+    def get_dashboard_data(self, user_id):
+        """
+        Haalt alle data op voor het dashboard van één gebruiker.
+        """
+
