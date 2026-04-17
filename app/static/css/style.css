@@ -624,3 +624,15 @@ De styling zorgt voor een modern dashboard met kaarten, grid layout en duidelijk
     padding: 20px;
     background: #f5f7fb;
 }
+
+ /*
+    Toont de titel van het dashboard.
+    Maakt de titel groot en duidelijk zichtbaar.
+    */
+.score-page-title {
+
+   
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
