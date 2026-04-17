@@ -51,3 +51,12 @@ class ScoreService:
         Haalt alle data op voor het dashboard van één gebruiker.
         """
 
+   # Alle scores ophalen uit database
+        scores = Score.query.filter_by(user_id=user_id).all()
+
+        # Gemiddelde score berekenen
+        avg = (
+            db.session.query(func.avg(Score.score))
+            .filter(Score.user_id == user_id)
+            .scalar()
+        )
