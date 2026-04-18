@@ -719,3 +719,20 @@ score-page-circle-subtext {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+
+ /*
+    Grote en duidelijke weergave van de score per vak.
+    */
+.score-page-value {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/*
+    Groene kleur voor positieve score verandering.
+    */
+.score-page-up {
+    color: #2e7d32;
+}
+
