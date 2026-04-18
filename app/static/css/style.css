@@ -683,3 +683,11 @@ score-page-card {
     font-size: 34px;
     font-weight: bold;
 }
+
+/*
+    Kleine tekst onder de cirkel (/10).
+    */
+score-page-circle-subtext {
+    margin-top: 5px;
+}
+
