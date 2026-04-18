@@ -15,14 +15,14 @@
     <!-- TOP SECTIE: GEMIDDELDE SCORE EN TREND GRAFIEK -->
     <!-- Deze sectie toont twee kolommen: gemiddelde score cirkel en trend grafiek -->
     <div class="score-dashboard-top-section">
-        
+
         <!-- LINKER KOLOM: GEMIDDELDE SCORE KAART -->
         <!-- Bevat cirkelweergave van gemiddelde score en maandelijkse verandering badge -->
         <div class="score-dashboard-card score-dashboard-card-average">
             <div class="score-card-header">
                 <h2>Gemiddelde Score</h2>
             </div>
-            
+
             <!-- CIRKELWEERGAVE VAN GEMIDDELDE SCORE -->
             <!-- Visuele cirkel met het gemiddelde cijfer centraal weergegeven -->
             <div class="score-circular-container">
@@ -55,7 +55,7 @@
             <div class="score-card-header">
                 <h2>Trend Afgelopen Weken</h2>
             </div>
-            
+
             <!-- CHART.JS CANVAS ELEMENT -->
             <!-- Hier wordt de trend grafiek ingetekend via JavaScript -->
             <div class="score-chart-container">
@@ -74,12 +74,12 @@
     <!-- BOTTOM SECTIE: VAKKEN GRID -->
     <!-- Responsieve grid layout met elk vak in een kaart (4 kolommen op desktop, 1 op mobile) -->
     <div class="score-dashboard-subjects-grid">
-        
+
         {% if data.subjects %}
             <!-- LOOP DOOR ALLE VAKKEN -->
             <!-- Elke vak krijgt een eigen kaart met naam, score en trend indicator -->
             {% for subject in data.subjects %}
-            
+
             <div class="score-subject-card">
                 <!-- VAKKAART HEADER -->
                 <!-- Bevat de naam van het vak -->
@@ -139,13 +139,13 @@
 (function() {
     // Verkrijg het canvas element
     const canvas = document.getElementById('trendChart');
-    
+
     // Maak een nieuwe Chart.js chart aan
     if (canvas && canvas.getContext) {
         new Chart(canvas, {
             // Type: Line chart voor trendweergave
             type: 'line',
-            
+
             // CHART DATA
             // Bevat labels en dataset met trend waarden
             data: {
@@ -165,7 +165,7 @@
                     pointHoverRadius: 6,
                 }]
             },
-            
+
             // CHART OPTIES
             // Configuratie voor de layout en gedrag van de chart
             options: {
@@ -218,3 +218,4 @@
 </script>
 
 {% endblock %}
+   
