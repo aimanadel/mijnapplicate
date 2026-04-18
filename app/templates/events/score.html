@@ -1,158 +1,220 @@
 {% extends "base.html" %}
 
-{% block title %}Score{% endblock %}
+{% block title %}Score Dashboard{% endblock %}
 
 {% block content %}
 
-<!--
-
-
-<div class="score-page-container">
-
+<div class="score-dashboard-container">
     <!-- PAGINA TITEL -->
-    <!-- Toont de naam van het dashboard -->
-    <h1 class="score-page-title">📊 Score Dashboard</h1>
-
-
-    <!--
-    TOP SECTION:
-    Deze sectie bevat 2 belangrijke onderdelen:
-    1. Gemiddelde score
-    2. Trend grafiek
-    -->
-    <div class="score-page-top-grid">
-
-        <!--
-        GEMIDDELDE SCORE KAART:
-        Toont de gemiddelde score van de leerling.
-        -->
-        <div class="score-page-card">
-
-            <h2>Gemiddelde Score</h2>
-                <!--
-            CIRKEL SCORE:
-            Visuele weergave van de gemiddelde score.
-            -->
-            <div class="score-page-circle-wrapper">
-
-                <div class="score-page-circle">
-                    {{ data.average_score }}
-                </div>
-
-                <div class="score-page-circle-subtext">/10</div>
-
-                <!--
-                BADGE:
-                Toont procentuele verandering deze maand.
-                -->
-                <div class="score-page-badge-up">
-                    ⬆ +{{ data.monthly_change }}% deze maand
-                </div>
-
-            </div>
-        </div>
-         <!--
-        TREND GRAFIEK:
-        Laat ontwikkeling van scores over tijd zien.
-        -->
-        <div class="score-page-card">
-            <h2>Trend Cijfers</h2>
-            <canvas id="trendChart"></canvas>
-        </div>
-
+    <!-- Hoofdtitel van het dashboard -->
+    <div class="score-dashboard-header">
+        <h1 class="score-dashboard-title">📊 Score Dashboard</h1>
+        <p class="score-dashboard-subtitle">Je voortgang en prestaties op een blik</p>
     </div>
-   <!--
-    SECTIE TITEL:
-    Begin van vakken overzicht.
-    -->
-    <h2 class="score-page-section-title">Score per Vak</h2>
 
-    <!--
-    BOTTOM GRID:
-    Toont alle vakken in kaarten.
-    -->
-    <div class="score-page-bottom-grid">
-  <!--
-        LOOP DOOR VAKKEN:
-        Elke vak krijgt een eigen kaart.
-        -->
-        {% for s in data.subjects %}
-
-        <!-- VAK KAART -->
-        <div class="score-page-card">
-
-            <!-- Naam van vak -->
-            <h3>{{ s.name }}</h3>
-
-            <!-- Score van vak -->
-            <div class="score-page-value">
-                {{ s.score }} /10
+    <!-- TOP SECTIE: GEMIDDELDE SCORE EN TREND GRAFIEK -->
+    <!-- Deze sectie toont twee kolommen: gemiddelde score cirkel en trend grafiek -->
+    <div class="score-dashboard-top-section">
+        
+        <!-- LINKER KOLOM: GEMIDDELDE SCORE KAART -->
+        <!-- Bevat cirkelweergave van gemiddelde score en maandelijkse verandering badge -->
+        <div class="score-dashboard-card score-dashboard-card-average">
+            <div class="score-card-header">
+                <h2>Gemiddelde Score</h2>
             </div>
-    
-    
- 
-            <!--
-            SCORE VERANDERING:
-            Controleert of score is gestegen of gedaald.
-            -->
-            {% if s.change >= 0 %}
-                <div class="score-page-up">⬆ +{{ s.change }}</div>
-            {% else %}
-                <div class="score-page-down">⬇ {{ s.change }}</div>
-            {% endif %}
+            
+            <!-- CIRKELWEERGAVE VAN GEMIDDELDE SCORE -->
+            <!-- Visuele cirkel met het gemiddelde cijfer centraal weergegeven -->
+            <div class="score-circular-container">
+                <div class="score-circle">
+                    <div class="score-circle-inner">
+                        <span class="score-circle-value">{{ data.average_score }}</span>
+                        <span class="score-circle-unit">/10</span>
+                    </div>
+                </div>
+            </div>
 
+            <!-- PERCENTAGE BADGE -->
+            <!-- Toont maandelijkse voortgang met ⬆ of ⬇ indicator -->
+            {% if data.monthly_change >= 0 %}
+                <div class="score-change-badge score-change-positive">
+                    <span class="score-change-arrow">⬆</span>
+                    <span class="score-change-text">+{{ data.monthly_change }}% deze maand</span>
+                </div>
+            {% else %}
+                <div class="score-change-badge score-change-negative">
+                    <span class="score-change-arrow">⬇</span>
+                    <span class="score-change-text">{{ data.monthly_change }}% deze maand</span>
+                </div>
+            {% endif %}
         </div>
 
-        {% endfor %}
+        <!-- RECHTER KOLOM: TREND GRAFIEK KAART -->
+        <!-- Toont de ontwikkeling van scores over de afgelopen weken met een line chart -->
+        <div class="score-dashboard-card score-dashboard-card-chart">
+            <div class="score-card-header">
+                <h2>Trend Afgelopen Weken</h2>
+            </div>
+            
+            <!-- CHART.JS CANVAS ELEMENT -->
+            <!-- Hier wordt de trend grafiek ingetekend via JavaScript -->
+            <div class="score-chart-container">
+                <canvas id="trendChart" role="img" aria-label="Trend grafiek van scores"></canvas>
+            </div>
+        </div>
+    </div>
 
+    <!-- SECTIE TITEL -->
+    <!-- Onderbreking tussen top sectie en vakken grid -->
+    <div class="score-dashboard-section-divider">
+        <h2 class="score-dashboard-section-title">Scores per Vak</h2>
+        <p class="score-dashboard-section-description">Zie je scores uitgesplitst per onderwerp</p>
+    </div>
+
+    <!-- BOTTOM SECTIE: VAKKEN GRID -->
+    <!-- Responsieve grid layout met elk vak in een kaart (4 kolommen op desktop, 1 op mobile) -->
+    <div class="score-dashboard-subjects-grid">
+        
+        {% if data.subjects %}
+            <!-- LOOP DOOR ALLE VAKKEN -->
+            <!-- Elke vak krijgt een eigen kaart met naam, score en trend indicator -->
+            {% for subject in data.subjects %}
+            
+            <div class="score-subject-card">
+                <!-- VAKKAART HEADER -->
+                <!-- Bevat de naam van het vak -->
+                <div class="score-subject-card-header">
+                    <h3 class="score-subject-name">{{ subject.name }}</h3>
+                </div>
+
+                <!-- VAKKAART INHOUD -->
+                <!-- Score weergave en trend indicator -->
+                <div class="score-subject-card-content">
+                    <div class="score-subject-value">
+                        {{ subject.score }}
+                        <span class="score-subject-unit">/10</span>
+                    </div>
+
+                    <!-- TREND INDICATOR -->
+                    <!-- Toont of de score is gestegen (groen ⬆) of gedaald (rood ⬇) -->
+                    {% if subject.change > 0 %}
+                        <div class="score-subject-trend score-trend-up">
+                            <span class="trend-arrow">⬆</span>
+                            <span class="trend-text">+{{ subject.change }}</span>
+                        </div>
+                    {% elif subject.change < 0 %}
+                        <div class="score-subject-trend score-trend-down">
+                            <span class="trend-arrow">⬇</span>
+                            <span class="trend-text">{{ subject.change }}</span>
+                        </div>
+                    {% else %}
+                        <div class="score-subject-trend score-trend-neutral">
+                            <span class="trend-arrow">➡️</span>
+                            <span class="trend-text">Stabiel</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% endfor %}
+        {% else %}
+            <!-- LEEG BERICHT -->
+            <!-- Wordt weergegeven als er geen vakken zijn -->
+            <div class="score-empty-state">
+                <p>Nog geen scores beschikbaar. Begin met een oefening om je eerste score te behalen!</p>
+            </div>
+        {% endif %}
     </div>
 
 </div>
 
-
-<!--
-CHART.JS LIBRARY:
-Wordt gebruikt om grafieken te maken.
--->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- CHART.JS LIBRARY IMPORT -->
+<!-- Externe bibliotheek voor het tekenen van grafieken -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
 <script>
+// TREND GRAFIEK INITIALISATIE
+// Deze code maakt een line chart die de scoretrend over tijd toont
 
-<!--
-TREND GRAFIEK:
-Maakt een line chart met score data.
--->
-const ctx = document.getElementById('trendChart');
-
-new Chart(ctx, {
-    type: 'line',
-
-    data: {
-        labels: ['W1','W2','W3','W4','W5','W6'],
-
-        datasets: [{
-            data: {{ data.trend | tojson }},
-            borderColor: '#1e88e5',
-            backgroundColor: 'rgba(30,136,229,0.15)',
-            fill: true,
-            tension: 0.4
-        }]
-    },
-
-    options: {
-        plugins: { legend: { display: false } },
-        scales: { y: { min: 0, max: 10 } }
+(function() {
+    // Verkrijg het canvas element
+    const canvas = document.getElementById('trendChart');
+    
+    // Maak een nieuwe Chart.js chart aan
+    if (canvas && canvas.getContext) {
+        new Chart(canvas, {
+            // Type: Line chart voor trendweergave
+            type: 'line',
+            
+            // CHART DATA
+            // Bevat labels en dataset met trend waarden
+            data: {
+                labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'],
+                datasets: [{
+                    label: 'Score Trend',
+                    data: {{ data.trend | tojson }},
+                    borderColor: '#1e88e5',
+                    backgroundColor: 'rgba(30, 136, 229, 0.08)',
+                    borderWidth: 2.5,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#1e88e5',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 6,
+                }]
+            },
+            
+            // CHART OPTIES
+            // Configuratie voor de layout en gedrag van de chart
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: { size: 14 },
+                        bodyFont: { size: 13 },
+                        callbacks: {
+                            label: function(context) {
+                                return 'Score: ' + context.parsed.y + '/10';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 10,
+                        ticks: {
+                            stepSize: 2,
+                            font: { size: 12 }
+                        },
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.15)',
+                            drawBorder: true
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: true
+                        },
+                        ticks: {
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
     }
-});
-
+})();
 </script>
-
-
-           
-        
-        
-
-
-
 
 {% endblock %}
