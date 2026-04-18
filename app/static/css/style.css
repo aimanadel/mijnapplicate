@@ -691,3 +691,22 @@ score-page-circle-subtext {
     margin-top: 5px;
 }
 
+
+/*
+    Groene badge die positieve verandering toont.
+    */
+.score-page-badge-up {
+    margin-top: 10px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+ /*
+    Titel voor de sectie "Score per Vak".
+    */
+.score-page-section-title {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
