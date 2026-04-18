@@ -710,3 +710,12 @@ score-page-circle-subtext {
     margin-top: 25px;
     margin-bottom: 10px;
 }
+/*
+    Grid layout voor vak kaarten.
+    Standaard 4 kaarten naast elkaar.
+    */
+.score-page-bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
