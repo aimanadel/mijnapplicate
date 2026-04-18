@@ -11,6 +11,45 @@ from app.db import execute_query
 from app.main import bp
 
 
+# ===== SCORE TABLE DEFINITION =====
+# SQL to create the score table with all necessary columns, constraints, and indexes
+SCORE_TABLE_SQL = """
+CREATE TABLE `score` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `leerling_id` INT NOT NULL,
+    `resultaat_id` INT,
+    `gemiddelde_score` DECIMAL(5,2),
+    `vorige_score` DECIMAL(5,2),
+    `trend` VARCHAR(50),
+    `periode` DATE,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`resultaat_id`) REFERENCES `resultaat`(`id`) ON DELETE SET NULL,
+    KEY `idx_leerling_id` (`leerling_id`),
+    KEY `idx_periode` (`periode`),
+    KEY `idx_leerling_periode` (`leerling_id`, `periode`)
+)
+"""
+
+
+def init_score_table():
+    """
+    Initializes the score table in the database.
+    Creates the table if it doesn't exist.
+    
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    try:
+        execute_query(SCORE_TABLE_SQL)
+        return True
+    except Exception as e:
+        print(f"Error initializing score table: {e}")
+        return False
+
+
 class ScoreService:
     """
     Serviceobject voor het score dashboard.
