@@ -3,44 +3,84 @@
 {% block title %}Contact & Support - Brain Boost{% endblock %}
 
 {% block header %}
-<h1>Contact & Support</h1>
-<p class="subtext">Veelgestelde vragen, hulp en contactinformatie</p>
+    <h1>Contact & Support</h1>
+    <p class="subtext">Veelgestelde vragen, hulp en contactinformatie</p>
 {% endblock %}
 
 {% block content %}
 
-<div class="card">
-    <h2>Veelgestelde Vragen</h2>
-
-    <div class="faq-container">
-        {#
-           Controleert of er objecten aanwezig zijn in de faq_list.
-           Dit voorkomt een lege pagina als de database-tabel leeg is.
-        #}
-        {% if faq_list %}
-
-            {# Loop door elk individueel FAQ-object uit de database #}
-            {% for faq in faq_list %}
-                <details class="faq-item">
-                    {# De 'summary' is het zichtbare deel waar de gebruiker op klikt #}
-                    <summary><strong>{{ faq.question }}</strong></summary>
-
-                    {# De 'faq-answer' div bevat de tekst die uitklapt #}
-                    <div class="faq-answer">
-                        <p>{{ faq.answer }}</p>
-                    </div>
-                </details>
-                <hr> {# Scheidingslijn tussen de vragen #}
-            {% endfor %}
-
-        {% else %}
-            {# Feedback voor de gebruiker wanneer er geen data gevonden is #}
-            <div class="alert alert-info">
-                <p>Geen veelgestelde vragen gevonden. Neem contact met ons op voor hulp!</p>
-            </div>
-        {% endif %}
+    {# Introductie voor de gebruiker #}
+    <div class="card">
+        <h2>Hoe kunnen we helpen?</h2>
+        <p>Welkom bij de support sectie van Brain Boost. Hier vind je informatie over hoe je het beste gebruik kunt maken van onze leerapplicatie.</p>
     </div>
-</div>
 
+    {# Hier tonen we data die vanuit de Flask-route als 'faq_list' is meegegeven.#}
+    <div class="card">
+        <h2>Veelgestelde Vragen</h2>
+        <div class="faq-container">
+            {# Controleer of de lijst objecten bevat om errors te voorkomen #}
+            {% if faq_list %}
+
+                {# Itereer door de lijst met FAQ-objecten (OOP in Jinja) #}
+                {% for faq in faq_list %}
+                    <details class="faq-item">
+                        {# Toon de attributen van het object middels dot-notatie #}
+                        <summary><strong>{{ faq.question }}</strong></summary>
+                        <div class="faq-answer">
+                            <p>{{ faq.answer }}</p>
+                        </div>
+                    </details>
+                    {# Gebruik loop.last om te voorkomen dat er een streep onder de laatste vraag staat #}
+                    {% if not loop.last %}<hr>{% endif %}
+                {% endfor %}
+
+            {% else %}
+                {# Melding wanneer de database-tabel leeg is #}
+                <div class="alert alert-info">
+                    <p>Geen veelgestelde vragen gevonden. Neem contact met ons op voor hulp!</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Dit formulier verstuurt data via een POST-methode naar de server.#}
+    <div class="card">
+        <h2>Contact opnemen</h2>
+        <p>Stuur ons een bericht en we komen zo snel mogelijk bij je terug.</p>
+
+        {# 
+           Flash Messages: Toont feedback aan de gebruiker (bijv. "Bericht verzonden").
+           Categories worden gebruikt voor CSS styling (success = groen, danger = rood).
+        #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {# Het formulier gebruikt url_for om de juiste route-functie aan te roepen #}
+        <form method="POST" action="{{ url_for('contact_page') }}" class="contact-form">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                {# 'name' attribuut is essentieel voor Flask om de data te herkennen #}
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mailadres</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Uw bericht</label>
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Bericht verzenden</button>
+        </form>
+    </div>
 
 {% endblock %}
