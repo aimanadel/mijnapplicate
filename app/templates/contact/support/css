@@ -1,0 +1,30 @@
+/* --- FAQ Sectie Styling --- */
+
+/* Container die de breedte en centrering van de FAQ bepaalt */
+.faq-container {
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Styling voor de klikbare balk van de FAQ-items */
+.faq-item summary {
+    padding: 15px;
+    background-color: #f8f9fa; /* Lichtgrijze achtergrond */
+    cursor: pointer;           /* Verandert cursor in een handje */
+    list-style: none;          /* Verwijdert het standaard driehoekje van de browser */
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Zorgt voor een vloeiende kleurverandering */
+}
+
+/* Hover-effect: de kleur verandert subtiel als je er met de muis overheen gaat */
+.faq-item summary:hover {
+    background-color: #e9ecef;
+}
+
+/* De styling van het uitgeklapte antwoord */
+.faq-answer {
+    padding: 15px;
+    line-height: 1.6;          /* Verbetert de leesbaarheid van de tekst */
+    color: #333;               /* Donkergrijze tekstkleur voor minder contrast-stress */
+}
