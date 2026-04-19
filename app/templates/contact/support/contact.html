@@ -62,7 +62,7 @@
         {% endwith %}
 
         {# Het formulier gebruikt url_for om de juiste route-functie aan te roepen #}
-        <form method="POST" action="{{ url_for('contact_page') }}" class="contact-form">
+        <form method="POST" action="{{ url_for('contact.contact') }}" class="contact-form">
             <div class="form-group">
                 <label for="name">Naam</label>
                 {# 'name' attribuut is essentieel voor Flask om de data te herkennen #}

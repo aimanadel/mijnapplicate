@@ -8,3 +8,11 @@ CREATE TABLE faq (
 INSERT INTO faq (question, answer) VALUES 
 ('Wat zijn de openingstijden?', 'Wij zijn elke werkdag bereikbaar van 09:00 tot 17:00.'),
 ('Hoe kan ik jullie bereiken?', 'Je kunt ons mailen of het contactformulier hieronder invullen.');
+
+CREATE TABLE contact_messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender_name TEXT NOT NULL,
+    sender_email TEXT NOT NULL,
+    message_content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Handig om te weten wanneer het gestuurd is
+);
