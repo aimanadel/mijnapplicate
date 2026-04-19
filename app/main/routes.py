@@ -35,12 +35,6 @@ def home():
     return render_template("home.html")
 
 
-@bp.route("/score")
-def score():
-    """Render de score pagina."""
-    return render_template("events/score.html")
-
-
 @bp.route("/leerlingen")
 def leerlingen():
     """
