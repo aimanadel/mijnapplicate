@@ -132,7 +132,12 @@ class ScoreController:
             user_id = request.args.get("user_id", type=int) or session.get("leerling_id", 1)
 
         data = self.service.get_dashboard_data(user_id)
-        return render_template("events/score.html", data=data.to_dict())
+        skills = [
+            {"name": "Samenwerken", "score": 4, "trend": "up"},
+            {"name": "Creativiteit", "score": 3, "trend": "stable"},
+            {"name": "Probleemoplossen", "score": 5, "trend": "up"}
+        ]
+        return render_template("events/score.html", data=data.to_dict(), skills=skills)
 
 # Maak een controller aan
 controller = ScoreController()
