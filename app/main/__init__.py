@@ -6,15 +6,9 @@ bp = Blueprint("main", __name__)
 
 from app.main import routes
 
-# Laad oefenenopgaven routes
-route_file = os.path.join(os.path.dirname(__file__), "route.oefenenopgaven.py")
-spec = importlib.util.spec_from_file_location("app.main.route.oefenenopgaven", route_file)
-route_module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(route_module)
-
 # Laad foutenanalyse routes
 route_file = os.path.join(os.path.dirname(__file__), "route.foutenanalyse.py")
-spec = importlib.util.spec_from_file_location("app.main.route.foutenanalyse", route_file)
+spec = importlib.util.spec_from_file_location("app.main.foutenanalyse", route_file)
 route_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(route_module)
 
