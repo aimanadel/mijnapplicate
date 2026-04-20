@@ -1,0 +1,21 @@
+<div class="skills-container">
+    {% for skill in skills %}
+    <div class="skill-card">
+        <h3>{{ skill.name }}</h3>
+        
+        <div class="stars">
+            {% for filled in skill.get_stars() %}
+                {% if filled %}
+                    <span class="star filled">★</span>
+                {% else %}
+                    <span class="star empty">☆</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="trend">
+            Trend: <span>{{ skill.get_trend_icon() }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
