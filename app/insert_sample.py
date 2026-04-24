@@ -14,7 +14,7 @@ def insert_sample_data():
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Rekenen', 'Optellen', 5);",
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Rekenen', 'Aftrekken', 3);",
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Taal', 'Spelling', 7);",
-        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Taal', 'Zinsbouw', 2);",
+        "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'Taal', ', 2);",
         "INSERT INTO fout (leerling_id, categorie, subcategorie, aantal) VALUES (1, 'biologie ', 'Cellen', 4);",
     ]
 
