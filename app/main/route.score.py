@@ -4,9 +4,17 @@ Score module voor Brain Boost
 Dit bestand heeft de route voor het score dashboard en haalt data op.
 """
 
-from flask import render_template, session, request
+from flask import render_template
 from app.db import execute_query
 from app.main import bp
+
+ALLOWED_SUBJECTS = [
+    'Wiskunde A',
+    'Wiskunde B',
+    'Wiskunde C',
+    'Natuurkunde'
+]
+DEFAULT_USER_ID = 1
 
 # Hier zijn de klassen voor de data die we gebruiken
 # Dit is een klasse voor een vak score
@@ -33,18 +41,20 @@ class DashboardData:
     Alle data voor het dashboard.
     """
 
-    def __init__(self, average_score=0, monthly_change=0, trend=None, subjects=None):
+    def __init__(self, average_score=0, monthly_change=0, trend=None, subjects=None, error_message=None):
         self.average_score = average_score
         self.monthly_change = monthly_change
         self.trend = trend or [0, 0, 0, 0, 0, 0]
         self.subjects = subjects or []
+        self.error_message = error_message
 
     def to_dict(self):
         return {
             "average_score": self.average_score,
             "monthly_change": self.monthly_change,
             "trend": self.trend,
-            "subjects": [subject.to_dict() for subject in self.subjects]
+            "subjects": [subject.to_dict() for subject in self.subjects],
+            "error_message": self.error_message
         }
 
 # Hier is de service klasse voor scores
@@ -63,14 +73,40 @@ class ScoreService:
                 "SELECT onderwerp, score FROM resultaat WHERE leerling_id = ?",
                 (user_id,)
             )
-        except Exception:
-            rows = []
+            print(f"[score] resultaat rows for leerling_id={user_id}: {rows}")
+        except Exception as exc:
+            print(f"[score] SQL query error for leerling_id={user_id}: {exc}")
+            return [], [], f"SQL query problem: {exc}"
+
+        if not rows:
+            return [], [], f"No database rows found for leerling_id={user_id}."
+
+        raw_subjects = [row.get("onderwerp") for row in rows if row.get("onderwerp")]
+        allowed_rows = [
+            row for row in rows
+            if row.get("onderwerp") in ALLOWED_SUBJECTS
+        ]
+
+        if not allowed_rows:
+            found_subjects = sorted(set(raw_subjects))
+            return [], [], (
+                f"Found rows for leerling_id={user_id}, but no allowed subjects were found. "
+                f"Found subjects: {found_subjects}. "
+                f"Allowed subjects: {ALLOWED_SUBJECTS}."
+            )
+
+        allowed_rows.sort(key=lambda row: ALLOWED_SUBJECTS.index(row.get("onderwerp")))
 
         subjects = []
         scores_for_average = []
 
-        for row in rows:
-            raw_score = float(row.get("score", 0))
+        for row in allowed_rows:
+            raw_score = row.get("score", 0)
+            try:
+                raw_score = float(raw_score)
+            except (TypeError, ValueError):
+                raw_score = 0.0
+
             display_score = round(raw_score / 10, 1)
 
             subject = SubjectScore(
@@ -80,7 +116,7 @@ class ScoreService:
             subjects.append(subject)
             scores_for_average.append(display_score)
 
-        return subjects, scores_for_average
+        return subjects, scores_for_average, None
 
     def calculate_average(self, scores):
         """
@@ -100,18 +136,20 @@ class ScoreService:
             trend = [0] * (max_points - len(trend)) + trend
         return trend
 
-    def get_dashboard_data(self, user_id):
+    def get_dashboard_data(self, user_id=DEFAULT_USER_ID):
         """
         Haalt alle data voor dashboard.
         """
-        subjects, scores = self.fetch_scores(user_id)
+        subjects, scores, error_message = self.fetch_scores(user_id)
         average = self.calculate_average(scores)
         trend = self.prepare_trend(scores)
 
         return DashboardData(
             average_score=average,
+            monthly_change=0,
             trend=trend,
-            subjects=subjects
+            subjects=subjects,
+            error_message=error_message
         )
 
 # Hier is de controller voor het dashboard
@@ -129,7 +167,7 @@ class ScoreController:
         Rendert de dashboard pagina.
         """
         if user_id is None:
-            user_id = request.args.get("user_id", type=int) or session.get("leerling_id", 1)
+            user_id = DEFAULT_USER_ID
 
         data = self.service.get_dashboard_data(user_id)
         skills = [
@@ -151,34 +189,4 @@ def score(user_id=None):
     """
     return controller.render_dashboard(user_id)
 
-# Dit is een functie om de tabel aan te maken
-def init_score_table():
-    """
-    Maakt score tabel aan.
-    """
-    sql = """
-    CREATE TABLE `score` (
-        `id` INT NOT NULL AUTO_INCREMENT,
-        `leerling_id` INT NOT NULL,
-        `resultaat_id` INT,
-        `gemiddelde_score` DECIMAL(5,2),
-        `vorige_score` DECIMAL(5,2),
-        `trend` VARCHAR(50),
-        `periode` DATE,
-        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        PRIMARY KEY (`id`),
-        FOREIGN KEY (`leerling_id`) REFERENCES `leerling`(`id`) ON DELETE CASCADE,
-        FOREIGN KEY (`resultaat_id`) REFERENCES `resultaat`(`id`) ON DELETE SET NULL,
-        KEY `idx_leerling_id` (`leerling_id`),
-        KEY `idx_periode` (`periode`),
-        KEY `idx_leerling_periode` (`leerling_id`, `periode`)
-    )
-    """
-    try:
-        execute_query(sql)
-        return True
-    except Exception as e:
-        print(f"Fout bij aanmaken score tabel: {e}")
-        return False
 
