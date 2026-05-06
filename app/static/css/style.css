@@ -1057,6 +1057,30 @@ h1 {
   text-decoration: none;
 }
 
+.overzicht-card h2 {
+  margin-top: 0;
+}
+
+.overzicht-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overzicht-links li {
+  margin-bottom: 10px;
+}
+
+.overzicht-links a {
+  color: #1f3b6c;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.overzicht-links a:hover {
+  text-decoration: underline;
+}
+
 /* Right panel stats column */
 .stats { display: flex; flex-direction: column; gap: 14px; }
 .panel { background: #fff; border: 1px solid #d8e5f5; border-radius: 12px; padding: 10px; }
@@ -1262,4 +1286,297 @@ score-page-circle-subtext {
     .score-page-bottom-grid {
         grid-template-columns: 1fr;
     }
+}
+.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}
+.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}
+.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
 }

@@ -13,9 +13,9 @@ from .error_analyzer import ErrorAnalyzer
 @bp.route("/")
 def index():
     """
-    Homepage (geen login vereist).
+    Homepage - Redirect naar dashboard.
     """
-    return render_template("index.html")
+    return redirect(url_for('main.home'))
 
 
 
@@ -27,13 +27,60 @@ def about_me():
     """
     return render_template("zelfportret.html")
 
-
 @bp.route("/home")
 def home():
-    """
-    Home page.
-    """
-    return render_template("home.html")
+    try:
+        leerling_id = session.get("leerling_id", 1)
+
+        # 🔴 Foutenanalyse ophalen
+        try:
+            analyzer = ErrorAnalyzer(leerling_id)
+            analyzer.analyze()
+            data = analyzer.get_data()
+            fouten = data.get("fouten", [])
+            aanbeveling = data.get("aanbeveling", "Blijf oefenen!")
+        except Exception as e:
+            print(f"⚠️ Fout bij ErrorAnalyzer: {e}")
+            fouten = []
+            aanbeveling = "Oefenen maakt perfect!"
+
+        # 🟣 Skills (kan later uit database)
+        skills = [
+            {"name": "Tijdsbeheer", "score": 4, "trend": "up"},
+            {"name": "Concentratie", "score": 3, "trend": "flat"},
+            {"name": "Nauwkeurigheid", "score": 4, "trend": "up"},
+            {"name": "Probleemoplossend", "score": 5, "trend": "up"},
+        ]
+
+        # 🔵 Gemiddelde score berekenen
+        if fouten:
+            gemiddelde_score = round(
+                10 - (sum(f["percentage"] for f in fouten) / len(fouten)) / 10, 1
+            )
+        else:
+            gemiddelde_score = 7.4
+
+        # 📈 Dummy trend (later uit DB)
+        trend_scores = [6, 6.5, 6.2, 7]
+
+        user = {
+            "name": session.get("user", "Jouw Naam"),
+            "initials": "JN"
+        }
+
+        return render_template(
+            "home.html",
+            fouten=fouten[:3],
+            aanbeveling=aanbeveling,
+            skills=skills,
+            gemiddelde_score=gemiddelde_score,
+            trend_scores=trend_scores,
+            user=user
+        )
+    except Exception as e:
+        print(f"❌ Fout in home route: {e}")
+        flash(f"Fout: {str(e)}", "error")
+        return redirect(url_for('main.index'))
 
 
 @bp.route("/leerlingen")
