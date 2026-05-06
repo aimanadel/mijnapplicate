@@ -62,12 +62,11 @@ def leerling_redirect():
 
 @bp.route("/aanbevelingen")
 def aanbevelingen():
-    """Render the recommendations page for students with tips and oefenopgaven."""
+    """Render the recommendations page for students with tips."""
 
     menu_items = [
         {"name": "Dashboard", "url": url_for('main.index'), "active": False},
         {"name": "Aanbevelingen", "url": url_for('main.aanbevelingen'), "active": True},
-        {"name": "Oefenen", "url": url_for('main.oefenen_opgaven'), "active": False},
     ]
 
     user = {
