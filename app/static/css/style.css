@@ -60,7 +60,7 @@ li {
   left: 0;
   width: 230px;
   height: 100vh;
-  background: linear-gradient(180deg, #1f3b6c, #2a4f8a);
+  background: linear-gradient(180deg, #a4c0f1, #a4c0f1);
   color: #fff;
   padding: 24px 16px;
   box-sizing: border-box;
@@ -73,7 +73,7 @@ li {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #ffdd59;
+  color: #305e9f;
   letter-spacing: 0.4px;
 }
 
@@ -260,7 +260,7 @@ td.fitwidth {
 /* Global HTML styling */
 html {
   height: 100%;
-  background-color: #e6f2ff;
+  background-color: white;
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(155, 70, 70);
 }
