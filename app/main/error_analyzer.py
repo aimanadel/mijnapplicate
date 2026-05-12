@@ -5,3 +5,4 @@ class ErrorAnalyzer:
             "message": text
         }
     
+    
