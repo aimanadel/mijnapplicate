@@ -15,6 +15,8 @@ from app.services.fout_analyse_service import FoutAnalyseService, controller
 
 
 
+
+
 @bp.route("/")
 def index():
     """
