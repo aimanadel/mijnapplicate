@@ -4,3 +4,4 @@ class ErrorAnalyzer:
             "status": "ok",
             "message": text
         }
+    
