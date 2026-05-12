@@ -22,11 +22,7 @@
         <h2>Pagina overzicht</h2>
         <p>Ga snel naar je belangrijkste pagina's.</p>
         <ul class="overzicht-links">
-            <li><a href="{{ url_for('main.foutenanalyse') }}">Foutenanalyse</a></li>
-            <li><a href="{{ url_for('main.leerlingen') }}">Leerling overzicht</a></li>
-            <li><a href="{{ url_for('main.aanbevelingen') }}">Aanbevelingen</a></li>
-            <li><a href="{{ url_for('main.about_me') }}">Over mij</a></li>
-        </ul>
+            <li><a href="{{ url_for('main.fout_analyse') }}">Foutenanalyse</a></li>
     </div>
 
     <div class="grid">
@@ -84,7 +80,7 @@
             {% else %}
                 <p>Geen fouten gevonden.</p>
             {% endif %}
-            <a href="{{ url_for('main.foutenanalyse') }}">Bekijk alles</a>
+            <a href="{{ url_for('main.fout_analyse') }}">Bekijk alles</a>
         </div>
 
         <div class="card aanbeveling">

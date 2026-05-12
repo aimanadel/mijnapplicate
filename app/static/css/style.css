@@ -1199,6 +1199,401 @@ score-page-circle-subtext {
     margin-top: 10px;
 }
 
+/* ===== MODERNE FOUTENANALYSE DASHBOARD ===== */
+
+/* DEFINITIE: FOUTENANALYSE DASHBOARD CONTAINER
+Deze container bevat het gehele foutenanalyse dashboard.
+Het zorgt voor optimale breedte, margin en ruimte voor alle onderdelen.
+*/
+.fout-dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* DEFINITIE: FOUTENANALYSE DASHBOARD HEADER
+Bovenste sectie met hoofdtitel en ondertitel.
+Maakt de pagina titel groot en duidelijk zichtbaar.
+*/
+.fout-dashboard-header {
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(30, 136, 229, 0.2);
+}
+
+/* Hoofd dashboard titel */
+.fout-dashboard-title {
+    margin: 0 0 10px 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: #1f3b6c;
+    letter-spacing: -0.5px;
+}
+
+/* Dashboard subtitel */
+.fout-dashboard-subtitle {
+    margin: 0;
+    font-size: 16px;
+    color: #5d6d84;
+    font-weight: 400;
+}
+
+/* DEFINITIE: FILTER SECTION
+Deze styling wordt gebruikt voor de filterkaart bovenaan de foutenanalysepagina.
+Geeft een overzichtelijke selectie van vakken met moderne dashboard-styling.
+*/
+.fout-filter-section {
+    margin-bottom: 30px;
+}
+
+.fout-filter-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+}
+
+.fout-filter-title {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.fout-filter-form {
+    display: inline-block;
+}
+
+.fout-filter-select {
+    padding: 10px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+    min-width: 200px;
+}
+
+/* DEFINITIE: DASHBOARD GRID LAYOUT
+Twee-kolom grid layout voor de top sectie van het dashboard.
+Linkerkaart: foutendistributie grafiek
+Rechterkaart: meest gemaakte fouttypes overzicht
+*/
+.fout-dashboard-top-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* DEFINITIE: DASHBOARD KAART
+Basisstijl voor alle kaarten in het foutenanalyse dashboard.
+Witte achtergrond, afgeronde hoeken en subtiele schaduw.
+*/
+.fout-dashboard-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.fout-card-header {
+    padding: 24px 24px 0 24px;
+}
+
+.fout-card-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.fout-card-content {
+    padding: 24px;
+}
+
+/* DEFINITIE: CHART CARD STYLING
+Specifieke styling voor de foutendistributie chart kaart.
+Extra padding onderaan voor betere weergave van Chart.js grafiek.
+*/
+.fout-chart-card .fout-card-content {
+    padding: 24px 24px 40px 24px;
+}
+
+.fout-chart-container {
+    position: relative;
+    height: 300px;
+}
+
+/* DEFINITIE: TOP FOUTEN OVERZICHT CARD
+Styling voor de kaart met meest voorkomende fouttypes.
+Toont progress bars met foutnamen en aantallen.
+*/
+.fout-overview-card .fout-card-content {
+    padding-top: 16px;
+}
+
+/* DEFINITIE: FOUT PROGRESS ITEM
+Styling voor individuele fout progress items.
+Bevat naam, aantal en gekleurde progress bar.
+*/
+.fout-progress-item {
+    margin-bottom: 20px;
+}
+
+.fout-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.fout-progress-name {
+    font-weight: 500;
+    color: #34495e;
+    font-size: 15px;
+}
+
+.fout-progress-count {
+    font-weight: 600;
+    color: #e74c3c;
+    font-size: 16px;
+}
+
+/* DEFINITIE: MODERNE PROGRESS BAR
+Gekleurde progress bar met zachte overgangen.
+Toont relatieve frequentie van elk fouttype.
+*/
+.fout-progress-bar-container {
+    background: #ecf0f1;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.fout-progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* DEFINITIE: AANBEVELING SECTIE
+Styling voor de grote aanbevelingskaart over volledige breedte.
+Gebruikt pastel gradient achtergrond met icoon voor visuele aantrekkelijkheid.
+*/
+.fout-recommendation-section {
+    margin-bottom: 40px;
+}
+
+.fout-recommendation-card {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.fout-recommendation-icon {
+    font-size: 48px;
+    opacity: 0.8;
+    flex-shrink: 0;
+}
+
+.fout-recommendation-content {
+    flex: 1;
+}
+
+.fout-recommendation-title {
+    margin: 0 0 12px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d3436;
+}
+
+.fout-recommendation-text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #636e72;
+}
+
+/* DEFINITIE: DETAILS SECTIE HEADER
+Titel en beschrijving voor de details sectie.
+Geeft context over wat in de detailkaarten staat.
+*/
+.fout-details-section {
+    margin-bottom: 40px;
+}
+
+.fout-details-section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+}
+
+.fout-details-section-description {
+    font-size: 15px;
+    color: #5d6d84;
+    margin: 0 0 24px 0;
+    font-weight: 400;
+}
+
+/* DEFINITIE: DETAILS GRID LAYOUT
+Responsive grid voor detailkaarten per fouttype.
+Automatische kolommen met minimum breedte van 350px.
+*/
+.fout-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+/* DEFINITIE: DETAIL KAART
+Styling voor individuele detailkaarten per fouttype.
+Witte achtergrond met schaduw en hover effecten.
+*/
+.fout-detail-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fout-detail-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* DEFINITIE: DETAIL KAART HEADER
+Header van detailkaart met gradient achtergrond.
+Toont fouttype naam en aantal keren gemaakt.
+*/
+.fout-detail-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fout-detail-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.fout-detail-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* DEFINITIE: DETAIL KAART BODY
+Body sectie van detailkaarten met beschrijving en tips.
+Bevat explananties over het fouttype.
+*/
+.fout-detail-body {
+    padding: 24px;
+}
+
+.fout-detail-description {
+    margin: 0 0 16px 0;
+    line-height: 1.6;
+    color: #555;
+    font-size: 15px;
+}
+
+/* DEFINITIE: DETAIL KAART TIP SECTIE
+Feedback en tips sectie binnen detailkaarten.
+Licht grijze achtergrond met gekleurde linker rand.
+*/
+.fout-detail-tip {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.fout-tip-label {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* DEFINITIE: GEEN DATA BERICHT
+Styling voor lege staat wanneer geen data beschikbaar is.
+Gecentreerde, subtiele tekst voor goede user experience.
+*/
+.fout-no-data {
+    text-align: center;
+    color: #95a5a6;
+    font-style: italic;
+    margin: 40px 0;
+}
+
+/* DEFINITIE: RESPONSIVE DESIGN VOOR FOUTENANALYSE
+Zorgt ervoor dat alle secties goed werken op kleinere schermen.
+Aanpassingen voor tablet en mobiele apparaten.
+*/
+@media (max-width: 1024px) {
+    .fout-dashboard-top-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .fout-details-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .fout-dashboard-container {
+        padding: 20px 15px;
+    }
+
+    .fout-dashboard-card {
+        padding: 20px;
+    }
+
+    .fout-recommendation-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .fout-recommendation-icon {
+        flex-shrink: 1;
+    }
+
+    .fout-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fout-detail-header {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .fout-dashboard-title {
+        font-size: 28px;
+    }
+
+    .fout-details-section-title {
+        font-size: 20px;
+    }
+
+    .fout-filter-select {
+        min-width: 150px;
+    }
+}
+
 /*
     Groene kleur voor positieve score verandering.
     */
