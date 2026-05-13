@@ -59,4 +59,24 @@
 
             <div class="fout-card-content">
                 {% if common_mistakes %}
+                 <!-- LOOP DOOR MEEST VOORKOMENDE FOUTEN -->
+                    <!-- Elke fout krijgt een progress bar met aantal keer gemaakt -->
+                    {% for mistake in common_mistakes %}
+                        <div class="fout-progress-item">
+                            <div class="fout-progress-header">
+                                <span class="fout-progress-name">{{ mistake.mistake_type }}</span>
+                                <span class="fout-progress-count">{{ mistake.count }}x</span>
+                            </div>
+                            <div class="fout-progress-bar-container">
+                                <div class="fout-progress-bar" style="width: {{ (mistake.count / common_mistakes[0].count * 100)|round }}%; background: linear-gradient(90deg, #e57373, #f06292);"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="fout-no-data">Geen fouten gevonden.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+           
 
