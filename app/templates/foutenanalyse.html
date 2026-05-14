@@ -160,7 +160,28 @@
         {% for subject, data in mistakes_by_subject.items() %}
             "{{ subject }}",
         {% endfor %}
-    ];           
+    ];
+     const dataValues = [
+        {% for subject, data in mistakes_by_subject.items() %}
+            {{ data.percentage }},
+        {% endfor %}
+    ];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            data: dataValues,
+            backgroundColor: [
+                '#e57373',
+                '#9575cd',
+                '#64b5f6',
+                '#81c784',
+                '#4db6ac'
+            ],
+            borderRadius: 10
+        }]
+    };
+           
 
 
 
