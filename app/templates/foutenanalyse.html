@@ -108,7 +108,14 @@
                         <div class="fout-detail-header">
                             <h4 class="fout-detail-name">{{ mistake.mistake_type }}</h4>
                             <span class="fout-detail-count">{{ mistake.count }}x</span>
-                        </div>                
+                        </div>     
+                        
+                        <!-- DETAIL KAART INHOUD -->
+                        <!-- Beschrijving en tips voor dit fouttype -->
+                        <div class="fout-detail-body">
+                            <p class="fout-detail-description">
+                                {% if mistake.mistake_type == 'Berekeningsfout' %}           
+
 
 
            
