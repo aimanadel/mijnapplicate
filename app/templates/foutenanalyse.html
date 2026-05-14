@@ -122,7 +122,11 @@
                                  Afrondingsfouten gebeuren wanneer getallen niet correct worden afgerond volgens de regels.
                                 {% elif mistake.mistake_type == 'Stappen ontbreken' %}
                                     Soms worden belangrijke tussenstappen in de oplossing overgeslagen.
-                                {% elif mistake.mistake_type == 'Leesfout' %}           
+                                {% elif mistake.mistake_type == 'Leesfout' %}
+                                  Een leesfout ontstaat wanneer de opdracht of gegevens niet correct worden gelezen.
+                                {% elif mistake.mistake_type == 'Eenhedenfout' %}
+                                    Eenhedenfouten gebeuren wanneer de eenheden (zoals meter, seconde) niet correct worden gebruikt.
+                                {% elif mistake.mistake_type == 'Grafiekfout' %}           
 
 
 
