@@ -146,7 +146,21 @@
         </div>
     </div>
 
-</div>           
+</div>
+
+<!-- CHART.JS LIBRARY IMPORT -->
+<!-- Externe bibliotheek voor het tekenen van grafieken -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // FOUTENDISTRIBUTIE GRAFIEK INITIALISATIE
+    // Deze code maakt een horizontale bar chart op basis van fouten per vak
+    
+    const labels = [
+        {% for subject, data in mistakes_by_subject.items() %}
+            "{{ subject }}",
+        {% endfor %}
+    ];           
 
 
 
