@@ -96,7 +96,12 @@
         <h2 class="fout-details-section-title">Fout Details</h2>
         <p class="fout-details-section-description">Meer informatie over elk fouttype</p>
 
-       
+        <div class="fout-details-grid">
+            {% if common_mistakes %}
+                <!-- LOOP DOOR ALLE FOUTTYPES -->
+                <!-- Elke fout krijgt een detail kaart met beschrijving en tips -->
+                {% for mistake in common_mistakes %}
+                    <div class="fout-detail-card">
 
 
            
