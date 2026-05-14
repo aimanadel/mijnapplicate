@@ -126,7 +126,14 @@
                                   Een leesfout ontstaat wanneer de opdracht of gegevens niet correct worden gelezen.
                                 {% elif mistake.mistake_type == 'Eenhedenfout' %}
                                     Eenhedenfouten gebeuren wanneer de eenheden (zoals meter, seconde) niet correct worden gebruikt.
-                                {% elif mistake.mistake_type == 'Grafiekfout' %}           
+                                {% elif mistake.mistake_type == 'Grafiekfout' %}
+                                Een grafiekfout ontstaat wanneer er fouten worden gemaakt bij het tekenen of interpreteren van grafieken.
+                                {% else %}
+                                    Dit type fout vereist aandacht en oefening.
+                                {% endif %}
+                                
+                                    
+                            </p>           
 
 
 
