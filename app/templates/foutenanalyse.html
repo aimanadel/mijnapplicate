@@ -103,6 +103,13 @@
                 {% for mistake in common_mistakes %}
                     <div class="fout-detail-card">
 
+               <!-- DETAIL KAART HEADER -->
+                        <!-- Bevat fouttype naam en aantal keren gemaakt -->
+                        <div class="fout-detail-header">
+                            <h4 class="fout-detail-name">{{ mistake.mistake_type }}</h4>
+                            <span class="fout-detail-count">{{ mistake.count }}x</span>
+                        </div>                
+
 
            
 
