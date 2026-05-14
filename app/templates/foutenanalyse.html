@@ -181,6 +181,25 @@
             borderRadius: 10
         }]
     };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: { beginAtZero: true }
+            }
+        }
+    };
+
+    new Chart(document.getElementById('foutenChart'), config);
+</script>
+
+{% endblock %}
            
 
 
