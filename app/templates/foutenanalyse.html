@@ -114,7 +114,11 @@
                         <!-- Beschrijving en tips voor dit fouttype -->
                         <div class="fout-detail-body">
                             <p class="fout-detail-description">
-                                {% if mistake.mistake_type == 'Berekeningsfout' %}           
+                                {% if mistake.mistake_type == 'Berekeningsfout' %}
+                                  Een berekeningsfout ontstaat wanneer er een fout wordt gemaakt in de wiskundige berekening zelf.
+                                {% elif mistake.mistake_type == 'Formulefout' %}
+                                    Een formulefout betekent dat de verkeerde formule of methode is gebruikt om het probleem op te lossen.
+                                {% elif mistake.mistake_type == 'Afrondingsfout' %}           
 
 
 
