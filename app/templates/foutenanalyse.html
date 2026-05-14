@@ -118,7 +118,11 @@
                                   Een berekeningsfout ontstaat wanneer er een fout wordt gemaakt in de wiskundige berekening zelf.
                                 {% elif mistake.mistake_type == 'Formulefout' %}
                                     Een formulefout betekent dat de verkeerde formule of methode is gebruikt om het probleem op te lossen.
-                                {% elif mistake.mistake_type == 'Afrondingsfout' %}           
+                                {% elif mistake.mistake_type == 'Afrondingsfout' %}
+                                 Afrondingsfouten gebeuren wanneer getallen niet correct worden afgerond volgens de regels.
+                                {% elif mistake.mistake_type == 'Stappen ontbreken' %}
+                                    Soms worden belangrijke tussenstappen in de oplossing overgeslagen.
+                                {% elif mistake.mistake_type == 'Leesfout' %}           
 
 
 
