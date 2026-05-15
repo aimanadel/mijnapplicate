@@ -58,4 +58,29 @@ class FoutAnalyseService:
             'Grafiekfout'
         ]
 
+    # DEFINITIE: FOUTEN PER VAK OPHALEN
+    # Deze methode haalt de fouten van een leerling op uit de database
+    # en groepeert deze per vak. De uitkomst wordt gebruikt voor de grafiek
+    # op de Foutenanalyse-pagina.
+    def get_mistakes_by_subject(self, student_id):
+        """
+        Haalt alle fouten van een leerling op en groepeert ze per vak.
+
+        Args:
+            student_id (int): ID van de leerling
+
+        Returns:
+            dict: Dictionary met vakken als keys en lijsten van fouten als values
+        """
+        query = """
+        SELECT s.name as subject_name, ma.mistake_type, COUNT(*) as count
+        FROM mistake_analysis ma
+        JOIN student_answer sa ON ma.student_answer_id = sa.id
+        JOIN question q ON sa.question_id = q.id
+        JOIN subject s ON q.subject_id = s.id
+        WHERE sa.student_id = ?
+        GROUP BY s.name, ma.mistake_type
+        ORDER BY s.name, count DESC
+        """
+       
     
