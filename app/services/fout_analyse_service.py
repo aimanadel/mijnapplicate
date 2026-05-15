@@ -37,3 +37,25 @@ class FoutAnalyseData:
             'selected_subject_id': self.selected_subject_id
         }
 
+
+# DEFINITIE: FOUTENANALYSE SERVICE KLASSE
+# Deze service bevat alle logica voor het ophalen en berekenen van foutdata.
+# De klasse communiceert met de database en bereikt alle berekeningen.
+class FoutAnalyseService:
+    """
+    Service voor het analyseren van fouten van leerlingen.
+    Bevat methodes voor het ophalen, groeperen en analyseren van foutdata.
+    """
+
+    def __init__(self):
+        self.mistake_types = [
+            'Berekeningsfout',
+            'Formulefout',
+            'Afrondingsfout',
+            'Stappen ontbreken',
+            'Leesfout',
+            'Eenhedenfout',
+            'Grafiekfout'
+        ]
+
+    
