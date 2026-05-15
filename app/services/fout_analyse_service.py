@@ -240,5 +240,32 @@ class FoutAnalyseService:
         """
         return execute_query(query, (student_id,))
 
-    
+    # DEFINITIE: COMPLETE DASHBOARD DATA OPHALEN
+    # Deze methode haalt alle data op die de template nodig heeft.
+    # Dit is de hoofdmethode die door de controller wordt aangeroepen.
+    def get_fout_analyse_dashboard_data(self, student_id, subject_id=None):
+        """
+        Haalt alle benodigde data op voor het foutenanalyse dashboard.
+        Alleen data voor deze leerling wordt opgehaald.
+
+        Args:
+            student_id (int): ID van de leerling
+            subject_id (int, optional): ID van specifiek vak om te filteren
+
+        Returns:
+            dict: Complete dashboard data
+        """
+        if subject_id:
+            mistakes_data = self.filter_by_subject(student_id, subject_id)
+            # Voor gefilterde data, maak een dict met één vak
+            subject_name_query = "SELECT name FROM subject WHERE id = ?"
+            subject_name = execute_query(subject_name_query, (subject_id,))[0]['name']
+            mistakes_by_subject = {subject_name: mistakes_data}
+        else:
+            mistakes_by_subject = self.get_mistakes_by_subject(student_id)
+
+        percentages_data = self.calculate_percentages(mistakes_by_subject)
+        recommendation = self.generate_recommendation(student_id)
+        common_mistakes = self.get_common_mistake_types(student_id)
+
 
