@@ -24,3 +24,16 @@ class FoutAnalyseData:
         self.recommendation = recommendation
         self.subjects = subjects or []
         self.selected_subject_id = selected_subject_id
+
+    def to_dict(self):
+        """
+        Zet alle data om naar een dictionary voor template passing.
+        """
+        return {
+            'mistakes_by_subject': self.mistakes_by_subject,
+            'common_mistakes': self.common_mistakes,
+            'recommendation': self.recommendation,
+            'subjects': self.subjects,
+            'selected_subject_id': self.selected_subject_id
+        }
+
