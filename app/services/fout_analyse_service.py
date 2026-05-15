@@ -200,4 +200,22 @@ class FoutAnalyseService:
         # Vind het meest voorkomende fouttype
         top_mistake = common_mistakes[0]['mistake_type']
 
+        # Vind het vak met de meeste fouten
+        subject_totals = {}
+        for subject, mistakes in mistakes_by_subject.items():
+            subject_totals[subject] = sum(m['count'] for m in mistakes)
+
+        if subject_totals:
+            worst_subject = max(subject_totals, key=subject_totals.get)
+            # Vind het meest voorkomende fouttype in dat vak
+            subject_mistakes = mistakes_by_subject[worst_subject]
+            if subject_mistakes:
+                top_mistake_in_subject = max(subject_mistakes, key=lambda x: x['count'])['mistake_type']
+                return f"Focus op {worst_subject} waar je vooral {top_mistake_in_subject.lower()}en maakt. Oefen meer op dit gebied!"
+            else:
+                return f"Focus op {worst_subject}. Oefen meer op dit vak!"
+        else:
+            return f"Je maakt vooral {top_mistake.lower()}en. Let hier extra op tijdens het maken van opdrachten!"
+
+   
 
