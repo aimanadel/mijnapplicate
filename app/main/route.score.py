@@ -4,16 +4,11 @@ Score module voor Brain Boost
 Dit bestand heeft de route voor het score dashboard en haalt data op.
 """
 
-from flask import render_template
+from flask import render_template, session
 from app.db import execute_query
 from app.main import bp
+from app.utils.student_helper import get_current_leerling_id
 
-ALLOWED_SUBJECTS = [
-    'Wiskunde A',
-    'Wiskunde B',
-    'Wiskunde C',
-    'Natuurkunde'
-]
 DEFAULT_USER_ID = 1
 
 # Hier zijn de klassen voor de data die we gebruiken
@@ -66,57 +61,89 @@ class ScoreService:
 
     def fetch_scores(self, user_id):
         """
-        Haalt scores op uit database.
+        Haalt resultaten op uit de student_answer tabel via question en subject.
         """
+        query = """
+        SELECT s.name AS subject_name,
+               SUM(sa.score) AS total_score,
+               SUM(sa.max_score) AS total_max
+        FROM student_answer sa
+        JOIN question q ON sa.question_id = q.id
+        JOIN subject s ON q.subject_id = s.id
+        WHERE sa.student_id = ?
+        GROUP BY s.name
+        ORDER BY s.name
+        """
+
         try:
-            rows = execute_query(
-                "SELECT onderwerp, score FROM resultaat WHERE leerling_id = ?",
-                (user_id,)
-            )
-            print(f"[score] resultaat rows for leerling_id={user_id}: {rows}")
+            rows = execute_query(query, (user_id,))
         except Exception as exc:
             print(f"[score] SQL query error for leerling_id={user_id}: {exc}")
-            return [], [], f"SQL query problem: {exc}"
+            return [], [], 0.0, f"SQL query problem: {exc}"
 
         if not rows:
-            return [], [], f"No database rows found for leerling_id={user_id}."
-
-        raw_subjects = [row.get("onderwerp") for row in rows if row.get("onderwerp")]
-        allowed_rows = [
-            row for row in rows
-            if row.get("onderwerp") in ALLOWED_SUBJECTS
-        ]
-
-        if not allowed_rows:
-            found_subjects = sorted(set(raw_subjects))
-            return [], [], (
-                f"Found rows for leerling_id={user_id}, but no allowed subjects were found. "
-                f"Found subjects: {found_subjects}. "
-                f"Allowed subjects: {ALLOWED_SUBJECTS}."
-            )
-
-        allowed_rows.sort(key=lambda row: ALLOWED_SUBJECTS.index(row.get("onderwerp")))
+            return [], [], 0.0, f"Geen studentgegevens gevonden voor leerling_id={user_id}."
 
         subjects = []
-        scores_for_average = []
+        overall_score = 0.0
+        overall_max = 0.0
 
-        for row in allowed_rows:
-            raw_score = row.get("score", 0)
+        for row in rows:
+            total_score = row.get("total_score") or 0
+            total_max = row.get("total_max") or 0
             try:
-                raw_score = float(raw_score)
+                total_score = float(total_score)
+                total_max = float(total_max)
             except (TypeError, ValueError):
-                raw_score = 0.0
+                total_score = 0.0
+                total_max = 0.0
 
-            display_score = round(raw_score / 10, 1)
+            subject_score = round((total_score / total_max) * 10, 1) if total_max else 0.0
+            subjects.append(SubjectScore(
+                name=row.get("subject_name", "Onbekend"),
+                score=subject_score
+            ))
 
-            subject = SubjectScore(
-                name=row.get("onderwerp", "Onbekend"),
-                score=display_score
-            )
-            subjects.append(subject)
-            scores_for_average.append(display_score)
+            overall_score += total_score
+            overall_max += total_max
 
-        return subjects, scores_for_average, None
+        average_score = round((overall_score / overall_max) * 10, 1) if overall_max else 0.0
+        return subjects, self.fetch_recent_trend(user_id), average_score, None
+
+    def fetch_recent_trend(self, user_id, max_points=6):
+        """
+        Haalt de meest recente antwoorden op voor de trendgrafiek.
+        """
+        query = """
+        SELECT sa.score, sa.max_score
+        FROM student_answer sa
+        WHERE sa.student_id = ?
+        ORDER BY sa.created_at ASC
+        """
+
+        try:
+            rows = execute_query(query, (user_id,))
+        except Exception as exc:
+            print(f"[score] trend query error for leerling_id={user_id}: {exc}")
+            return [0] * max_points
+
+        trend = []
+        for row in rows[-max_points:]:
+            score = row.get("score") or 0
+            max_score = row.get("max_score") or 1
+            try:
+                score = float(score)
+                max_score = float(max_score)
+            except (TypeError, ValueError):
+                score = 0.0
+                max_score = 1.0
+
+            trend.append(round((score / max_score) * 10, 1) if max_score else 0.0)
+
+        if not trend:
+            return [0] * max_points
+
+        return trend
 
     def calculate_average(self, scores):
         """
@@ -140,9 +167,8 @@ class ScoreService:
         """
         Haalt alle data voor dashboard.
         """
-        subjects, scores, error_message = self.fetch_scores(user_id)
-        average = self.calculate_average(scores)
-        trend = self.prepare_trend(scores)
+        subjects, trend_scores, average, error_message = self.fetch_scores(user_id)
+        trend = self.prepare_trend(trend_scores)
 
         return DashboardData(
             average_score=average,
@@ -166,16 +192,11 @@ class ScoreController:
         """
         Rendert de dashboard pagina.
         """
-        if user_id is None:
-            user_id = DEFAULT_USER_ID
+        # Bepaal leerling ID centraal (url > query > session > demo)
+        user_id = get_current_leerling_id(user_id)
 
         data = self.service.get_dashboard_data(user_id)
-        skills = [
-            {"name": "Samenwerken", "score": 4, "trend": "up"},
-            {"name": "Creativiteit", "score": 3, "trend": "stable"},
-            {"name": "Probleemoplossen", "score": 5, "trend": "up"}
-        ]
-        return render_template("events/score.html", data=data.to_dict(), skills=skills)
+        return render_template("events/score.html", data=data.to_dict())
 
 # Maak een controller aan
 controller = ScoreController()

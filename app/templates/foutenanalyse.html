@@ -1,4 +1,4 @@
-% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Foutenanalyse{% endblock %}
 
@@ -113,40 +113,44 @@
                         <!-- DETAIL KAART INHOUD -->
                         <!-- Beschrijving en tips voor dit fouttype -->
                         <div class="fout-detail-body">
+                            {% set mistake_type = mistake.mistake_type|trim %}
+                            {% set mistake_descriptions = {
+                                'Berekeningsfout': 'Een berekeningsfout ontstaat wanneer er een fout wordt gemaakt in de wiskundige berekening zelf.',
+                                'Formulefout': 'Een formulefout betekent dat de verkeerde formule of methode is gebruikt om het probleem op te lossen.',
+                                'Afrondingsfout': 'Afrondingsfouten gebeuren wanneer getallen niet correct worden afgerond volgens de regels.',
+                                'Stappen ontbreken': 'Soms worden belangrijke tussenstappen in de oplossing overgeslagen.',
+                                'Leesfout': 'Een leesfout ontstaat wanneer de opdracht of gegevens niet correct worden gelezen.',
+                                'Eenhedenfout': 'Eenhedenfouten gebeuren wanneer de eenheden (zoals meter, seconde) niet correct worden gebruikt.',
+                                'Grafiekfout': 'Een grafiekfout ontstaat wanneer er fouten worden gemaakt bij het tekenen of interpreteren van grafieken.'
+                            } %}
+                            {% set mistake_tips = {
+                                'Berekeningsfout': 'Controleer je berekening stap voor stap en reken het antwoord opnieuw na.',
+                                'Formulefout': 'Controleer eerst welke formule bij de vraag hoort.',
+                                'Afrondingsfout': 'Let goed op decimalen en afrondingsregels.',
+                                'Stappen ontbreken': 'Schrijf alle tussenstappen duidelijk op.',
+                                'Leesfout': 'Lees de vraag rustig opnieuw en markeer belangrijke woorden.',
+                                'Eenhedenfout': 'Controleer altijd of je de juiste eenheden gebruikt.',
+                                'Grafiekfout': 'Kijk goed naar de assen en schaalverdeling van de grafiek.'
+                            } %}
+
                             <p class="fout-detail-description">
-                                {% if mistake.mistake_type == 'Berekeningsfout' %}
-                                  Een berekeningsfout ontstaat wanneer er een fout wordt gemaakt in de wiskundige berekening zelf.
-                                {% elif mistake.mistake_type == 'Formulefout' %}
-                                    Een formulefout betekent dat de verkeerde formule of methode is gebruikt om het probleem op te lossen.
-                                {% elif mistake.mistake_type == 'Afrondingsfout' %}
-                                 Afrondingsfouten gebeuren wanneer getallen niet correct worden afgerond volgens de regels.
-                                {% elif mistake.mistake_type == 'Stappen ontbreken' %}
-                                    Soms worden belangrijke tussenstappen in de oplossing overgeslagen.
-                                {% elif mistake.mistake_type == 'Leesfout' %}
-                                  Een leesfout ontstaat wanneer de opdracht of gegevens niet correct worden gelezen.
-                                {% elif mistake.mistake_type == 'Eenhedenfout' %}
-                                    Eenhedenfouten gebeuren wanneer de eenheden (zoals meter, seconde) niet correct worden gebruikt.
-                                {% elif mistake.mistake_type == 'Grafiekfout' %}
-                                Een grafiekfout ontstaat wanneer er fouten worden gemaakt bij het tekenen of interpreteren van grafieken.
-                                {% else %}
-                                    Dit type fout vereist aandacht en oefening.
-                                {% endif %}
-                                
-                                    
+                                {{ mistake_descriptions[mistake_type] if mistake_type in mistake_descriptions else 'Dit type fout vereist aandacht en oefening.' }}
                             </p>
-                                <!-- TIP SECTIE -->
-                            <!-- Adviezen voor verbetering -->
                             <div class="fout-detail-tip">
-                                <strong class="fout-tip-label">💡 Tip:</strong> Let extra op bij dit type fout om je prestaties te verbeteren.
+                                <strong class="fout-tip-label">💡 Tip:</strong>
+                                {{ mistake_tips[mistake_type] if mistake_type in mistake_tips else 'Controleer je antwoord goed en oefen extra met dit fouttype.' }}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+            {% else %}
+                <p class="fout-no-data">Geen foutdetails beschikbaar.</p>
             {% endif %}
         </div>
     </div>
-
 </div>
+
+                               
 
 <!-- CHART.JS LIBRARY IMPORT -->
 <!-- Externe bibliotheek voor het tekenen van grafieken -->
