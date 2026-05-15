@@ -54,8 +54,7 @@ class FoutAnalyseService:
             'Afrondingsfout',
             'Stappen ontbreken',
             'Leesfout',
-            'Eenhedenfout',
-            'Grafiekfout'
+            'Eenhedenfout'
         ]
 
     # DEFINITIE: FOUTEN PER VAK OPHALEN
@@ -217,36 +216,12 @@ class FoutAnalyseService:
         else:
             return f"Je maakt vooral {top_mistake.lower()}en. Let hier extra op tijdens het maken van opdrachten!"
 
-    # DEFINITIE: VAKKEN OPHALEN VOOR DEZE LEERLING
-    # Deze methode haalt ALLEEN de vakken op waarvoor de leerling
-    # echt student_answer of mistake_analysis records heeft.
-    def get_subjects_for_student(self, student_id):
-        """
-        Haalt alle vakken op waarvoor deze leerling data heeft.
-
-        Args:
-            student_id (int): ID van de leerling
-
-        Returns:
-            list: Lijst van vakken met ID en naam, alleen die met data voor deze leerling
-        """
-        query = """
-        SELECT DISTINCT s.id, s.name
-        FROM subject s
-        JOIN question q ON s.id = q.subject_id
-        JOIN student_answer sa ON q.id = sa.question_id
-        WHERE sa.student_id = ?
-        ORDER BY s.name
-        """
-        return execute_query(query, (student_id,))
-
     # DEFINITIE: COMPLETE DASHBOARD DATA OPHALEN
     # Deze methode haalt alle data op die de template nodig heeft.
     # Dit is de hoofdmethode die door de controller wordt aangeroepen.
     def get_fout_analyse_dashboard_data(self, student_id, subject_id=None):
         """
         Haalt alle benodigde data op voor het foutenanalyse dashboard.
-        Alleen data voor deze leerling wordt opgehaald.
 
         Args:
             student_id (int): ID van de leerling
@@ -268,8 +243,9 @@ class FoutAnalyseService:
         recommendation = self.generate_recommendation(student_id)
         common_mistakes = self.get_common_mistake_types(student_id)
 
-        # Haal ALLEEN vakken op waarvoor deze leerling data heeft
-        subjects = self.get_subjects_for_student(student_id)
+        # Haal alle vakken op voor de dropdown
+        subjects_query = "SELECT id, name FROM subject"
+        subjects = execute_query(subjects_query)
 
         return FoutAnalyseData(
             mistakes_by_subject=percentages_data,
@@ -297,10 +273,6 @@ class FoutAnalyseController:
         """
         Rendert de foutenanalyse dashboard pagina.
         """
-        # Bepaal de actieve leerling centraal: url > query > session > demo
-        from app.utils.student_helper import get_current_leerling_id
-        student_id = get_current_leerling_id(student_id)
-
         data = self.service.get_fout_analyse_dashboard_data(student_id, subject_id)
         return render_template("foutenanalyse.html", **data.to_dict())
 
