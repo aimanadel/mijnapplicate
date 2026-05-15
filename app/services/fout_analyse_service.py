@@ -151,4 +151,28 @@ class FoutAnalyseService:
 
         return result
 
-   
+    # DEFINITIE: FILTEREN OP VAK
+    # Deze methode filtert de fouten op één specifiek vak.
+    # Dit wordt gebruikt wanneer de leerling een vak selecteert in de dropdown.
+    def filter_by_subject(self, student_id, subject_id):
+        """
+        Haalt fouten op voor een specifiek vak.
+
+        Args:
+            student_id (int): ID van de leerling
+            subject_id (int): ID van het vak
+
+        Returns:
+            dict: Fouten voor het specifieke vak
+        """
+        query = """
+        SELECT ma.mistake_type, COUNT(*) as count
+        FROM mistake_analysis ma
+        JOIN student_answer sa ON ma.student_answer_id = sa.id
+        JOIN question q ON sa.question_id = q.id
+        WHERE sa.student_id = ? AND q.subject_id = ?
+        GROUP BY ma.mistake_type
+        ORDER BY count DESC
+        """
+       
+
