@@ -82,5 +82,18 @@ class FoutAnalyseService:
         GROUP BY s.name, ma.mistake_type
         ORDER BY s.name, count DESC
         """
-       
+        results = execute_query(query, (student_id,))
+
+        mistakes_by_subject = {}
+        for row in results:
+            subject = row['subject_name']
+            if subject not in mistakes_by_subject:
+                mistakes_by_subject[subject] = []
+            mistakes_by_subject[subject].append({
+                'mistake_type': row['mistake_type'],
+                'count': row['count']
+            })
+
+        return mistakes_by_subject
+
     
