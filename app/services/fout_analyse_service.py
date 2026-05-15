@@ -280,3 +280,30 @@ class FoutAnalyseService:
         )
 
 
+# DEFINITIE: FOUTENANALYSE CONTROLLER KLASSE
+# Deze controller zorgt voor de renderlogica en het aanroepen van de service.
+# De controller geeft alleen data door aan de template en houdt routing logica van de service af.
+class FoutAnalyseController:
+    """
+    Controller voor foutenanalyse dashboard.
+    """
+
+    def __init__(self):
+        self.service = FoutAnalyseService()
+
+    # DEFINITIE: DASHBOARD PAGINA RENDEREN
+    # Deze methode bereidt alle data voor en geeft het door aan de template.
+    def render_dashboard(self, student_id=1, subject_id=None):
+        """
+        Rendert de foutenanalyse dashboard pagina.
+        """
+        # Bepaal de actieve leerling centraal: url > query > session > demo
+        from app.utils.student_helper import get_current_leerling_id
+        student_id = get_current_leerling_id(student_id)
+
+        data = self.service.get_fout_analyse_dashboard_data(student_id, subject_id)
+        return render_template("foutenanalyse.html", **data.to_dict())
+
+
+# Maak een controller aan
+controller = FoutAnalyseController()
