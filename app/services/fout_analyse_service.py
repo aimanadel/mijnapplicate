@@ -121,4 +121,34 @@ class FoutAnalyseService:
 
         return [{'mistake_type': row['mistake_type'], 'count': row['count']} for row in results]
 
-    
+    # DEFINITIE: FOUTPERCENTAGES BEREKENEN
+    # Deze methode berekent welk percentage van de fouten bij elk vak hoort.
+    # Dit wordt gebruikt voor de foutendistributie grafiek.
+    def calculate_percentages(self, data):
+        """
+        Berekent percentages voor fouten per vak.
+
+        Args:
+            data (dict): Data met fouten per vak
+
+        Returns:
+            dict: Data met toegevoegde percentages
+        """
+        total_mistakes = sum(sum(mistake['count'] for mistake in mistakes) for mistakes in data.values())
+
+        if total_mistakes == 0:
+            return data
+
+        result = {}
+        for subject, mistakes in data.items():
+            subject_total = sum(m['count'] for m in mistakes)
+            percentage = round((subject_total / total_mistakes) * 100, 1)
+            result[subject] = {
+                'mistakes': mistakes,
+                'total': subject_total,
+                'percentage': percentage
+            }
+
+        return result
+
+   
