@@ -174,5 +174,30 @@ class FoutAnalyseService:
         GROUP BY ma.mistake_type
         ORDER BY count DESC
         """
-       
+        results = execute_query(query, (student_id, subject_id))
+
+        return [{'mistake_type': row['mistake_type'], 'count': row['count']} for row in results]
+
+    # DEFINITIE: AANBEVELING GENEREREN
+    # Deze methode genereert een persoonlijke aanbeveling op basis van
+    # het vak en fouttype waar de leerling de meeste problemen mee heeft.
+    def generate_recommendation(self, student_id):
+        """
+        Genereert een aanbeveling gebaseerd op de meest voorkomende fouten.
+
+        Args:
+            student_id (int): ID van de leerling
+
+        Returns:
+            str: Aanbevelingstekst
+        """
+        common_mistakes = self.get_common_mistake_types(student_id)
+        mistakes_by_subject = self.get_mistakes_by_subject(student_id)
+
+        if not common_mistakes:
+            return "Geweldig! Geen fouten gevonden om te analyseren."
+
+        # Vind het meest voorkomende fouttype
+        top_mistake = common_mistakes[0]['mistake_type']
+
 
