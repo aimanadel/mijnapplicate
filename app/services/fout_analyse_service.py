@@ -268,4 +268,15 @@ class FoutAnalyseService:
         recommendation = self.generate_recommendation(student_id)
         common_mistakes = self.get_common_mistake_types(student_id)
 
+        # Haal ALLEEN vakken op waarvoor deze leerling data heeft
+        subjects = self.get_subjects_for_student(student_id)
+
+        return FoutAnalyseData(
+            mistakes_by_subject=percentages_data,
+            common_mistakes=common_mistakes,
+            recommendation=recommendation,
+            subjects=subjects,
+            selected_subject_id=subject_id
+        )
+
 
