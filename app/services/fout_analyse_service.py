@@ -1,0 +1,26 @@
+"""
+Foutanalyse module voor Brain Boost
+
+Dit bestand bevat alle logica voor het foutenanalyse dashboard.
+De service haalt data op uit de database en berekent foutstatistieken.
+"""
+
+from app.db import execute_query
+from flask import render_template
+
+
+# DEFINITIE: FOUTENANALYSE DATA KLASSE
+# Deze klasse bevat alle data die voor het foutenanalyse dashboard nodig is.
+# Dit zorgt voor een schone weergave en makkelijke passing naar templates.
+class FoutAnalyseData:
+    """
+    Container voor alle foutenanalyse data.
+    """
+
+    def __init__(self, mistakes_by_subject=None, common_mistakes=None,
+                 recommendation="", subjects=None, selected_subject_id=None):
+        self.mistakes_by_subject = mistakes_by_subject or {}
+        self.common_mistakes = common_mistakes or []
+        self.recommendation = recommendation
+        self.subjects = subjects or []
+        self.selected_subject_id = selected_subject_id
