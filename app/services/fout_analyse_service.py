@@ -96,4 +96,29 @@ class FoutAnalyseService:
 
         return mistakes_by_subject
 
+    # DEFINITIE: MEEST VOORKOMENDE FOUTTYPES
+    # Deze methode haalt de top fouttypes op en sorteert ze op frequentie.
+    # Dit wordt weergegeven in de "Top Fouten Overzicht" kaart.
+    def get_common_mistake_types(self, student_id):
+        """
+        Haalt de meest voorkomende fouttypes van een leerling op.
+
+        Args:
+            student_id (int): ID van de leerling
+
+        Returns:
+            list: Gesorteerde lijst van fouttypes met aantallen
+        """
+        query = """
+        SELECT ma.mistake_type, COUNT(*) as count
+        FROM mistake_analysis ma
+        JOIN student_answer sa ON ma.student_answer_id = sa.id
+        WHERE sa.student_id = ?
+        GROUP BY ma.mistake_type
+        ORDER BY count DESC
+        """
+        results = execute_query(query, (student_id,))
+
+        return [{'mistake_type': row['mistake_type'], 'count': row['count']} for row in results]
+
     
