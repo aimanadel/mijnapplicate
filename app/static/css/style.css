@@ -1400,6 +1400,17 @@ Elke fout krijgt één progress item met naam, aantal en een gekleurde bar.
   margin-bottom: 22px;
 }
 
+/*
+Header van progress item met naam en aantal fouten.
+Toont het fouttype naam links en het aantal keer gemaakt rechts.
+*/
+.fout-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 
 
 
