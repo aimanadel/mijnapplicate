@@ -1589,6 +1589,18 @@ Toont de foutnaam links en het aantal keer gemaakt rechts.
   align-items: center;
 }
 
+/*
+Naam van het fouttype in de detail kaart.
+Dit is de linkerwaarde in de detail kaart header.
+*/
+.fout-detail-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f3b6c;
+}
+
+
 
 
 
