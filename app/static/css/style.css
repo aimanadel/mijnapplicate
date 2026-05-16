@@ -1222,6 +1222,18 @@ Heeft een subtiele blauwe rand eronder voor visuele scheiding.
   border-bottom: 2px solid rgba(30, 136, 229, 0.2);
 }
 
+/*
+Styling voor de grote pagina titel.
+Maakt de tekst groot (36px) en donkerblauw zodat het opvalt.
+*/
+.fout-dashboard-title {
+  margin: 0 0 10px 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #1f3b6c;
+  letter-spacing: -0.5px;
+}
+
 
 
 
