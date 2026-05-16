@@ -1487,7 +1487,24 @@ Dit is meestal een 💡 (gloeilamp) icoon die verwijst naar tips/advies.
   flex-shrink: 0;
 }
 
-/*/
+/*
+Tekstgedeelte van de aanbevelingskaart.
+Dit bevat de titel en advistekst van de aanbeveling.
+*/
+.fout-recommendation-content {
+  flex: 1;
+}
+
+/*
+Titel van de aanbevelingskaart.
+Bijvoorbeeld "Persoonlijke Aanbeveling".
+*/
+.fout-recommendation-title {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3436;
+}
 
 
 
