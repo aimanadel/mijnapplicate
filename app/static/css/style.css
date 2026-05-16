@@ -1211,6 +1211,17 @@ De pagina bevat een dashboard layout met grafieken, filters, aanbevelingen, prog
   padding: 30px 20px;
 }
 
+/*
+Toont de titel en subtitel van de foutenanalyse pagina.
+Maakt de titel groot, duidelijk en consistent met de Score pagina design.
+Heeft een subtiele blauwe rand eronder voor visuele scheiding.
+*/
+.fout-dashboard-header {
+  margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(30, 136, 229, 0.2);
+}
+
 
 
 
