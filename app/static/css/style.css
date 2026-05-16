@@ -1571,6 +1571,13 @@ Hebben een blauwe top rand en hover effecten.
   border-top: 4px solid #1e88e5;
 }
 
+.fout-detail-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  border-top-color: #1565c0;
+}
+
+
 
 
 
