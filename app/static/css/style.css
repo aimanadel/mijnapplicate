@@ -1342,6 +1342,21 @@ Hebben hover effecten voor betere interactie feedback.
   transform: translateY(-2px);
 }
 
+/*
+Header sectie van dashboard kaarten met titel.
+Dit is het bovenste gedeelte van elke kaart.
+*/
+.fout-card-header {
+  margin-bottom: 20px;
+}
+
+.fout-card-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f3b6c;
+}
+
 
 
 
