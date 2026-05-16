@@ -1421,6 +1421,18 @@ Dit is de linkerwaarde in de progress item header.
   font-size: 14px;
 }
 
+/*
+Aantal voorkomsten van het fouttype.
+Dit is de rechterwaarde in de progress item header.
+Weergegeven in rood om op te vallen.
+*/
+.fout-progress-count {
+  font-weight: 600;
+  color: #e57373;
+  font-size: 14px;
+}
+
+
 
 
 
