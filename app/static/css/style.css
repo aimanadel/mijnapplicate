@@ -1477,7 +1477,17 @@ Heeft een opvallende geel-oranje gradient achtergrond.
   gap: 24px;
 }
 
+/*
+Emoji icoon in de aanbevelingskaart.
+Dit is meestal een 💡 (gloeilamp) icoon die verwijst naar tips/advies.
 */
+.fout-recommendation-icon {
+  font-size: 48px;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+/*/
 
 
 
