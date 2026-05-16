@@ -1312,6 +1312,17 @@ Heeft hover en focus states voor betere interactie feedback.
   box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
 }
 
+/*
+Twee-kolom grid layout voor de top sectie van de foutenanalyse pagina.
+Links staat de foutendistributie grafiek, rechts het top fouten overzicht.
+Op smaller schermen wordt dit een enkele kolom.
+*/
+.fout-dashboard-top-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 40px;
+}
 
 
 
