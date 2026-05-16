@@ -1234,6 +1234,16 @@ Maakt de tekst groot (36px) en donkerblauw zodat het opvalt.
   letter-spacing: -0.5px;
 }
 
+/*
+Styling voor de ondertitel onder de pagina titel.
+Geeft context en uitleg over wat de leerling op deze pagina kan doen.
+*/
+.fout-dashboard-subtitle {
+  margin: 0;
+  font-size: 16px;
+  color: #5d6d84;
+  font-weight: 400;
+}
 
 
 
