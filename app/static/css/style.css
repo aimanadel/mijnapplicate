@@ -1462,7 +1462,22 @@ Dit is een aparte sectie met een opvallende gradient achtergrond.
   margin-bottom: 40px;
 }
 
+/*
+Gradient kaart met persoonlijke aanbeveling voor verbetering.
+Deze kaart geeft de leerling persoonlijk advies op basis van hun fouten.
+Heeft een opvallende geel-oranje gradient achtergrond.
+*/
+.fout-recommendation-card {
+  background: linear-gradient(135deg, #ffe082 0%, #ffb74d 100%);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 
+*/
 
 
 
