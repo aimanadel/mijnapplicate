@@ -1443,6 +1443,16 @@ Dit is de grijze achtergrond waar de gekleurde bar in loopt.
   overflow: hidden;
 }
 
+/*
+Gekleurde progress bar die de relatieve frequentie van fouten toont.
+De breedte is berekend op basis van het aantal fouten.
+Heeft een gradient kleur van rood naar roze.
+*/
+.fout-progress-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
 
 
 
