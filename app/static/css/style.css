@@ -1357,6 +1357,21 @@ Dit is het bovenste gedeelte van elke kaart.
   color: #1f3b6c;
 }
 
+/*
+Inhoudsgedeelte van dashboard kaarten.
+Dit bevat de eigenlijke data in de kaarten.
+*/
+.fout-card-content {
+  /* Basis styling voor kaart inhoud */
+}
+
+/*
+Specifieke styling voor de foutendistributie chart kaart.
+Dit is de linkerkaart in de top sectie.
+*/
+.fout-chart-card {
+  /* Specifieke styling voor chart kaart */
+}
 
 
 
