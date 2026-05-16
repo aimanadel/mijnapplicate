@@ -1253,6 +1253,18 @@ Dit is een apart container element rond de filterkaart.
   margin-bottom: 30px;
 }
 
+/*
+Styling voor de filterkaart bovenaan de pagina.
+Hiermee kan de leerling fouten filteren per vak.
+Heeft een witte achtergrond, afgeronde hoeken en een subtiele schaduw.
+*/
+.fout-filter-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: inline-block;
+}
 
 
 
