@@ -1614,6 +1614,25 @@ Heeft een lichtblauw achtergrond met blauw tekst.
   font-weight: 600;
 }
 
+/*
+Inhoudsgedeelte van detail kaart.
+Dit bevat de beschrijving en tips voor het fouttype.
+*/
+.fout-detail-body {
+  padding: 20px 24px;
+}
+
+/*
+Beschrijving en uitleg van het fouttype.
+Dit is de hoofdtekst die uitlegt wat dit fouttype is.
+*/
+.fout-detail-description {
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+  color: #555;
+  font-size: 14px;
+}
+
 
 
 
