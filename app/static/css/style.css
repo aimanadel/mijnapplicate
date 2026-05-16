@@ -1285,6 +1285,33 @@ Dit omvat het form element dat de filter bevat.
   display: inline-block;
 }
 
+/*
+Styling voor de vakselectie dropdown.
+Gebruiker kan hier een vak selecteren om fouten op te filteren.
+Heeft hover en focus states voor betere interactie feedback.
+*/
+.fout-filter-select {
+  padding: 10px 15px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  color: #2f3f60;
+  min-width: 220px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.fout-filter-select:hover {
+  border-color: #1e88e5;
+}
+
+.fout-filter-select:focus {
+  outline: none;
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+}
+
 
 
 
