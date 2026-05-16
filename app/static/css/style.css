@@ -1600,6 +1600,19 @@ Dit is de linkerwaarde in de detail kaart header.
   color: #1f3b6c;
 }
 
+/*
+Badge die het aantal keren gemaakt toont.
+Dit is de rechterwaarde in de detail kaart header.
+Heeft een lichtblauw achtergrond met blauw tekst.
+*/
+.fout-detail-count {
+  background: #e3f2fd;
+  color: #1e88e5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
 
 
 
