@@ -1373,6 +1373,17 @@ Dit is de linkerkaart in de top sectie.
   /* Specifieke styling voor chart kaart */
 }
 
+/*
+Container voor het Chart.js canvas element.
+Geeft de grafiek een vaste hoogte zodat deze consistent weergegeven wordt.
+*/
+.fout-chart-container {
+  position: relative;
+  height: 280px;
+  margin-top: 15px;
+}
+
+
 
 
 
