@@ -1633,7 +1633,181 @@ Dit is de hoofdtekst die uitlegt wat dit fouttype is.
   font-size: 14px;
 }
 
+/*
+Sectie met verbeteradvies en tips voor dit fouttype.
+Dit is een speciale box met een gekleurde linkerrand.
+Geeft concrete tips hoe de leerling kan verbeteren.
+*/
+.fout-detail-tip {
+  background: #f5f5f5;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid #ffb74d;
+  font-size: 14px;
+}
 
+/*
+Label voor de tip sectie.
+Dit is meestal een icoon (💡) gevolgd door "Tip:".
+*/
+.fout-tip-label {
+  color: #ff9800;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+/*
+Bericht weergegeven wanneer geen fouten beschikbaar zijn.
+Dit is een lege staat message voor als er geen data is.
+*/
+.fout-no-data {
+  text-align: center;
+  color: #95a5a6;
+  font-style: italic;
+  margin: 40px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/*
+==================================================
+RESPONSIVE DESIGN FOUTENANALYSE
+==================================================
+Media queries zorgen ervoor dat de foutenanalyse pagina op alle schermformaten goed werkt.
+Dit omvat aanpassingen voor tablets en mobiele apparaten.
+*/
+
+/*
+Tablet breakpoint aanpassingen.
+Aanpassingen voor schermen van 1024px en kleiner.
+De twee-kolom layout wordt hier één kolom.
+*/
+@media (max-width: 1024px) {
+  .fout-dashboard-top-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .fout-details-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .fout-dashboard-title {
+    font-size: 28px;
+  }
+
+  .fout-details-section-title {
+    font-size: 20px;
+  }
+}
+
+/*
+Mobile breakpoint aanpassingen.
+Aanpassingen voor schermen van 768px en kleiner.
+Layout wordt meer staand gericht en tekst kleiner.
+*/
+@media (max-width: 768px) {
+  .fout-dashboard-container {
+    padding: 20px 15px;
+  }
+
+  .fout-dashboard-card {
+    padding: 20px;
+  }
+
+  .fout-recommendation-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .fout-recommendation-icon {
+    flex-shrink: 1;
+  }
+
+  .fout-details-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .fout-detail-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .fout-dashboard-title {
+    font-size: 24px;
+  }
+
+  .fout-details-section-title {
+    font-size: 18px;
+  }
+
+  .fout-filter-select {
+    min-width: 150px;
+    width: 100%;
+  }
+
+  .fout-chart-container {
+    height: 240px;
+  }
+}
+
+/*
+Zeer kleine mobile breakpoint aanpassingen.
+Aanpassingen voor zeer kleine schermen van 480px en kleiner.
+Verdere aanpassingen voor compacte weergave.
+*/
+@media (max-width: 480px) {
+  .fout-dashboard-container {
+    padding: 15px 10px;
+  }
+
+  .fout-dashboard-card {
+    padding: 15px;
+  }
+
+  .fout-card-header h2 {
+    font-size: 16px;
+  }
+
+  .fout-dashboard-title {
+    font-size: 20px;
+  }
+
+  .fout-details-section-title {
+    font-size: 16px;
+  }
+
+  .fout-recommendation-title {
+    font-size: 18px;
+  }
+
+  .fout-recommendation-text {
+    font-size: 14px;
+  }
+}
+
+/*
+    Groene kleur voor positieve score verandering.
+    */
+.score-page-up {
+    color: #2e7d32;
+}
+
+
+
+    /*
+    Rode kleur voor negatieve score verandering.
+    */
+
+.score-page-down {
+
+    color: #c62828;
+}
 
 
     /*
@@ -1646,4 +1820,297 @@ Dit is de hoofdtekst die uitlegt wat dit fouttype is.
     .score-page-bottom-grid {
         grid-template-columns: 1fr;
     }
+}
+.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}
+.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}
+.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
+}.dashboard {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-circle {
+    background: teal;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.score-circle {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star.filled {
+    color: gold;
+}
+
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 5px;
+}
+
+.progress {
+    background: red;
+    height: 100%;
 }
