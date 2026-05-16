@@ -1504,7 +1504,37 @@ Bijvoorbeeld "Persoonlijke Aanbeveling".
   font-size: 20px;
   font-weight: 600;
   color: #2d3436;
-}style: voeg styling toe voor fout-recommendation-title in aanbevelingskaart
+}
+
+/*
+Advistekst in de aanbevelingskaart.
+Dit is de eigenlijke aanbevelingsboodschap voor de leerling.
+*/
+.fout-recommendation-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+/*
+Sectie met detail kaarten voor elk fouttype.
+Dit bevat alle detail kaarten met uitleggen en tips per fouttype.
+*/
+.fout-details-section {
+  margin-bottom: 40px;
+}
+
+/*
+Titel voor de fout details sectie.
+Dit zegt de leerling wat ze hieronder kunnen verwachten.
+*/
+.fout-details-section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f3b6c;
+  margin: 0 0 8px 0;
+}
 
 
 
