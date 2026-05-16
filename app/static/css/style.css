@@ -1266,6 +1266,17 @@ Heeft een witte achtergrond, afgeronde hoeken en een subtiele schaduw.
   display: inline-block;
 }
 
+/*
+Styling voor de titel van de filterkaart.
+Laat zien wat de dropdown is voor.
+*/
+.fout-filter-title {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #1f3b6c;
+  font-weight: 600;
+}
+
 
 
 
