@@ -1536,6 +1536,16 @@ Dit zegt de leerling wat ze hieronder kunnen verwachten.
   margin: 0 0 8px 0;
 }
 
+/*
+Beschrijvende tekst voor de details sectie.
+Dit geeft extra context over de detail kaarten hieronder.
+*/
+.fout-details-section-description {
+  font-size: 14px;
+  color: #5d6d84;
+  margin: 0 0 24px 0;
+  font-weight: 400;
+}
 
 
 
