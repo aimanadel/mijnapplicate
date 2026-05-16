@@ -1454,6 +1454,14 @@ Heeft een gradient kleur van rood naar roze.
   transition: width 0.3s ease;
 }
 
+/*
+Bevat de grote aanbevelingskaart met persoonlijke verbeteradvies.
+Dit is een aparte sectie met een opvallende gradient achtergrond.
+*/
+.fout-recommendation-section {
+  margin-bottom: 40px;
+}
+
 
 
 
