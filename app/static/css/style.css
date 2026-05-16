@@ -1557,6 +1557,20 @@ Automatische kolommen die zich aanpassen aan schermgrootte.
   gap: 24px;
 }
 
+/*
+Kaart die per fouttype uitleg, aantal fouten en een verbetertip toont.
+Dit zijn individuele kaarten voor elk fouttype dat de leerling maakt.
+Hebben een blauwe top rand en hover effecten.
+*/
+.fout-detail-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-top: 4px solid #1e88e5;
+}
+
 
 
 
