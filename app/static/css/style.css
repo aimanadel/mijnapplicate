@@ -1547,6 +1547,16 @@ Dit geeft extra context over de detail kaarten hieronder.
   font-weight: 400;
 }
 
+/*
+Responsieve grid layout voor de fout detail kaarten.
+Automatische kolommen die zich aanpassen aan schermgrootte.
+*/
+.fout-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
 
 
 
