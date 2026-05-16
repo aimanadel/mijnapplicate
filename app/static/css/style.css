@@ -1383,6 +1383,23 @@ Geeft de grafiek een vaste hoogte zodat deze consistent weergegeven wordt.
   margin-top: 15px;
 }
 
+/*
+Specifieke styling voor de top fouten overzicht kaart.
+Dit is de rechterkaart in de top sectie.
+Toont de meest voorkomende fouttypes met progress bars.
+*/
+.fout-overview-card {
+  /* Specifieke styling voor overzicht kaart */
+}
+
+/*
+Individueel progress item in de top fouten overzicht.
+Elke fout krijgt één progress item met naam, aantal en een gekleurde bar.
+*/
+.fout-progress-item {
+  margin-bottom: 22px;
+}
+
 
 
 
