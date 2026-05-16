@@ -1411,6 +1411,15 @@ Toont het fouttype naam links en het aantal keer gemaakt rechts.
   margin-bottom: 8px;
 }
 
+/*
+Naam van het fouttype in het progress item.
+Dit is de linkerwaarde in de progress item header.
+*/
+.fout-progress-name {
+  font-weight: 500;
+  color: #2f3f60;
+  font-size: 14px;
+}
 
 
 
