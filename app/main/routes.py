@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import execute_query
 import json
 from app.main import bp
-from app.services.fout_analyse_service import FoutAnalyseService
+from app.services.fout_analyse_service import FoutAnalyseService, controller
 
 
 
@@ -301,7 +301,7 @@ def foutenanalyse(leerling_id=None):
     subject_id = request.args.get("subject_id", type=int)
 
     from app.services.fout_analyse_service import controller
-    return controller.render_dashboard(None, subject_id)
+    return controller.render_dashboard(leerling_id, subject_id)
 
 
 # DEFINITIE: FOUTENANALYSE ROUTE

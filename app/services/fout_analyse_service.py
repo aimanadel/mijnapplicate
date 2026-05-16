@@ -6,6 +6,7 @@ De service haalt data op uit de database en berekent foutstatistieken.
 """
 
 from app.db import execute_query
+from app.utils.student_helper import get_current_leerling_id
 from flask import render_template
 
 
@@ -18,12 +19,14 @@ class FoutAnalyseData:
     """
 
     def __init__(self, mistakes_by_subject=None, common_mistakes=None,
-                 recommendation="", subjects=None, selected_subject_id=None):
+                 recommendation="", subjects=None, selected_subject_id=None,
+                 current_student_id=None):
         self.mistakes_by_subject = mistakes_by_subject or {}
         self.common_mistakes = common_mistakes or []
         self.recommendation = recommendation
         self.subjects = subjects or []
         self.selected_subject_id = selected_subject_id
+        self.current_student_id = current_student_id
 
     def to_dict(self):
         """
@@ -34,7 +37,8 @@ class FoutAnalyseData:
             'common_mistakes': self.common_mistakes,
             'recommendation': self.recommendation,
             'subjects': self.subjects,
-            'selected_subject_id': self.selected_subject_id
+            'selected_subject_id': self.selected_subject_id,
+            'current_student_id': self.current_student_id
         }
 
 
@@ -119,6 +123,28 @@ class FoutAnalyseService:
         results = execute_query(query, (student_id,))
 
         return [{'mistake_type': row['mistake_type'], 'count': row['count']} for row in results]
+
+    # DEFINITIE: LEERLING VAKKEN OPHALEN
+    # Haalt alleen unieke vakken op die bij deze leerling horen.
+    def get_student_subjects(self, student_id):
+        """
+        Haalt unieke vakken op voor een specifieke leerling.
+
+        Args:
+            student_id (int): ID van de leerling
+
+        Returns:
+            list: Lijst van vakken met id en naam
+        """
+        query = """
+        SELECT DISTINCT s.id, s.name
+        FROM student_answer sa
+        JOIN question q ON sa.question_id = q.id
+        JOIN subject s ON q.subject_id = s.id
+        WHERE sa.student_id = ?
+        ORDER BY s.name
+        """
+        return execute_query(query, (student_id,))
 
     # DEFINITIE: FOUTPERCENTAGES BEREKENEN
     # Deze methode berekent welk percentage van de fouten bij elk vak hoort.
@@ -243,16 +269,16 @@ class FoutAnalyseService:
         recommendation = self.generate_recommendation(student_id)
         common_mistakes = self.get_common_mistake_types(student_id)
 
-        # Haal alle vakken op voor de dropdown
-        subjects_query = "SELECT id, name FROM subject"
-        subjects = execute_query(subjects_query)
+        # Haal alleen unieke vakken op die bij deze leerling horen
+        subjects = self.get_student_subjects(student_id)
 
         return FoutAnalyseData(
             mistakes_by_subject=percentages_data,
             common_mistakes=common_mistakes,
             recommendation=recommendation,
             subjects=subjects,
-            selected_subject_id=subject_id
+            selected_subject_id=subject_id,
+            current_student_id=student_id
         )
 
 
@@ -269,10 +295,11 @@ class FoutAnalyseController:
 
     # DEFINITIE: DASHBOARD PAGINA RENDEREN
     # Deze methode bereidt alle data voor en geeft het door aan de template.
-    def render_dashboard(self, student_id=1, subject_id=None):
+    def render_dashboard(self, student_id=None, subject_id=None):
         """
         Rendert de foutenanalyse dashboard pagina.
         """
+        student_id = get_current_leerling_id(student_id)
         data = self.service.get_fout_analyse_dashboard_data(student_id, subject_id)
         return render_template("foutenanalyse.html", **data.to_dict())
 

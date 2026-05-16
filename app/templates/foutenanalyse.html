@@ -18,7 +18,10 @@
     <div class="fout-filter-section">
         <div class="fout-filter-card">
             <h3 class="fout-filter-title">Filter op vak</h3>
-            <form method="get" action="{{ url_for('main.fout_analyse') }}" class="fout-filter-form">
+            <form method="get" action="{{ request.path }}" class="fout-filter-form">
+                {% if current_student_id %}
+                    <input type="hidden" name="leerling_id" value="{{ current_student_id }}">
+                {% endif %}
                 <select name="subject_id" class="fout-filter-select" onchange="this.form.submit()">
                     <option value="">Alle vakken</option>
                     {% for subject in subjects %}
