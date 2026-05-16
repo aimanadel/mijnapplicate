@@ -1577,6 +1577,17 @@ Hebben een blauwe top rand en hover effecten.
   border-top-color: #1565c0;
 }
 
+/*
+Header van detail kaart met fouttype naam en aantal.
+Dit is het bovenste gedeelte van de detail kaart.
+Toont de foutnaam links en het aantal keer gemaakt rechts.
+*/
+.fout-detail-header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 
