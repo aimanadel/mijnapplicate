@@ -1245,6 +1245,15 @@ Geeft context en uitleg over wat de leerling op deze pagina kan doen.
   font-weight: 400;
 }
 
+/*
+Bevat de filterkaart waarmee de leerling fouten per vak kan filteren.
+Dit is een apart container element rond de filterkaart.
+*/
+.fout-filter-section {
+  margin-bottom: 30px;
+}
+
+
 
 
 
