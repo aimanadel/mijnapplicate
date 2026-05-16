@@ -1324,6 +1324,23 @@ Op smaller schermen wordt dit een enkele kolom.
   margin-bottom: 40px;
 }
 
+/*
+Basisstijl voor alle kaarten in het foutenanalyse dashboard.
+Dit zijn witte kaarten met afgeronde hoeken en subtiele schaduwen.
+Hebben hover effecten voor betere interactie feedback.
+*/
+.fout-dashboard-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.fout-dashboard-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
 
 
 
