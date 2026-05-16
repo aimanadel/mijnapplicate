@@ -1432,6 +1432,16 @@ Weergegeven in rood om op te vallen.
   font-size: 14px;
 }
 
+/*
+Achtergrond container voor de progress bar.
+Dit is de grijze achtergrond waar de gekleurde bar in loopt.
+*/
+.fout-progress-bar-container {
+  background: #ecf0f1;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
 
 
 
