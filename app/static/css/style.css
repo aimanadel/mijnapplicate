@@ -1277,6 +1277,14 @@ Laat zien wat de dropdown is voor.
   font-weight: 600;
 }
 
+/*
+Formulier container voor de filter dropdown.
+Dit omvat het form element dat de filter bevat.
+*/
+.fout-filter-form {
+  display: inline-block;
+}
+
 
 
 
