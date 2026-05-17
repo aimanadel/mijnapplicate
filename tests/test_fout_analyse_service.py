@@ -93,4 +93,8 @@ class TestFoutAnalyseServiceCalculations:
         Controleert lege data situaties.
         """
 
-       
+        service = self.create_test_service()
+
+        result = service.calculate_percentages({})
+
+        
