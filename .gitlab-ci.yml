@@ -6,14 +6,9 @@ image: python:3.10
 stages:
   - test
 
-variables:
-  PIP_DISABLE_PIP_VERSION_CHECK: "1"
-  PYTHONPATH: "$CI_PROJECT_DIR"
-
 test_job:
   stage: test
-  before_script:
+  script:
     - python -m pip install --upgrade pip
     - python -m pip install --no-cache-dir -r requirements.txt
-  script:
     - python -m pytest tests/test_fout_analyse_service.py -v
