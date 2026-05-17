@@ -97,4 +97,6 @@ class TestFoutAnalyseServiceCalculations:
 
         result = service.calculate_percentages({})
 
-        
+        assert result == {}
+        assert isinstance(result, dict)
+
