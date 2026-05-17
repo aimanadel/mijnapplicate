@@ -78,5 +78,24 @@ class TestFoutAnalyseServiceCalculations:
         """
         return FoutAnalyseService()
 
-
+    def test_calculate_percentages_basic(self):
+        """
+        Test: calculate_percentages() met basis testdata.
+        
+        Controleert dat percentages correct berekend worden
+        op basis van fout aantallen per vak.
+        """
+        service = self.create_test_service()
+        
+        # Mockdata: 2 vakken met verschillende fouten
+        test_data = {
+            'Wiskunde': [
+                {'mistake_type': 'Berekeningsfout', 'count': 60},
+                {'mistake_type': 'Formulefout', 'count': 40}
+            ],
+            'Natuurkunde': [
+                {'mistake_type': 'Eenhedenfout', 'count': 100}
+            ]
+        }
+       
    
