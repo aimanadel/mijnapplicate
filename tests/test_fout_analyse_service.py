@@ -105,7 +105,9 @@ class TestFoutAnalyseServiceCalculations:
         # Natuurkunde = 100/200 = 50%
         assert result['Wiskunde']['percentage'] == 50.0
         assert result['Wiskunde']['total'] == 100
-      
+        assert result['Natuurkunde']['percentage'] == 50.0
+        assert result['Natuurkunde']['total'] == 100
+
 
 
    
