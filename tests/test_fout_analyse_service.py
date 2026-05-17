@@ -27,6 +27,35 @@ class TestFoutAnalyseData:
     naar een dictionary voor Jinja2 template rendering.
     """
 
+    def test_fout_analyse_data_to_dict(self):
+        """
+        Test: FoutAnalyseData.to_dict() converteert naar template dict.
+        
+        Controleert dat de to_dict() methode alle velden correct
+        converteert naar een dictionary voor Jinja2 template passing.
+        """
+        data = FoutAnalyseData(
+            mistakes_by_subject={'Natuurkunde': []},
+            common_mistakes=[{'mistake_type': 'Leesfout', 'count': 2}],
+            recommendation="Lees instructies zorgvuldig",
+            subjects=[{'id': 2, 'name': 'Natuurkunde'}],
+            selected_subject_id=2,
+            current_student_id=17
+        )
+        
+        result_dict = data.to_dict()
+        
+        assert isinstance(result_dict, dict)
+        assert 'mistakes_by_subject' in result_dict
+        assert 'common_mistakes' in result_dict
+        assert 'recommendation' in result_dict
+        assert 'subjects' in result_dict
+        assert 'selected_subject_id' in result_dict
+        assert 'current_student_id' in result_dict
+        
+        assert result_dict['current_student_id'] == 17
+        assert result_dict['selected_subject_id'] == 2
+
 
 
 
