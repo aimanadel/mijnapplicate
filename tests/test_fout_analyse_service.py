@@ -68,5 +68,15 @@ class TestFoutAnalyseServiceCalculations:
     en edge cases (lege data, enkele vakken, ongelijke verdeling).
     """
 
-    
+    @staticmethod
+    def create_test_service():
+        """
+        Helper: Maak een FoutAnalyseService instance voor testing.
+        
+        Retourneert een schone service instance zonder
+        database dependencies.
+        """
+        return FoutAnalyseService()
+
+
    
