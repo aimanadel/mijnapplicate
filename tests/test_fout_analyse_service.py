@@ -97,5 +97,9 @@ class TestFoutAnalyseServiceCalculations:
                 {'mistake_type': 'Eenhedenfout', 'count': 100}
             ]
         }
-       
+        
+        result = service.calculate_percentages(test_data)
+        
+      
+
    
