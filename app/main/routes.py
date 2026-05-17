@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import execute_query
 import json
 from app.main import bp
-from .error_analyzer import ErrorAnalyzer
+from app.services.fout_analyse_service import FoutAnalyseService, controller
 
 
 
@@ -35,15 +35,22 @@ def home():
     try:
         leerling_id = session.get("leerling_id", 1)
 
-        #  Foutenanalyse ophalen
+        #  Foutenanalyse ophalen via centrale service
         try:
-            analyzer = ErrorAnalyzer(leerling_id)
-            analyzer.analyze()
-            data = analyzer.get_data()
-            fouten = data.get("fouten", [])
-            aanbeveling = data.get("aanbeveling", "Blijf oefenen!")
+            service = FoutAnalyseService()
+            fa = service.get_fout_analyse_dashboard_data(leerling_id)
+            fa_dict = fa.to_dict() if hasattr(fa, 'to_dict') else dict(fa)
+            # Maak een eenvoudige lijst met categorie/percentage voor de home kaart
+            fouten = []
+            for subject, info in fa_dict.get('mistakes_by_subject', {}).items():
+                fouten.append({
+                    'categorie': subject,
+                    'percentage': info.get('percentage', 0),
+                    'details': info.get('mistakes', [])
+                })
+            aanbeveling = fa_dict.get('recommendation', 'Blijf oefenen!')
         except Exception as e:
-            print(f"⚠️ Fout bij ErrorAnalyzer: {e}")
+            print(f"⚠️ Fout bij FoutAnalyseService: {e}")
             fouten = []
             aanbeveling = "Oefenen maakt perfect!"
 
@@ -293,11 +300,7 @@ def foutenanalyse(leerling_id=None):
     
     Gebruikt dezelfde service als /fout-analyse voor compatibiliteit.
     """
-    if leerling_id is None:
-        leerling_id = request.args.get("leerling_id", type=int)
-    if leerling_id is None:
-        leerling_id = session.get("leerling_id", 1)
-
+    # Laat controller de leerling-id bepalen (url > query > session > demo)
     subject_id = request.args.get("subject_id", type=int)
 
     from app.services.fout_analyse_service import controller
@@ -314,8 +317,18 @@ def fout_analyse():
     """
     Route voor foutenanalyse dashboard.
     """
-    student_id = session.get("leerling_id", 1)
+    # De controller bepaalt de actieve leerling
     subject_id = request.args.get("subject_id", type=int)
 
     from app.services.fout_analyse_service import controller
-    return controller.render_dashboard(student_id, subject_id)
+    return controller.render_dashboard(None, subject_id)
+
+
+@bp.route('/_debug_current_leerling')
+def _debug_current_leerling():
+    from app.utils.student_helper import get_current_leerling_id
+    try:
+        lid = get_current_leerling_id(None)
+    except Exception as e:
+        return f"error: {e}", 500
+    return f"current_leerling_id={lid}"
