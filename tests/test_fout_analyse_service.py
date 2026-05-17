@@ -100,3 +100,6 @@ class TestFoutAnalyseServiceCalculations:
         assert result == {}
         assert isinstance(result, dict)
 
+
+if __name__ == '__main__':
+    pytest.main([__file__, '-v'])
