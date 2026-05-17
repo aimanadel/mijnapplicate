@@ -100,6 +100,12 @@ class TestFoutAnalyseServiceCalculations:
         
         result = service.calculate_percentages(test_data)
         
+        # Totaal = 60 + 40 + 100 = 200 fouten
+        # Wiskunde = 100/200 = 50%
+        # Natuurkunde = 100/200 = 50%
+        assert result['Wiskunde']['percentage'] == 50.0
+        assert result['Wiskunde']['total'] == 100
       
+
 
    
