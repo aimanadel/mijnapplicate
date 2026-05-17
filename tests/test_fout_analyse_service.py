@@ -14,6 +14,18 @@ Test aanpak:
 - Volledige validatie van service logica
 """
 
+import pytest
+from app.services.fout_analyse_service import FoutAnalyseData, FoutAnalyseService
+
+
+class TestFoutAnalyseData:
+    """
+    Unit tests voor FoutAnalyseData.to_dict() conversie.
+    
+    Test class organiseert tests voor de FoutAnalyseData datacontainer.
+    Controleert of data correct wordt opgeslagen en geconverteerd
+    naar een dictionary voor Jinja2 template rendering.
+    """
 
 
 
