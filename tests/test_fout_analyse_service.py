@@ -59,4 +59,14 @@ class TestFoutAnalyseData:
 
 
 
+class TestFoutAnalyseServiceCalculations:
+    """
+    Unit tests voor calculate_percentages() berekeningen.
+    
+    Test class organiseert tests voor percentage berekeningen.
+    Controleert correcte verwerking van foutdata, afronding,
+    en edge cases (lege data, enkele vakken, ongelijke verdeling).
+    """
+
+    
    
